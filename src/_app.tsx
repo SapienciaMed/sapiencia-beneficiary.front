@@ -8,7 +8,6 @@ import ModalMessageComponent from "./common/components/modal-message.component";
 import ApplicationProvider from "./application-provider";
 import useAppCominicator from "./common/hooks/app-communicator.hook";
 import DocumentsRoutes from "./features/documents/documents-routes";
-import PortalAuthRoutes from "./features/portal-auth/portal-auth.routes";
 
 function App() {
   const { publish } = useAppCominicator();
@@ -34,10 +33,6 @@ function App() {
               <Route
                 path={"/beneficiario/documentos/*"}
                 element={<DocumentsRoutes />}
-              />
-               <Route
-                path={"/portal/*"}
-                element={<PortalAuthRoutes />}
               />
             </Routes>
           </Suspense>

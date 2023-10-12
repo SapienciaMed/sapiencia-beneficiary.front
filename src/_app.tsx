@@ -8,7 +8,6 @@ import ModalMessageComponent from "./common/components/modal-message.component";
 import ApplicationProvider from "./application-provider";
 import useAppCominicator from "./common/hooks/app-communicator.hook";
 import DocumentsRoutes from "./features/documents/documents-routes";
-import PortalAuthRoutes from "./features/portal-auth/portal-auth.routes";
 import BeneficiaryMonitoringRoutes from "./features/BeneficiaryMonitoring/BeneficiaryMonitoring-routes";
 
 function App() {

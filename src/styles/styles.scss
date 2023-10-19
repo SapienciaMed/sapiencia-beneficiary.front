@@ -538,3 +538,18 @@ div[id="single-spa-application:@sapiencia/accounting"] {
 .color-icon-pdf{
   color:#F00;
 }
+
+.baseTab{
+  border-left: 1px solid dimgrey !important;
+  cursor: pointer;
+
+  :hover{
+    background-color: rgba(167, 25, 137, 0.6) !important;
+    color: #ffff !important;
+  }
+}
+
+.activeTab{
+  background-color: rgba(190, 12, 152, 0.6) !important;
+  color: #ffff !important;
+}

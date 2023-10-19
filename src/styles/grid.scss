@@ -68,6 +68,26 @@
   }
 }
 
+.grid-form-8-container {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-gap: 16px 16px;
+  align-items: stretch;
+
+  .grid-span-2-columns {
+    grid-column: span 2 !important;
+  }
+  .grid-span-3-columns {
+    grid-column: span 3;
+  }
+  .grid-span-4-columns {
+    grid-column: span 4;
+  }
+  .grid-span-5-columns {
+    grid-column: span 5;
+  }
+}
+
 .grid-form-3-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

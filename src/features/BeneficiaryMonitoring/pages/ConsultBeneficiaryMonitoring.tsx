@@ -16,7 +16,11 @@ const ConsultBeneficiaryMonitoring = () => {
     handleChange,
     handleClean,
     validateActionAccess,
-    downloadCollection
+    downloadCollection,
+    founds,
+    periods,
+    modalitys,
+    creditsStatus
   } = useConsultBeneficiaryMonitoring();
   return (
     <BeneficiaryMonitoringForm
@@ -34,6 +38,10 @@ const ConsultBeneficiaryMonitoring = () => {
       isValid={isValid}
       handleClean={handleClean}
       downloadCollection ={downloadCollection}
+      founds = {founds}
+      periods = {periods}
+      modalitys = {modalitys}
+      creditsStatus = {creditsStatus}
     />
   );
 };

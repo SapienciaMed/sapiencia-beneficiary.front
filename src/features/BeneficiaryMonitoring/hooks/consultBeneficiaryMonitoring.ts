@@ -10,10 +10,17 @@ import {
   IBeneficiary,
   IBeneficiaryFilters,
 } from "../../../common/interfaces/beneficiaryMonitoring.interface";
+import { useGetAllFounds } from "./listsSapiencia/getFounds.hook";
+import { useGetAllPeriod } from "./listsSapiencia/getPeriods.hook";
+import { getAllModalitys } from "./listsSapiencia/getModality.hook";
+import { useGetAllCreditStatus } from "./listsSapiencia/getCreditStatus.hook";
 
 export const useConsultBeneficiaryMonitoring = () => {
-  //const { data: foundData };
   const navigate = useNavigate();
+  const { founds } = useGetAllFounds();
+  const { periods } = useGetAllPeriod();
+  const { modalitys } = getAllModalitys();
+  const { creditsStatus } = useGetAllCreditStatus();
   const tableComponentRef = useRef(null);
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [tableView, setTableView] = useState<boolean>(false);
@@ -34,8 +41,8 @@ export const useConsultBeneficiaryMonitoring = () => {
     ccBeneficiary: "",
   });
 
-  const [founds, period, modality, creditStatus] = watch([
-    "founds",
+  const [found, period, modality, creditStatus] = watch([
+    "found",
     "period",
     "modality",
     "creditStatus",
@@ -72,19 +79,17 @@ export const useConsultBeneficiaryMonitoring = () => {
     });
   };
 
-  const downloadCollection = useCallback(()=>{
-
-  },[paginateData,formWatch])
+  const downloadCollection = useCallback(() => {}, [paginateData, formWatch]);
 
   useEffect(() => {
     const { ccBeneficiary } = formWatch;
-    if (founds || period || modality || creditStatus || ccBeneficiary) {
+    if (found || period || modality || creditStatus || ccBeneficiary) {
       return setSubmitDisabled(false);
     }
     setSubmitDisabled(true);
-  }, [founds, period, modality, creditStatus, formWatch]);
+  }, [founds, periods, modality, creditStatus, formWatch]);
 
-  return{
+  return {
     downloadCollection,
     tableComponentRef,
     setPaginateData,
@@ -99,5 +104,9 @@ export const useConsultBeneficiaryMonitoring = () => {
     handleChange,
     handleClean,
     validateActionAccess,
-  }
+    founds,
+    periods,
+    modalitys,
+    creditsStatus
+  };
 };

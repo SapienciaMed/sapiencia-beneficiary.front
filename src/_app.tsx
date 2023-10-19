@@ -7,7 +7,6 @@ import "primereact/resources/primereact.min.css";
 import ModalMessageComponent from "./common/components/modal-message.component";
 import ApplicationProvider from "./application-provider";
 import useAppCominicator from "./common/hooks/app-communicator.hook";
-import DocumentsRoutes from "./features/documents/documents-routes";
 import BeneficiaryMonitoringRoutes from "./features/BeneficiaryMonitoring/BeneficiaryMonitoring-routes";
 
 function App() {
@@ -30,15 +29,7 @@ function App() {
         <Router>
           <Suspense fallback={<p>Loading...</p>}>
             <Routes>
-              <Route path={"/beneficiario/"} element={<BeneficiaryMonitoringRoutes />} />;
-              {/* <Route
-                path={"/beneficiario/seguimiento-beneficiarios/*"}
-                element={<BeneficiaryMonitoringRoutes />}
-              /> */}
-               {/* <Route
-                path={"/portal/*"}
-                element={<PortalAuthRoutes />}
-              /> */}
+              <Route path={"/beneficiario/*"} element={<BeneficiaryMonitoringRoutes />} />;
             </Routes>
           </Suspense>
         </Router>

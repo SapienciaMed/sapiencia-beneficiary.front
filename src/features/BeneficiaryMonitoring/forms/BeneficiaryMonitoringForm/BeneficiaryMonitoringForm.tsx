@@ -24,6 +24,10 @@ const BeneficiaryMonitoringForm = ({
   handleChange,
   validateActionAccess,
   downloadCollection,
+  founds,
+  periods,
+  modalitys,
+  creditsStatus
 }) => {
   return (
     <div className="container-sections-forms mt-24px ml-16px mr-16px p-0">
@@ -50,10 +54,11 @@ const BeneficiaryMonitoringForm = ({
           </div>
           <div className="grid-form-4-container gap-25 mt-14px">
             <SelectComponent
-              idInput="founds"
+              idInput="found"
               control={control}
               errors={errors}
               label={<>Fondo</>}
+              data= {founds}
               className="select-basic medium"
               classNameLabel="text-black big bold"
               placeholder="Seleccionar"
@@ -65,6 +70,7 @@ const BeneficiaryMonitoringForm = ({
               errors={errors}
               label={<>Perido de selección</>}
               className="select-basic medium"
+              data={periods}
               classNameLabel="text-black big bold"
               placeholder="Seleccionar"
               filter
@@ -74,6 +80,7 @@ const BeneficiaryMonitoringForm = ({
               control={control}
               errors={errors}
               label={<>Modalidad</>}
+              data={modalitys}
               className="select-basic medium"
               classNameLabel="text-black big bold"
               placeholder="Seleccionar"
@@ -83,6 +90,7 @@ const BeneficiaryMonitoringForm = ({
               idInput="creditStatus"
               control={control}
               errors={errors}
+              data={creditsStatus}
               label={<>Estado crédito</>}
               className="select-basic medium"
               classNameLabel="text-black big bold"

@@ -1,9 +1,9 @@
 import * as yup from "yup";
 
 export const consultBeneficiaryMonitoringSchema = yup.object({
-    ccBeneficiary : yup.number().required("Debes ingresar el numero de cedula del beneficiario"),
-    founds : yup.number().optional(),
-    period : yup.number().optional(),
-    modality : yup.number().optional(),
-    creditStatus : yup.number().optional()
+    ccBeneficiary : yup.number().optional(),
+    founds : yup.number().optional().nullable(),
+    period : yup.number().optional().nullable(),
+    modality : yup.number().optional().nullable(),
+    creditStatus : yup.number().optional().nullable()
 })

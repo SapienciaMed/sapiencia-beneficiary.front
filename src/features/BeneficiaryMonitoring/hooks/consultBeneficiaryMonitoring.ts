@@ -1,7 +1,6 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { urlApiBeneficiary } from "../../../common/utils/base-url";
 import { AppContext } from "../../../common/contexts/app.context";
 import useYupValidationResolver from "../../../common/hooks/form-validator.hook";
 import { consultBeneficiaryMonitoringSchema } from "../../../common/schemas/beneficiaryMonitoring.schema";
@@ -33,7 +32,6 @@ export const useConsultBeneficiaryMonitoring = () => {
     handleSubmit,
     register,
     reset,
-    watch,
     formState: { errors, isValid },
   } = useForm({ resolver, mode: "all" });
 
@@ -41,12 +39,6 @@ export const useConsultBeneficiaryMonitoring = () => {
     ccBeneficiary: "",
   });
 
-  const [found, period, modality, creditStatus] = watch([
-    "found",
-    "period",
-    "modality",
-    "creditStatus",
-  ]);
 
   const tableActions: ITableAction<IBeneficiary>[] = [
     {
@@ -81,13 +73,16 @@ export const useConsultBeneficiaryMonitoring = () => {
 
   const downloadCollection = useCallback(() => {}, [paginateData, formWatch]);
 
+  useEffect(()=>{
+
+  },[])
   useEffect(() => {
     const { ccBeneficiary } = formWatch;
-    if (found || period || modality || creditStatus || ccBeneficiary) {
+    if (founds || periods || modalitys ||creditsStatus ||ccBeneficiary) {
       return setSubmitDisabled(false);
     }
     setSubmitDisabled(true);
-  }, [founds, periods, modality, creditStatus, formWatch]);
+  }, [founds , periods , modalitys ,creditsStatus,formWatch]);
 
   return {
     downloadCollection,
@@ -107,6 +102,6 @@ export const useConsultBeneficiaryMonitoring = () => {
     founds,
     periods,
     modalitys,
-    creditsStatus
+    creditsStatus,
   };
 };

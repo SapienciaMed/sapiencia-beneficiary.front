@@ -54,11 +54,11 @@ const BeneficiaryMonitoringForm = ({
           </div>
           <div className="grid-form-4-container gap-25 mt-14px">
             <SelectComponent
-              idInput="found"
+              idInput="founds"
               control={control}
               errors={errors}
-              label={<>Fondo</>}
               data= {founds}
+              label={<>Fondo</>}
               className="select-basic medium"
               classNameLabel="text-black big bold"
               placeholder="Seleccionar"
@@ -68,9 +68,9 @@ const BeneficiaryMonitoringForm = ({
               idInput="period"
               control={control}
               errors={errors}
+              data={periods}
               label={<>Perido de selección</>}
               className="select-basic medium"
-              data={periods}
               classNameLabel="text-black big bold"
               placeholder="Seleccionar"
               filter
@@ -79,8 +79,8 @@ const BeneficiaryMonitoringForm = ({
               idInput="modality"
               control={control}
               errors={errors}
-              label={<>Modalidad</>}
               data={modalitys}
+              label={<>Modalidad</>}
               className="select-basic medium"
               classNameLabel="text-black big bold"
               placeholder="Seleccionar"

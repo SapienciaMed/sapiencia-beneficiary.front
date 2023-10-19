@@ -11,7 +11,7 @@ export interface IBeneficiary {
 
 export interface IBeneficiaryFilters{
     ccBeneficiary: number;
-    found:string;
+    found:number;
     period: number;
     modality: number;
     creditStatus:number;

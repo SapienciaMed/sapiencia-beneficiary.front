@@ -27,7 +27,8 @@ const BeneficiaryMonitoringForm = ({
   founds,
   periods,
   modalitys,
-  creditsStatus
+  creditsStatus,
+  urlGetConsultBeneficiary,
 }) => {
   return (
     <div className="container-sections-forms mt-24px ml-16px mr-16px p-0">
@@ -57,7 +58,7 @@ const BeneficiaryMonitoringForm = ({
               idInput="founds"
               control={control}
               errors={errors}
-              data= {founds}
+              data={founds}
               label={<>Fondo</>}
               className="select-basic medium"
               classNameLabel="text-black big bold"
@@ -122,7 +123,7 @@ const BeneficiaryMonitoringForm = ({
             <TableComponent
               setPaginateData={setPaginateData}
               ref={tableComponentRef}
-              url={""}
+              url={urlGetConsultBeneficiary}
               columns={tableColumns}
               actions={tableActions}
               isShowModal={true}

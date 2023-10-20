@@ -1,12 +1,11 @@
 export interface IBeneficiary {
-    id:number;
     typeDocument: string;
     document: number;
     fullName: string;
-    found: number;
-    period: number;
-    modality: number;
-    creditStatus:number
+    found: string;
+    period: string;
+    modality: string;
+    creditStatus: string;
 }
 
 export interface IBeneficiaryFilters{

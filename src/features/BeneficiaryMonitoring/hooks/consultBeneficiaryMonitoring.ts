@@ -13,6 +13,7 @@ import { useGetAllFounds } from "./listsSapiencia/getFounds.hook";
 import { useGetAllPeriod } from "./listsSapiencia/getPeriods.hook";
 import { getAllModalitys } from "./listsSapiencia/getModality.hook";
 import { useGetAllCreditStatus } from "./listsSapiencia/getCreditStatus.hook";
+import { urlApiBeneficiary } from "../../../common/utils/base-url";
 
 export const useConsultBeneficiaryMonitoring = () => {
   const navigate = useNavigate();
@@ -32,13 +33,18 @@ export const useConsultBeneficiaryMonitoring = () => {
     handleSubmit,
     register,
     reset,
+    watch,
     formState: { errors, isValid },
   } = useForm({ resolver, mode: "all" });
+
+  const [fonud,period,modality,creditStatus]= watch([
+    "founds","period","modality","creditStatus"
+  ])
+  const urlGetConsultBeneficiary = `${urlApiBeneficiary}/api/v1/sapiencia/beneficiary/get-all-paginated`
 
   const [formWatch, setFormWatch] = useState({
     ccBeneficiary: "",
   });
-
 
   const tableActions: ITableAction<IBeneficiary>[] = [
     {
@@ -73,16 +79,14 @@ export const useConsultBeneficiaryMonitoring = () => {
 
   const downloadCollection = useCallback(() => {}, [paginateData, formWatch]);
 
-  useEffect(()=>{
 
-  },[])
   useEffect(() => {
     const { ccBeneficiary } = formWatch;
-    if (founds || periods || modalitys ||creditsStatus ||ccBeneficiary) {
-      return setSubmitDisabled(false);
+    if (fonud || period || modality || creditStatus || ccBeneficiary) {
+      return setSubmitDisabled(true);
     }
-    setSubmitDisabled(true);
-  }, [founds , periods , modalitys ,creditsStatus,formWatch]);
+    setSubmitDisabled(false);
+  }, [founds, periods, modalitys, creditsStatus, formWatch]);
 
   return {
     downloadCollection,
@@ -103,5 +107,6 @@ export const useConsultBeneficiaryMonitoring = () => {
     periods,
     modalitys,
     creditsStatus,
+    urlGetConsultBeneficiary
   };
 };

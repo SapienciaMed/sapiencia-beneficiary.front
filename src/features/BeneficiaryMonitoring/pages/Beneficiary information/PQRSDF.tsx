@@ -8,6 +8,8 @@ import {
 import TableComponent from "../../../../common/components/table.component";
 import Svgs from "../../../../public/images/icons/svgs";
 import { PQRSDFHook } from "../../hooks/BeneficiaryInformation/PQRSDF.hook";
+
+
 const PQRSDF = () => {
   const {
     onSubmit,

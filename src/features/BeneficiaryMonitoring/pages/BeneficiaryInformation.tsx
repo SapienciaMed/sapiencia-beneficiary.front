@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo } from "react";
 
 import GeneralInformation from "./Beneficiary information/General_Information";
 import { TabView, TabPanel } from "primereact/tabview";
@@ -8,7 +8,11 @@ import PQRSDF from "./Beneficiary information/PQRSDF";
 import Attentions from "./Beneficiary information/Attentions";
 import Consolidation from "./Beneficiary information/Consolidation";
 import Credit_Status from "./Beneficiary information/Credit_Status";
+import { ButtonComponent } from "../../../common/components/Form";
+import { MainHook } from "../hooks/BeneficiaryInformation/Main";
+
 const BeneficiaryInformation = () => {
+
   return (
     <>
       <div className="text-black large bold grid-span-4-columns mt-14px ml-16px pb-14px">
@@ -38,6 +42,15 @@ const BeneficiaryInformation = () => {
             <Credit_Status />
           </TabPanel>
         </TabView>
+      </div>
+
+      <div className="button-save-container-display mr-24px">
+        <ButtonComponent
+          value="Regresar"
+          className={`button-save big`}
+          type="submit"
+
+        />
       </div>
     </>
   );

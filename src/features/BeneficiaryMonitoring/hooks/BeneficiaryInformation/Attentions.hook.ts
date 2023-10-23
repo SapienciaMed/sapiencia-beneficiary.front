@@ -4,7 +4,7 @@ import useYupValidationResolver from "../../../../common/hooks/form-validator.ho
 import { consultPQRSFSchema } from "../../../../common/schemas/BeneficiaryInformation/PQRSDF.schema";
 import { useForm } from "react-hook-form";
 import { ITableAction } from "../../../../common/interfaces/table.interfaces";
-import { IAttentios, IAttentiosFilter } from "../../../../common/interfaces/BeneficiaryInformation/Attentions.interface";
+import { IAttentions, IAttentionsFilter } from "../../../../common/interfaces/BeneficiaryInformation/Attentions.interface";
 import { consultAttentioschema } from "../../../../common/schemas/BeneficiaryInformation/Attentions.schema";
 
 export const AttentionsHook = () => {
@@ -32,7 +32,7 @@ export const AttentionsHook = () => {
     setTableView(false);
   };
 
-  const tableActions: ITableAction<IAttentios>[] = [
+  const tableActions: ITableAction<IAttentions>[] = [
     {
       icon: "Detail",
       onClick: (row) => {
@@ -40,7 +40,7 @@ export const AttentionsHook = () => {
       },
     },
   ];
-  const onSubmit = handleSubmit((filters: IAttentiosFilter) => {
+  const onSubmit = handleSubmit((filters: IAttentionsFilter) => {
     setTableView(true);
     tableComponentRef.current?.loadData({
       ...filters,

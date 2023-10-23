@@ -82,6 +82,7 @@ export const PQRSDFHook = () => {
     submitDisabled,
     errors,
     handleChange,
-    tableActions
+    tableActions,
+    isValid
   };
 };

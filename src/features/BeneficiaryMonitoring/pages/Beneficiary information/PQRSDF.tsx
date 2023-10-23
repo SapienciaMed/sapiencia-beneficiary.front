@@ -18,13 +18,19 @@ const PQRSDF = () => {
     submitDisabled,
     errors,
     handleChange,
-    tableActions
+    tableActions,
+    isValid
   } = PQRSDFHook();
   return (
     <>
       <div className="text-black large bold grid-span-4-columns pb-14px">
         PQRSDF presentadas por el Beneficiario
       </div>
+      <FormComponent
+        id="PQRSDFForm"
+        className="form-signIn"
+        action={onSubmit}
+      > 
       <div className="grid-form-5-container gap-25 mt-24px ml-16px mr-16px p-0">
         <InputComponent
           idInput="PQRSDF"
@@ -62,7 +68,25 @@ const PQRSDF = () => {
           placeholder="Seleccionar"
           filter
         />
+
       </div>
+      <div className="button-save-container-display mr-24px">
+          <ButtonComponent
+            value="Limpiar"
+            className="button-clean bold"
+            type="button"
+            action={handleClean}
+          />
+          <ButtonComponent
+            value="Buscar"
+            className={`button-save ${
+              !isValid || submitDisabled ? "disabled-black" : ""
+            } big`}
+            type="submit"
+            disabled={!isValid || submitDisabled}
+          />
+        </div>
+      </FormComponent>
     </>
   );
 };

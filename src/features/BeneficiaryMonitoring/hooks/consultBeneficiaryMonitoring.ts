@@ -50,7 +50,7 @@ export const useConsultBeneficiaryMonitoring = () => {
     {
       icon: "Detail",
       onClick: (row) => {
-        navigate(`#`);
+        navigate(`/Beneficiario/info/${row.document}`);
       },
     },
   ];
@@ -83,9 +83,9 @@ export const useConsultBeneficiaryMonitoring = () => {
   useEffect(() => {
     const { ccBeneficiary } = formWatch;
     if (found || period || modality || creditStatus || ccBeneficiary) {
-      return setSubmitDisabled(true);
+      return setSubmitDisabled(false);
     }
-    setSubmitDisabled(false);
+    setSubmitDisabled(true);
   }, [found, period, modality, creditStatus, formWatch]);
 
   return {

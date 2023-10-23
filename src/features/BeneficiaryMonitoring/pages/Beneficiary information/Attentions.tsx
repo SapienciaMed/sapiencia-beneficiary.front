@@ -32,7 +32,7 @@ const Attentions = () => {
             idInput="registrationDate"
             errors={errors}
             control={control}
-            label={<>Fecha de adquisición</>}
+            label={<>Fecha registro</>}
             classNameLabel="text-black big bold"
             className="dataPicker-basic  medium "
             dateFormat="dd/mm/yy"

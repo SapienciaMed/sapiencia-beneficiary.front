@@ -1,7 +1,13 @@
-export interface IAttentios {
-
+export interface IAttentions {
+  ID: number;
+  registrationDate: Date;
+  Typeofrequest: string;
+  dependence: string;
+  program: string;
+  ApplicationTopic: string;
 }
 
-export interface IAttentiosFilter{
-    
+export interface IAttentionsFilter {
+    registrationDate: Date;
+    program: number;
 }

@@ -2,10 +2,6 @@ import { IBeneficiaryTable } from "../../../../common/interfaces/beneficiaryMoni
 import { ITableElement } from "../../../../common/interfaces/table.interfaces";
 export const tableColumns: ITableElement<IBeneficiaryTable>[]=[
     {
-        fieldName: "typeDocument",
-        header: "Tipo documento",
-    },
-    {
         fieldName: "document",
         header: "Documento de identidad",
     },

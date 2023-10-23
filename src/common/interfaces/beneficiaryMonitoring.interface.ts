@@ -17,7 +17,6 @@ export interface IBeneficiaryFilters{
 }
 
 export interface IBeneficiaryTable{
-    typeDocument: string;
     document: number;
     fullName: string;
     found: number;

@@ -37,7 +37,7 @@ export const useConsultBeneficiaryMonitoring = () => {
     formState: { errors, isValid },
   } = useForm({ resolver, mode: "all" });
 
-  const [fonud,period,modality,creditStatus]= watch([
+  const [found,period,modality,creditStatus]= watch([
     "founds","period","modality","creditStatus"
   ])
   const urlGetConsultBeneficiary = `${urlApiBeneficiary}/api/v1/sapiencia/beneficiary/get-all-paginated`
@@ -82,11 +82,11 @@ export const useConsultBeneficiaryMonitoring = () => {
 
   useEffect(() => {
     const { ccBeneficiary } = formWatch;
-    if (fonud || period || modality || creditStatus || ccBeneficiary) {
+    if (found || period || modality || creditStatus || ccBeneficiary) {
       return setSubmitDisabled(true);
     }
     setSubmitDisabled(false);
-  }, [founds, periods, modalitys, creditsStatus, formWatch]);
+  }, [found, period, modality, creditStatus, formWatch]);
 
   return {
     downloadCollection,

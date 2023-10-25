@@ -1,5 +1,4 @@
 import { memo } from "react";
-
 import GeneralInformation from "./Beneficiary information/General_Information";
 import { TabView, TabPanel } from "primereact/tabview";
 import Historical from "./Beneficiary information/Historical";
@@ -9,10 +8,10 @@ import Attentions from "./Beneficiary information/Attentions";
 import Consolidation from "./Beneficiary information/Consolidation";
 import Credit_Status from "./Beneficiary information/Credit_Status";
 import { ButtonComponent } from "../../../common/components/Form";
+import { useNavigate } from "react-router-dom";
 import { MainHook } from "../hooks/BeneficiaryInformation/Main";
-
 const BeneficiaryInformation = () => {
-
+  const {handleClose} = MainHook()
   return (
     <>
       <div className="text-black large bold grid-span-4-columns mt-14px ml-16px pb-14px">
@@ -49,7 +48,7 @@ const BeneficiaryInformation = () => {
           value="Regresar"
           className={`button-save big`}
           type="submit"
-
+          action={handleClose}
         />
       </div>
     </>

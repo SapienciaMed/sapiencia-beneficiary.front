@@ -7,7 +7,7 @@ const BeneficiaryMonitoringRoutes = () => {
   return (
     <Routes>
       <Route path="" element={<ConsultBeneficiaryMonitoring />} />
-      <Route path="/info/:id" element={<BeneficiaryInformation />} />
+      <Route path="/info/:document/:foundId" element={<BeneficiaryInformation />} />
     </Routes>
   );
 };

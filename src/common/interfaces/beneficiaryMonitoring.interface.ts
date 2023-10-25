@@ -1,4 +1,5 @@
 export interface IBeneficiary {
+    foundID:number
     typeDocument: string;
     document: number;
     fullName: string;

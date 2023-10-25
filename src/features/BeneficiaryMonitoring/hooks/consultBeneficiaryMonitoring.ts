@@ -50,7 +50,7 @@ export const useConsultBeneficiaryMonitoring = () => {
     {
       icon: "Detail",
       onClick: (row) => {
-        navigate(`/Beneficiario/info/${row.document}`);
+        navigate(`/Beneficiario/info/${row.document}/${row.foundID}`);
       },
     },
   ];

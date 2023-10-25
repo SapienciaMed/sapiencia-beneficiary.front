@@ -1,153 +1,130 @@
 import React, { memo } from "react";
 import { Accordion, AccordionTab } from "primereact/accordion";
 import { InputComponent } from "../../../../common/components/Form/input.component";
+import { useGetGeneralInformation } from "../../hooks/BeneficiaryInformation/GeneralInformation.hook";
 const GeneralInformation = () => {
+  const {control,register} = useGetGeneralInformation()
   return (
     <div className=" container-sections-forms ml-20px mr-20px">
       <Accordion activeIndex={0}>
         <AccordionTab header="Datos personales">
           <div className="grid-form-4-container gap-25 mt-14px">
             <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Tipo_de_documento"
               label={<>Tipo de documento</>}
-              //register={[""]}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
             <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Nro_de_identificacion"
               label={<>Documento de identidad</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
+
               disabled
             />
             <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Nombre"
               label={<>Nombres y Apellidos</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
             <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Lugar_expedicion"
               label={<>Lugar de expedicion</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
             <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Genero"
               label={<>Sexo</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
             <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Fecha_nacimiento"
               label={<>Fecha</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
             <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Edad"
               label={<>Edad</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
             <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Pais_de_nacimiento"
               label={<>Pais</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
             <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Dpto_de_nacimiento"
               label={<>Departamento de nacimiento</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
             <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Municipio_de_nacimiento"
               label={<>Municipio de nacimiento</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
             <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Direccion_residencia"
               label={<>Datos de residencia</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
             <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Celular"
               label={<>Celular</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
             <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Correo"
               label={<>Correo</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
           </div>
@@ -155,25 +132,21 @@ const GeneralInformation = () => {
         <AccordionTab header="IES y programa">
           <div className="grid-form-2-container gap-25 mt-14px">
             <InputComponent
-              idInput="ccBeneficiary"
+              idInput="IES"
               label={<>Institución de educación superior (IES)</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
             <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Programa_academico"
               label={<>Programa académico</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
           </div>
@@ -182,168 +155,138 @@ const GeneralInformation = () => {
           <div className="grid-form-3-container gap-25 mt-14px">
 
           <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Tipo_documento_deudor"
               label={<>Tipo documento del deudor</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
           <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Nro_documento_deudor"
               label={<>Documento de identicad Deudor</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
           <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Nombre_deudor"
               label={<>Nombres y Apellidos</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
           <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Dpto_resd_deudor"
               label={<>Departamento residencia</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
           <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Mpio_resd_deudor"
               label={<>Municipio residencia</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
           <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Dir_resd_deudor"
               label={<>Dirección</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
           <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Telefono_deudor"
               label={<>Telefono fijo Deudor</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
           <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Celular_deudor"
               label={<>Celular deudor</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
           <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Correo_deudor"
               label={<>Correo electrónico</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
           <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Actividad_economica_deudor"
               label={<>Actividad económica</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
           <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Empresa_deudor"
               label={<>Empresa donde trabaja</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
           <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Cargo_deudor"
               label={<>Cargo u ocupación</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
           <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Dir_empresa_deudor"
               label={<>Dirección de la empresa</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
           <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Tel_empresa_deudor"
               label={<>Télefono de la empresa</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
           <InputComponent
-              idInput="ccBeneficiary"
+              idInput="Salario_deudor"
               label={<>Salario o ingresos actuales $</>}
-              //register={register}
-              typeInput="number"
-              //errors={errors}
+              register={register}
+              typeInput="text"
               className="input-basic medium"
               classNameLabel="text-black big bold"
-              //onChange={handleChange}
               disabled
             />
             </div>

@@ -28,6 +28,7 @@ import useCrudService from "../hooks/crud-service.hook";
 import { useWidth } from "../hooks/use-width";
 import { ITableAction, ITableElement } from "../interfaces/table.interfaces";
 import { IPagingData } from "../utils/api-response";
+import Svgs from "../../public/images/icons/svgs";
 
 interface IProps<T> {
   url: string;
@@ -148,49 +149,49 @@ const TableComponent = forwardRef<IRef, IProps<any>>((props, ref) => {
     };
   }, []);
 
-  const mobilTemplate = (item: any) => {
-    return (
-      <div className="card-grid-item">
-        <div className="card-header">
-          {columns.map((column) => {
-            const properties = column.fieldName.split(".");
-            let field = item[properties[0]];
-            properties.length >= 2 &&
-              properties.forEach((prop, index) => {
-                if (index === 0) return;
-                field = field[prop];
-              });
-            return (
-              <div key={item} className="item-value-container">
-                <p className="text-black bold">{column.header}</p>
-                <p> {column.renderCell ? column.renderCell(item) : field} </p>
-              </div>
-            );
-          })}
-        </div>
-        <div className="card-footer">
-          {actions.map((action, index) => (
-            <div key={index} onClick={() => action.onClick(item)}>
-              {action.customIcon ? (
-                <div className="button grid-button button-link">
-                  {action.customIcon()}
-                </div>
-              ) : typeof action.icon === "function" ? (
-                (() => {
-                  const iconResult = action.icon(item);
-                  return getIconElement(iconResult, "src");
-                })()
-              ) : (
-                (() => {
-                  return getIconElement(action.icon, "src");
-                })()
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  };
+  // const mobilTemplate = (item: any) => {
+  //   return (
+  //     <div className="card-grid-item">
+  //       <div className="card-header">
+  //         {columns.map((column) => {
+  //           const properties = column.fieldName.split(".");
+  //           let field = item[properties[0]];
+  //           properties.length >= 2 &&
+  //             properties.forEach((prop, index) => {
+  //               if (index === 0) return;
+  //               field = field[prop];
+  //             });
+  //           return (
+  //             <div key={item} className="item-value-container">
+  //               <p className="text-black bold">{column.header}</p>
+  //               <p> {column.renderCell ? column.renderCell(item) : field} </p>
+  //             </div>
+  //           );
+  //         })}
+  //       </div>
+  //       <div className="card-footer">
+  //         {actions.map((action, index) => (
+  //           <div key={index} onClick={() => action.onClick(item)}>
+  //             {action.customIcon ? (
+  //               <div className="button grid-button button-link">
+  //                 {action.customIcon()}
+  //               </div>
+  //             ) : typeof action.icon === "function" ? (
+  //               (() => {
+  //                 const iconResult = action.icon(item);
+  //                 return getIconElement(iconResult, "src");
+  //               })()
+  //             ) : (
+  //               (() => {
+  //                 return getIconElement(action.icon, "src");
+  //               })()
+  //             )}
+  //           </div>
+  //         ))}
+  //       </div>
+  //     </div>
+  //   );
+  // };
 
   useImperativeHandle(ref, () => ({
     loadData: loadData,
@@ -219,7 +220,7 @@ const TableComponent = forwardRef<IRef, IProps<any>>((props, ref) => {
               leftContent={leftContent}
             />
 
-            {width > 830 ? (
+            {width && (
               <DataTable
                 className="spc-table full-height"
                 value={resultData?.array || []}
@@ -233,6 +234,7 @@ const TableComponent = forwardRef<IRef, IProps<any>>((props, ref) => {
                     field={col.fieldName}
                     header={col.header}
                     body={col.renderCell}
+                    style={{ fontSize: "0.8em" }}
                   />
                 ))}
 
@@ -250,13 +252,6 @@ const TableComponent = forwardRef<IRef, IProps<any>>((props, ref) => {
                   />
                 )}
               </DataTable>
-            ) : (
-              <DataView
-                value={resultData?.array || []}
-                itemTemplate={mobilTemplate}
-                rows={5}
-                emptyMessage={emptyMessage}
-              />
             )}
 
             <Paginator
@@ -324,13 +319,21 @@ function getIconElement(icon: string, element: "name" | "src") {
       ) : (
         <Icons.FaRegFilePdf className="button grid-button button-pdf color-icon-pdf" />
       );
+    case "view":
+      return element == "name" ? (
+        "Pdf"
+      ) : (
+        <div className="pointer">
+          <Svgs svg="view" />
+        </div>
+      );
     default:
       return "";
   }
 }
 
 let leftContent = (
-  <p className="header-information text-black bold biggest">
+  <p className="header-information text-black bold medium">
     Resultados de búsqueda
   </p>
 );
@@ -341,7 +344,7 @@ const paginatorHeader: PaginatorTemplateOptions = {
   CurrentPageReport: (options: PaginatorCurrentPageReportOptions) => {
     return (
       <>
-        <p className="header-information text-black bold big">
+        <p className="header-information text-black bold medium">
           Total de resultados
         </p>
         <p className="header-information text-three bold big">
@@ -360,7 +363,7 @@ const paginatorHeader: PaginatorTemplateOptions = {
 
     return (
       <React.Fragment>
-        <p className="header-information text-black bold big">
+        <p className="header-information text-black bold medium">
           Registros por página{" "}
         </p>
         <Dropdown

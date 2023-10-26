@@ -14,6 +14,7 @@ import { useGetAllPeriod } from "./listsSapiencia/getPeriods.hook";
 import { getAllModalitys } from "./listsSapiencia/getModality.hook";
 import { useGetAllCreditStatus } from "./listsSapiencia/getCreditStatus.hook";
 import { urlApiBeneficiary } from "../../../common/utils/base-url";
+import * as XLSX from "xlsx"
 
 export const useConsultBeneficiaryMonitoring = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ export const useConsultBeneficiaryMonitoring = () => {
   const tableComponentRef = useRef(null);
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [tableView, setTableView] = useState<boolean>(false);
+  const [loading,setLoading] = useState (false);
   const { validateActionAccess } = useContext(AppContext);
   const [paginateData, setPaginateData] = useState({ page: "", perPage: "" });
   const resolver = useYupValidationResolver(consultBeneficiaryMonitoringSchema);
@@ -48,7 +50,7 @@ export const useConsultBeneficiaryMonitoring = () => {
 
   const tableActions: ITableAction<IBeneficiary>[] = [
     {
-      icon: "Detail",
+      icon: "view",
       onClick: (row) => {
         navigate(`/Beneficiario/info/${row.document}/${row.foundID}`);
       },
@@ -60,10 +62,12 @@ export const useConsultBeneficiaryMonitoring = () => {
     setSubmitDisabled(true);
     tableComponentRef.current?.emptyData();
     setTableView(false);
+    setLoading(false);
   };
 
   const onSubmit = handleSubmit((filters: IBeneficiaryFilters) => {
     setTableView(true);
+    setLoading(true);
     tableComponentRef.current?.loadData({
       ...filters,
     });
@@ -77,7 +81,13 @@ export const useConsultBeneficiaryMonitoring = () => {
     });
   };
 
-  const downloadCollection = useCallback(() => {}, [paginateData, formWatch]);
+  const downloadCollection = useCallback((paginateData) => {
+    console.log(paginateData)
+      // const book = XLSX.utils.book_new()
+      // const sheets = XLSX.utils.json_to_sheet(paginateData)
+      // XLSX.utils.book_append_sheet(book,sheets,"Beneficiarios")
+      // XLSX.writeFile (book, "Beneficiarios.xlsx");
+  },[paginateData]);
 
 
   useEffect(() => {
@@ -107,6 +117,7 @@ export const useConsultBeneficiaryMonitoring = () => {
     periods,
     modalitys,
     creditsStatus,
-    urlGetConsultBeneficiary
+    urlGetConsultBeneficiary,
+    loading
   };
 };

@@ -19,6 +19,7 @@ export interface ITableAction<T> {
     | "Delete"
     | "Profile"
     | "Pdf"
+    | "view"
     | ((row: T) => "Activate" | "Deactivate");
   onClick: (row: T) => void;
   customName?: string;

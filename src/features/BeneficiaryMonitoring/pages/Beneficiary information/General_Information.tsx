@@ -39,7 +39,7 @@ const GeneralInformation = () => {
             />
             <InputComponent
               idInput="Lugar_expedicion"
-              label={<>Lugar de expedicion</>}
+              label={<>Lugar de expedición</>}
               register={register}
               typeInput="text"
               className="input-basic medium"
@@ -165,7 +165,7 @@ const GeneralInformation = () => {
             />
           <InputComponent
               idInput="Nro_documento_deudor"
-              label={<>Documento de identicad Deudor</>}
+              label={<>Documento de identidad Deudor</>}
               register={register}
               typeInput="text"
               className="input-basic medium"
@@ -210,7 +210,7 @@ const GeneralInformation = () => {
             />
           <InputComponent
               idInput="Telefono_deudor"
-              label={<>Telefono fijo Deudor</>}
+              label={<>Teléfono fijo Deudor</>}
               register={register}
               typeInput="text"
               className="input-basic medium"
@@ -273,7 +273,7 @@ const GeneralInformation = () => {
             />
           <InputComponent
               idInput="Tel_empresa_deudor"
-              label={<>Télefono de la empresa</>}
+              label={<>Teléfono de la empresa</>}
               register={register}
               typeInput="text"
               className="input-basic medium"

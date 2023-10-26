@@ -69,10 +69,12 @@
 
     .table-previus:after {
         content: "Ant";
+        color: #000000;
     }
 
     .table-next:after {
         content: "Sig";
+        color: #000000;
     }
 
     table {
@@ -165,10 +167,12 @@
 @media (min-width: 1024px) {
     .table-previus:after {
         content: "Anterior" !important;
+        color: #000000;
     }
 
     .table-next:after {
         content: "Siguiente" !important;
+        color: #000000;
     }
 
     .spc-common-table {

@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import {
   ButtonComponent,
   FormComponent,
@@ -8,6 +8,7 @@ import {
 import TableComponent from "../../../../common/components/table.component";
 import Svgs from "../../../../public/images/icons/svgs";
 import { tableColumns } from "./columns";
+import { ProgressSpinner } from 'primereact/progressspinner';
 
 const BeneficiaryMonitoringForm = ({
   tableComponentRef,
@@ -29,7 +30,10 @@ const BeneficiaryMonitoringForm = ({
   modalitys,
   creditsStatus,
   urlGetConsultBeneficiary,
+  loading
 }) => {
+  
+
   return (
     <div className="container-sections-forms mt-24px ml-16px mr-16px p-0">
       <FormComponent
@@ -38,7 +42,7 @@ const BeneficiaryMonitoringForm = ({
         action={onSubmit}
       >
         <div className=" container-sections-forms ml-20px mr-20px">
-          <div className="text-black large bold grid-span-4-columns pb-14px">
+          <div className="text-black large grid-span-4-columns pb-14px">
             Seguimiento Beneficiario
           </div>
           <div className="grid-form-4-container gap-25">
@@ -82,7 +86,7 @@ const BeneficiaryMonitoringForm = ({
               errors={errors}
               data={modalitys}
               label={<>Modalidad</>}
-              className="select-basic medium"
+              className="select-basic small"
               classNameLabel="text-black big bold"
               placeholder="Seleccionar"
               filter
@@ -123,14 +127,14 @@ const BeneficiaryMonitoringForm = ({
             <TableComponent
               setPaginateData={setPaginateData}
               ref={tableComponentRef}
-              url={urlGetConsultBeneficiary}
+              url={urlGetConsultBeneficiary} 
               columns={tableColumns}
               actions={tableActions}
               isShowModal={true}
               emptyMessage="Resultado en la búsqueda"
               descriptionModalNoResult="No se generó resultado en la búsqueda"
               titleMessageModalNoResult="Resultado de búsqueda"
-            />
+            /> 
           </div>
           <div
             style={{

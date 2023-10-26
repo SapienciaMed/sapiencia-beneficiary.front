@@ -5,7 +5,8 @@ import { useGetGeneralInformation } from "../../hooks/BeneficiaryInformation/Gen
 const GeneralInformation = () => {
   const {control,register} = useGetGeneralInformation()
   return (
-    <div className=" container-sections-forms ml-20px mr-20px">
+
+    
       <Accordion activeIndex={0}>
         <AccordionTab header="Datos personales">
           <div className="grid-form-4-container gap-25 mt-14px">
@@ -292,7 +293,7 @@ const GeneralInformation = () => {
             </div>
         </AccordionTab>
       </Accordion>
-    </div>
+
   );
 };
 

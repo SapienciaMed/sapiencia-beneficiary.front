@@ -8,17 +8,16 @@ import Attentions from "./Beneficiary information/Attentions";
 import Consolidation from "./Beneficiary information/Consolidation";
 import Credit_Status from "./Beneficiary information/Credit_Status";
 import { ButtonComponent } from "../../../common/components/Form";
-import { useNavigate } from "react-router-dom";
 import { MainHook } from "../hooks/BeneficiaryInformation/Main";
 const BeneficiaryInformation = () => {
   const {handleClose} = MainHook()
   return (
     <>
+    <div className="p-tabview">
       <div className="text-black large bold grid-span-4-columns mt-14px ml-16px pb-14px">
         Información beneficiario
       </div>
-      <div className="mt-14px ml-16px mr-16px ">
-        <TabView>
+        <TabView scrollable>
           <TabPanel header="Información general">
             <GeneralInformation />
           </TabPanel>
@@ -41,8 +40,6 @@ const BeneficiaryInformation = () => {
             <Credit_Status />
           </TabPanel>
         </TabView>
-      </div>
-
       <div className="button-save-container-display mr-24px">
         <ButtonComponent
           value="Regresar"
@@ -50,6 +47,7 @@ const BeneficiaryInformation = () => {
           type="submit"
           action={handleClose}
         />
+      </div>
       </div>
     </>
   );

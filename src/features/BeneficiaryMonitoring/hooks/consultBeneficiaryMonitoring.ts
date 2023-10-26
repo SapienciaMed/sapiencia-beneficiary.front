@@ -81,18 +81,40 @@ export const useConsultBeneficiaryMonitoring = () => {
     });
   };
 
-  const downloadCollection = useCallback((paginateData) => {
-    console.log(paginateData)
-      // const book = XLSX.utils.book_new()
-      // const sheets = XLSX.utils.json_to_sheet(paginateData)
-      // XLSX.utils.book_append_sheet(book,sheets,"Beneficiarios")
-      // XLSX.writeFile (book, "Beneficiarios.xlsx");
-  },[paginateData]);
+  const downloadCollection = useCallback(() => {
+    const { page, perPage } = paginateData;
+    const { ccBeneficiary } = formWatch;
+    const url = new URL(`${urlApiBeneficiary}/api/v1/sapiencia/beneficiary/generate-xlsx`);
+    const params = new URLSearchParams();
+    params.append("page",page+1)
+    params.append("perPage",perPage+1)
+
+    if(ccBeneficiary){
+      params.append("ccBeneficiary",ccBeneficiary)
+    }
+    if(found){
+      params.append("founds",found)
+    }
+    if(period){
+      params.append("period",period)
+    }
+    if(modality){
+      params.append("modality",modality)
+    }
+    if(creditStatus){
+      params.append("creditStatus",creditStatus)
+    }
+
+    url.search = params.toString();
+    window.open(url.toString(), "_blank");
+
+  },[paginateData,formWatch,found,period,modality,creditStatus]);
 
 
   useEffect(() => {
     const { ccBeneficiary } = formWatch;
-    if (found || period || modality || creditStatus || ccBeneficiary) {
+
+    if (found || period || modality || creditStatus != null|| creditStatus != undefined || ccBeneficiary) {
       return setSubmitDisabled(false);
     }
     setSubmitDisabled(true);

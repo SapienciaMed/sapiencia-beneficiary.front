@@ -17,11 +17,11 @@ const BeneficiaryInformation = () => {
       <div className="text-black large bold grid-span-4-columns mt-14px ml-16px pb-14px">
         Información beneficiario
       </div>
-        <TabView scrollable>
+        <TabView>
           <TabPanel header="Información general">
             <GeneralInformation />
           </TabPanel>
-          <TabPanel header="Historial">
+           {/*<TabPanel header="Historial">
             <Historical />
           </TabPanel>
           <TabPanel header="Beneficios">
@@ -38,7 +38,7 @@ const BeneficiaryInformation = () => {
           </TabPanel>
           <TabPanel header="Estado Crédito">
             <Credit_Status />
-          </TabPanel>
+          </TabPanel> */}
         </TabView>
       <div className="button-save-container-display mr-24px">
         <ButtonComponent

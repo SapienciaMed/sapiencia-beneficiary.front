@@ -10,44 +10,53 @@ import Credit_Status from "./Beneficiary information/Credit_Status";
 import { ButtonComponent } from "../../../common/components/Form";
 import { MainHook } from "../hooks/BeneficiaryInformation/Main";
 const BeneficiaryInformation = () => {
-  const {handleClose} = MainHook()
+  const { handleClose } = MainHook();
+  const tabs = [
+    { title: 'Información general', content: <GeneralInformation /> },
+    // { title: 'Historial', content: <Historical /> },
+    // { title: 'Beneficios', content: <Benefits /> },
+    // { title: 'PQRSDF', content: <PQRSDF /> },
+    // { title: 'Atenciones', content: <Attentions />},
+    // { title: 'Consolidación', content: <Consolidation /> },
+    // { title: 'Estado Crédito', content: <Credit_Status /> },
+
+    
+];
+const panelClassName = (parent, index) => {
+  if (parent.state.activeIndex === index)
+      return 'bg-primary'
+}
   return (
     <>
-    <div className="p-tabview">
       <div className="text-black large bold grid-span-4-columns mt-14px ml-16px pb-14px">
         Información beneficiario
       </div>
-        <TabView>
-          <TabPanel header="Información general">
-            <GeneralInformation />
-          </TabPanel>
-           {/*<TabPanel header="Historial">
-            <Historical />
-          </TabPanel>
-          <TabPanel header="Beneficios">
-            <Benefits />
-          </TabPanel>
-          <TabPanel header="PQRSDF">
-            <PQRSDF />
-          </TabPanel>
-          <TabPanel header="Atenciones">
-            <Attentions />
-          </TabPanel>
-          <TabPanel header="Consolidación">
-            <Consolidation />
-          </TabPanel>
-          <TabPanel header="Estado Crédito">
-            <Credit_Status />
-          </TabPanel> */}
-        </TabView>
-      <div className="button-save-container-display mr-24px">
-        <ButtonComponent
-          value="Regresar"
-          className={`button-save big`}
-          type="submit"
-          action={handleClose}
-        />
-      </div>
+      <div className="card">
+        <div >
+          <TabView >
+          {tabs.map((tab, i) => {
+                    return (
+                        <TabPanel
+                            pt={{
+                                headerAction: ({ parent }) => ({
+                                    className: panelClassName(parent, i)
+                                })
+                            }}
+                            key={i} header={tab.title}>
+                            <p className="m-0">{tab.content}</p>
+                        </TabPanel>
+                    )
+                })}
+          </TabView>
+          <div className="button-save-container-display mr-24px">
+            <ButtonComponent
+              value="Regresar"
+              className={`button-save big`}
+              type="submit"
+              action={handleClose}
+            />
+          </div>
+        </div>
       </div>
     </>
   );

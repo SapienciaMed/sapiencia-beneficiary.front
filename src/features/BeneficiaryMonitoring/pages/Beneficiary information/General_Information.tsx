@@ -16,7 +16,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
             <InputComponent
@@ -25,7 +25,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
 
               disabled
             />
@@ -35,7 +35,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
             <InputComponent
@@ -44,7 +44,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
             <InputComponent
@@ -53,7 +53,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
             <InputComponent
@@ -62,7 +62,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
             <InputComponent
@@ -71,7 +71,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
             <InputComponent
@@ -80,7 +80,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
             <InputComponent
@@ -89,7 +89,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
             <InputComponent
@@ -98,7 +98,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
             <InputComponent
@@ -107,7 +107,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
             <InputComponent
@@ -116,7 +116,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
             <InputComponent
@@ -125,7 +125,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
           </div>
@@ -138,7 +138,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
             <InputComponent
@@ -147,7 +147,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
           </div>
@@ -161,7 +161,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
           <InputComponent
@@ -170,7 +170,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
           <InputComponent
@@ -179,7 +179,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
           <InputComponent
@@ -188,7 +188,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
           <InputComponent
@@ -197,7 +197,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
           <InputComponent
@@ -206,7 +206,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
           <InputComponent
@@ -215,7 +215,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
           <InputComponent
@@ -224,7 +224,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
           <InputComponent
@@ -233,7 +233,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
           <InputComponent
@@ -242,7 +242,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
           <InputComponent
@@ -251,7 +251,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
           <InputComponent
@@ -260,7 +260,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
           <InputComponent
@@ -269,7 +269,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
           <InputComponent
@@ -278,7 +278,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
           <InputComponent
@@ -287,7 +287,7 @@ const GeneralInformation = () => {
               register={register}
               typeInput="text"
               className="input-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big "
               disabled
             />
             </div>

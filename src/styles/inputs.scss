@@ -29,7 +29,8 @@
     1px solid $input-color-border,
     $secondary-color,
     null,
-    15px
+    15px,
+    null
   );
 
   padding: 10px 20px;
@@ -46,12 +47,13 @@
 .input-basic {
   @include generate-input(
     100%,
-    41px,
+    400px,
     6px,
     1px solid $input-color-border,
     null,
     null,
-    15px
+    14px,
+    RubikRegular
   );
 
 

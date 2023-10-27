@@ -58,7 +58,8 @@
   $border,
   $background-color: null,
   $color: null,
-  $font-size: null
+  $font-size: null,
+  $font-family:null,
 ) {
   width: $width;
   height: $height;
@@ -67,6 +68,7 @@
   background-color: $background-color;
   color: $color;
   font-size: $font-size;
+  font-family:$font-family;
 }
 
 @mixin generate-button($border-radius, $color, $background-color, $border) {

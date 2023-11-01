@@ -8,7 +8,7 @@ import {
 import TableComponent from "../../../../common/components/table.component";
 import Svgs from "../../../../public/images/icons/svgs";
 import { tableColumns } from "./columns";
-import { ProgressSpinner } from 'primereact/progressspinner';
+import { ProgressSpinner } from "primereact/progressspinner";
 
 const BeneficiaryMonitoringForm = ({
   tableComponentRef,
@@ -23,17 +23,13 @@ const BeneficiaryMonitoringForm = ({
   register,
   setPaginateData,
   handleChange,
-  validateActionAccess,
   downloadCollection,
   founds,
   periods,
   modalitys,
   creditsStatus,
   urlGetConsultBeneficiary,
-  loading
 }) => {
-  
-
   return (
     <div className="container-sections-forms mt-24px ml-16px mr-16px p-0">
       <FormComponent
@@ -127,14 +123,14 @@ const BeneficiaryMonitoringForm = ({
             <TableComponent
               setPaginateData={setPaginateData}
               ref={tableComponentRef}
-              url={urlGetConsultBeneficiary} 
+              url={urlGetConsultBeneficiary}
               columns={tableColumns}
               actions={tableActions}
               isShowModal={true}
               emptyMessage="Resultado en la búsqueda"
               descriptionModalNoResult="No se generó resultado en la búsqueda"
               titleMessageModalNoResult="Resultado de búsqueda"
-            /> 
+            />
           </div>
           <div
             style={{

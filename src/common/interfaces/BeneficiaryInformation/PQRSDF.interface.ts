@@ -1,14 +1,22 @@
 export interface IPQRSDF {
-    ID:number,
-    PQRSDF:string,
+    ID: number,
+    PQRSDF: string,
     DateFiled: Date,
     Program: string,
-    Subject : string,
-    Status : string
+    Subject: string,
+    Status: string
 }
 
 export interface IPQRSDFFilters {
-    PQRSDF:string,
-    Subject : number,
-    Program : number,
+    PQRSDF: string,
+    Subject: number,
+    Program: number,
+}
+
+export interface IPQRSDFTable {
+    PQRSDF: string;
+    Datefiled: Date;
+    Program: string;
+    Issue: string;
+    Status: string;
 }

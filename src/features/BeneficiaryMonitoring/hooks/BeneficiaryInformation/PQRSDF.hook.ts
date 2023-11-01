@@ -1,19 +1,21 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import useYupValidationResolver from "../../../../common/hooks/form-validator.hook";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { ITableAction } from "../../../../common/interfaces/table.interfaces";
 import { consultPQRSFSchema } from "../../../../common/schemas/BeneficiaryInformation/PQRSDF.schema";
 import {
   IPQRSDF,
   IPQRSDFFilters,
 } from "../../../../common/interfaces/BeneficiaryInformation/PQRSDF.interface";
+import { AppContext } from "../../../../common/contexts/app.context";
 
 export const PQRSDFHook = () => {
   const navigate = useNavigate();
   const tableComponentRef = useRef(null);
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [tableView, setTableView] = useState<boolean>(false);
+  const { validateActionAccess } = useContext(AppContext);
   const [paginateData, setPaginateData] = useState({ page: "", perPage: "" });
   const resolver = useYupValidationResolver(consultPQRSFSchema);
   const {
@@ -62,7 +64,9 @@ export const PQRSDFHook = () => {
     });
   };
 
-  const downloadCollection = useCallback(() => {}, [paginateData, formWatch]);
+  const downloadCollection = useCallback(() => {
+    const { page, perPage } = paginateData;
+  }, [paginateData, formWatch]);
 
   useEffect(() => {
     const { PQRSDF } = formWatch;
@@ -75,6 +79,7 @@ export const PQRSDFHook = () => {
   return {
     downloadCollection,
     onSubmit,
+    setPaginateData,
     handleClean,
     register,
     control,
@@ -83,6 +88,8 @@ export const PQRSDFHook = () => {
     errors,
     handleChange,
     tableActions,
-    isValid
+    isValid,
+    tableComponentRef
+
   };
 };

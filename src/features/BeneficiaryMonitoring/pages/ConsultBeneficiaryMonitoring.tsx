@@ -15,17 +15,15 @@ const ConsultBeneficiaryMonitoring = () => {
     submitDisabled,
     handleChange,
     handleClean,
-    validateActionAccess,
     downloadCollection,
     founds,
     periods,
     modalitys,
     creditsStatus,
-    urlGetConsultBeneficiary,loading
+    urlGetConsultBeneficiary,
   } = useConsultBeneficiaryMonitoring();
   return (
     <BeneficiaryMonitoringForm
-      validateActionAccess={validateActionAccess}
       register={register}
       handleChange={handleChange}
       submitDisabled={submitDisabled}
@@ -38,13 +36,12 @@ const ConsultBeneficiaryMonitoring = () => {
       errors={errors}
       isValid={isValid}
       handleClean={handleClean}
-      downloadCollection ={downloadCollection}
-      founds = {founds}
-      periods = {periods}
-      modalitys = {modalitys}
-      creditsStatus = {creditsStatus}
-      urlGetConsultBeneficiary = {urlGetConsultBeneficiary}
-      loading = {loading}
+      downloadCollection={downloadCollection}
+      founds={founds}
+      periods={periods}
+      modalitys={modalitys}
+      creditsStatus={creditsStatus}
+      urlGetConsultBeneficiary={urlGetConsultBeneficiary}
     />
   );
 };

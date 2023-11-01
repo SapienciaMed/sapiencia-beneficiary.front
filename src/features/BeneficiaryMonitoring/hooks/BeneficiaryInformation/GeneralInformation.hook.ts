@@ -6,31 +6,30 @@ import { useForm } from "react-hook-form";
 import { BeneficiaryInfo } from "../../../../common/interfaces/BeneficiaryInformation/GeneralInformation";
 import { ApiResponse } from "../../../../common/utils/api-response";
 
-export const useGetGeneralInformation = ()=>{
+export const useGetGeneralInformation = () => {
     const { control, register, reset } = useForm();
-    const [Information, setInformation]= useState<BeneficiaryInfo>(null);
-    const {document,foundId } = useParams();
-    const data = {document,foundId}
-    const {post} = useCrudService (urlApiBeneficiary)
+    const [Information, setInformation] = useState<BeneficiaryInfo>(null);
+    const { document, foundId } = useParams();
+    const data = { document, foundId }
+    const { post } = useCrudService(urlApiBeneficiary)
     const getInformation = async () => {
         try {
             const endpoint = "/api/v1/sapiencia/beneficiary/get-by-document"
-            const resp:ApiResponse<BeneficiaryInfo> = await post(endpoint,data)
+            const resp: ApiResponse<BeneficiaryInfo> = await post(endpoint, data)
             setInformation(resp.data[0][0][0])
-            console.log(resp.data[0][0][0])
         } catch (error) {
             console.error(error)
         }
     }
 
-    useEffect (()=>{
+    useEffect(() => {
         getInformation()
-    },[])
+    }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
         reset(Information)
-    },[Information])
+    }, [Information])
 
-    return {control,register}
+    return { control, register }
 }
 

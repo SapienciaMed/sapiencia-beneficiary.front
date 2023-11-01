@@ -40,7 +40,7 @@ interface IProps<T> {
   isShowModal: boolean;
   titleMessageModalNoResult?: string;
   descriptionModalNoResult?: string;
-  setPaginateData?: ({}) => {};
+  setPaginateData?: any;
 }
 
 interface IRef {

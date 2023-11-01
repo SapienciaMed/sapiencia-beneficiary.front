@@ -14,7 +14,6 @@ import { useGetAllPeriod } from "./listsSapiencia/getPeriods.hook";
 import { getAllModalitys } from "./listsSapiencia/getModality.hook";
 import { useGetAllCreditStatus } from "./listsSapiencia/getCreditStatus.hook";
 import { urlApiBeneficiary } from "../../../common/utils/base-url";
-import * as XLSX from "xlsx"
 
 export const useConsultBeneficiaryMonitoring = () => {
   const navigate = useNavigate();
@@ -25,7 +24,6 @@ export const useConsultBeneficiaryMonitoring = () => {
   const tableComponentRef = useRef(null);
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [tableView, setTableView] = useState<boolean>(false);
-  const [loading,setLoading] = useState (false);
   const { validateActionAccess } = useContext(AppContext);
   const [paginateData, setPaginateData] = useState({ page: "", perPage: "" });
   const resolver = useYupValidationResolver(consultBeneficiaryMonitoringSchema);
@@ -39,8 +37,8 @@ export const useConsultBeneficiaryMonitoring = () => {
     formState: { errors, isValid },
   } = useForm({ resolver, mode: "all" });
 
-  const [found,period,modality,creditStatus]= watch([
-    "founds","period","modality","creditStatus"
+  const [found, period, modality, creditStatus] = watch([
+    "founds", "period", "modality", "creditStatus"
   ])
   const urlGetConsultBeneficiary = `${urlApiBeneficiary}/api/v1/sapiencia/beneficiary/get-all-paginated`
 
@@ -62,12 +60,10 @@ export const useConsultBeneficiaryMonitoring = () => {
     setSubmitDisabled(true);
     tableComponentRef.current?.emptyData();
     setTableView(false);
-    setLoading(false);
   };
 
   const onSubmit = handleSubmit((filters: IBeneficiaryFilters) => {
     setTableView(true);
-    setLoading(true);
     tableComponentRef.current?.loadData({
       ...filters,
     });
@@ -86,35 +82,35 @@ export const useConsultBeneficiaryMonitoring = () => {
     const { ccBeneficiary } = formWatch;
     const url = new URL(`${urlApiBeneficiary}/api/v1/sapiencia/beneficiary/generate-xlsx`);
     const params = new URLSearchParams();
-    params.append("page",page+1)
-    params.append("perPage",perPage+1)
+    params.append("page", page + 1)
+    params.append("perPage", perPage + 1)
 
-    if(ccBeneficiary){
-      params.append("ccBeneficiary",ccBeneficiary)
+    if (ccBeneficiary) {
+      params.append("ccBeneficiary", ccBeneficiary)
     }
-    if(found){
-      params.append("founds",found)
+    if (found) {
+      params.append("founds", found)
     }
-    if(period){
-      params.append("period",period)
+    if (period) {
+      params.append("period", period)
     }
-    if(modality){
-      params.append("modality",modality)
+    if (modality) {
+      params.append("modality", modality)
     }
-    if(creditStatus){
-      params.append("creditStatus",creditStatus)
+    if (creditStatus) {
+      params.append("creditStatus", creditStatus)
     }
 
     url.search = params.toString();
     window.open(url.toString(), "_blank");
 
-  },[paginateData,formWatch,found,period,modality,creditStatus]);
+  }, [paginateData, formWatch, found, period, modality, creditStatus]);
 
 
   useEffect(() => {
     const { ccBeneficiary } = formWatch;
 
-    if (found || period || modality || creditStatus != null|| creditStatus != undefined || ccBeneficiary) {
+    if (found || period || modality || creditStatus != null || creditStatus != undefined || ccBeneficiary) {
       return setSubmitDisabled(false);
     }
     setSubmitDisabled(true);
@@ -140,6 +136,5 @@ export const useConsultBeneficiaryMonitoring = () => {
     modalitys,
     creditsStatus,
     urlGetConsultBeneficiary,
-    loading
   };
 };

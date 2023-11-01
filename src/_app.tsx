@@ -29,7 +29,11 @@ function App() {
         <Router>
           <Suspense fallback={<p>Loading...</p>}>
             <Routes>
-              <Route path={"/beneficiario/*"} element={<BeneficiaryMonitoringRoutes />} />;
+              <Route
+                path={"/Beneficiario/*"}
+                element={<BeneficiaryMonitoringRoutes />}
+              />
+              ;
             </Routes>
           </Suspense>
         </Router>

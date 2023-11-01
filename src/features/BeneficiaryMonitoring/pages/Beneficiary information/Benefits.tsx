@@ -1,9 +1,9 @@
-import React from 'react'
+import { memo } from "react";
+import BenefitsForm from "../../forms/BeneficiaryInformation/Benefits/BenefitsForm";
+import { getDataBenefits } from "../../hooks/BeneficiaryInformation/Benefits.hook";
 
-function Benefits() {
-  return (
-    <div>Benefits</div>
-  )
-}
+const Benefits = () => {
+  return <BenefitsForm />;
+};
 
-export default Benefits
+export default memo(Benefits);

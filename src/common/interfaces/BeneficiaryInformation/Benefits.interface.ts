@@ -7,6 +7,6 @@ export interface IBenefitsTable {
 }
 
 export interface IBenefitsFilters {
-    document: string;
-    foundID: string;
+    modalityID: number;
+    foundId: number;
 }

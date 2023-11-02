@@ -3,23 +3,23 @@ import { ITableElement } from "../../../../../common/interfaces/table.interfaces
 
 export const tableColumns: ITableElement<IPQRSDFTable>[] = [
   {
-    fieldName: "PQRSDF",
-    header: "Documento de identidad",
+    fieldName: "filingNumber",
+    header: "No.PQRSDF",
   },
   {
-    fieldName: "Datefiled",
+    fieldName: "createdAt",
     header: "Fecha radicado",
   },
   {
-    fieldName: "Program",
+    fieldName: "program",
     header: "Programa",
   },
   {
-    fieldName: "Issue",
+    fieldName: "requestSubject.aso_asunto",
     header: "Asunto",
   },
   {
-    fieldName: "Status",
+    fieldName: "status.lep_estado",
     header: "Estado",
   },
 ];

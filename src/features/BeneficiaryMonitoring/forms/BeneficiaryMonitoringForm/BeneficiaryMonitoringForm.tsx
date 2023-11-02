@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo } from "react";
 import {
   ButtonComponent,
   FormComponent,
@@ -8,7 +8,6 @@ import {
 import TableComponent from "../../../../common/components/table.component";
 import Svgs from "../../../../public/images/icons/svgs";
 import { tableColumns } from "./columns";
-import { ProgressSpinner } from "primereact/progressspinner";
 
 const BeneficiaryMonitoringForm = ({
   tableComponentRef,
@@ -151,11 +150,6 @@ const BeneficiaryMonitoringForm = ({
               }
               className="button-download large "
               action={downloadCollection}
-            />
-            <ButtonComponent
-              value="Cerrar"
-              className="button-save big"
-              action={handleClean}
             />
           </div>
         </>

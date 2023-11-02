@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useYupValidationResolver from "../../../../common/hooks/form-validator.hook";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { ITableAction } from "../../../../common/interfaces/table.interfaces";
@@ -9,6 +9,9 @@ import {
   IPQRSDFFilters,
 } from "../../../../common/interfaces/BeneficiaryInformation/PQRSDF.interface";
 import { AppContext } from "../../../../common/contexts/app.context";
+import { urlApiBeneficiary } from "../../../../common/utils/base-url";
+import { getProgramsCitizenAttentions } from "../ExternalHooks/CitizenAttentions/getPrograms.hooks";
+import { getSubjectTypeCitizenAttentions } from "../ExternalHooks/CitizenAttentions/getSubjectType.hook";
 
 export const PQRSDFHook = () => {
   const navigate = useNavigate();
@@ -18,6 +21,11 @@ export const PQRSDFHook = () => {
   const { validateActionAccess } = useContext(AppContext);
   const [paginateData, setPaginateData] = useState({ page: "", perPage: "" });
   const resolver = useYupValidationResolver(consultPQRSFSchema);
+  const { programs } = getProgramsCitizenAttentions()
+  const { subjectType } = getSubjectTypeCitizenAttentions()
+
+
+  console.log(programs, subjectType)
   const {
     control,
     handleSubmit,
@@ -26,6 +34,7 @@ export const PQRSDFHook = () => {
     watch,
     formState: { errors, isValid },
   } = useForm({ resolver, mode: "all" });
+  const { document, foundId } = useParams();
 
   const [formWatch, setFormWatch] = useState({
     PQRSDF: "",
@@ -35,12 +44,14 @@ export const PQRSDFHook = () => {
 
   const tableActions: ITableAction<IPQRSDF>[] = [
     {
-      icon: "Detail",
+      icon: "view",
       onClick: (row) => {
         navigate(`#`);
       },
     },
   ];
+
+  const urlGetPQRSDF = `${urlApiBeneficiary}/api/v1/sapiencia/beneficiary/pqrsdf/get-paginated`
 
   const handleClean = () => {
     reset();
@@ -51,7 +62,9 @@ export const PQRSDFHook = () => {
 
   const onSubmit = handleSubmit((filters: IPQRSDFFilters) => {
     setTableView(true);
+    let identification = '45542511'
     tableComponentRef.current?.loadData({
+      identification,
       ...filters,
     });
   });
@@ -70,11 +83,11 @@ export const PQRSDFHook = () => {
 
   useEffect(() => {
     const { PQRSDF } = formWatch;
-    if (SubjectType || Program || PQRSDF) {
+    if (PQRSDF) {
       return setSubmitDisabled(true);
     }
     setSubmitDisabled(false);
-  }, [SubjectType, Program, formWatch]);
+  }, [formWatch]);
 
   return {
     downloadCollection,
@@ -89,7 +102,9 @@ export const PQRSDFHook = () => {
     handleChange,
     tableActions,
     isValid,
-    tableComponentRef
-
+    tableComponentRef,
+    urlGetPQRSDF,
+    programs,
+    subjectType
   };
 };

@@ -24,6 +24,9 @@ const PQRSDF = () => {
     isValid,
     setPaginateData,
     tableComponentRef,
+    urlGetPQRSDF,
+    programs,
+    subjectType,
   } = PQRSDFHook();
   return (
     <>
@@ -57,7 +60,7 @@ const PQRSDF = () => {
                 idInput="SubjectType"
                 control={control}
                 errors={errors}
-                //data={founds}
+                data={subjectType}
                 label={<>Tipo de asunto</>}
                 className="select-basic medium"
                 classNameLabel="text-black big bold"
@@ -65,10 +68,10 @@ const PQRSDF = () => {
                 filter
               />
               <SelectComponent
-                idInput="Program"
+                idInput="SubjectType"
                 control={control}
                 errors={errors}
-                //data={founds}
+                data={programs}
                 label={<>Programa</>}
                 className="select-basic medium"
                 classNameLabel="text-black big bold"
@@ -76,11 +79,11 @@ const PQRSDF = () => {
                 filter
               />
               <SelectComponent
-                idInput="Issue"
+                idInput="SubjectType"
                 control={control}
                 errors={errors}
-                //data={founds}
-                label={<>Estado</>}
+                data={subjectType}
+                label={<>Asunto</>}
                 className="select-basic medium"
                 classNameLabel="text-black big bold"
                 placeholder="Seleccionar"
@@ -100,21 +103,22 @@ const PQRSDF = () => {
                   !isValid || submitDisabled ? "disabled-black" : ""
                 } big`}
                 type="submit"
-                disabled={!isValid || submitDisabled}
               />
             </div>
           </div>
         </FormComponent>
-
-        <div className="container-sections-forms ml-20px mr-20px">
-          <TableComponent
-            setPaginateData={setPaginateData}
-            ref={tableComponentRef}
-            url={""}
-            columns={tableColumns}
-            isShowModal={true}
-          />
-        </div>
+        {tableView && (
+          <div className="container-sections-forms ml-20px mr-20px">
+            <TableComponent
+              setPaginateData={setPaginateData}
+              ref={tableComponentRef}
+              url={urlGetPQRSDF}
+              columns={tableColumns}
+              actions={tableActions}
+              isShowModal={true}
+            />
+          </div>
+        )}
       </div>
     </>
   );

@@ -205,6 +205,7 @@ const TableComponent = forwardRef<IRef, IProps<any>>((props, ref) => {
   }
 
   if (resultData && resultData.array && resultData.array.length > 0) {
+    console.log(columns[1]);
     return (
       <div className="card-user">
         <div className="spc-common-table">
@@ -219,7 +220,6 @@ const TableComponent = forwardRef<IRef, IProps<any>>((props, ref) => {
               onPageChange={onPageChange}
               leftContent={leftContent}
             />
-
             {width && (
               <DataTable
                 className="spc-table full-height"

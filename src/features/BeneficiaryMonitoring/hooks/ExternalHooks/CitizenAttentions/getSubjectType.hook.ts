@@ -3,10 +3,6 @@ import useCrudService from "../../../../../common/hooks/crud-service.hook";
 import { urlApiCitizenAttentions } from "../../../../../common/utils/base-url";
 import { ApiResponse } from "../../../../../common/utils/api-response";
 
-export interface ISubjectType {
-    value: number;
-    name: string;
-}
 export const getSubjectTypeCitizenAttentions = () => {
     const { get } = useCrudService(urlApiCitizenAttentions);
     const [subjectType, setSubjectType] = useState<any>([]);
@@ -29,7 +25,6 @@ export const getSubjectTypeCitizenAttentions = () => {
             console.log("Error response:", err.response);
         }
     }
-
     useEffect(() => {
         getAllSubjectType()
     }, [])

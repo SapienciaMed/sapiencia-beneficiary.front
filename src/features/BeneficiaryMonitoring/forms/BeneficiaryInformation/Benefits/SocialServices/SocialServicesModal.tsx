@@ -1,13 +1,36 @@
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
+import { ApiResponse } from "../../../../../../common/utils/api-response";
+import useCrudService from "../../../../../../common/hooks/crud-service.hook";
+import { urlApiBeneficiary } from "../../../../../../common/utils/base-url";
 
-const SocialServicesModal = (information) => {
+const SocialServicesModal = ({ period, found, modality }) => {
+  const [InformationSocialServices, setInformationSocialServices] =
+    useState(null);
+  const { post } = useCrudService(urlApiBeneficiary);
+  const getInformationSocialSerices = async () => {
+    try {
+      const data = { document, period, found, modality };
+      console.log(data);
+      const endpoint =
+        "/api/v1/sapiencia/beneficiary/getSocialServicesByBeneficiary";
+      const resp: ApiResponse<[]> = await post(endpoint, data);
+      setInformationSocialServices(resp.data["array"]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getInformationSocialSerices();
+  }, []);
   return (
     <>
       <div>
         <DataTable
-          value={information}
+          dataKey="id"
+          value={InformationSocialServices}
           showGridlines
           tableStyle={{ minWidth: "50rem" }}
         >
@@ -30,7 +53,7 @@ const SocialServicesModal = (information) => {
       </div>
       <div>
         <DataTable
-          value={information}
+          value={InformationSocialServices}
           showGridlines
           tableStyle={{ minWidth: "50rem" }}
         >
@@ -53,7 +76,7 @@ const SocialServicesModal = (information) => {
       </div>
       <div>
         <DataTable
-          value={information}
+          value={InformationSocialServices}
           showGridlines
           tableStyle={{ minWidth: "50rem" }}
         >

@@ -51,7 +51,7 @@ export const PQRSDFHook = () => {
     },
   ];
 
-  const urlGetPQRSDF = `${urlApiBeneficiary}/api/v1/sapiencia/beneficiary/pqrsdf/get-paginated`
+  const urlGetPQRSDF = `${urlApiBeneficiary}/api/v1/sapiencia/external/citizenAttentions/pqrsdf/get-paginated`
 
   const handleClean = () => {
     reset();

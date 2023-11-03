@@ -78,17 +78,6 @@ const PQRSDF = () => {
                 placeholder="Seleccionar"
                 filter
               />
-              <SelectComponent
-                idInput="SubjectType"
-                control={control}
-                errors={errors}
-                data={subjectType}
-                label={<>Asunto</>}
-                className="select-basic medium"
-                classNameLabel="text-black big bold"
-                placeholder="Seleccionar"
-                filter
-              />
             </div>
             <div className="button-save-container-display mr-24px">
               <ButtonComponent

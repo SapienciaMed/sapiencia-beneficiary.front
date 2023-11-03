@@ -22,6 +22,7 @@ const BenefitsForm = () => {
     submitDisabled,
     onSubmit,
     tableView,
+    showSocialServices,
   } = getDataBenefits();
 
   const { foundId } = useParams();
@@ -108,7 +109,7 @@ const BenefitsForm = () => {
                   field=""
                   header="Servicio social"
                   body={
-                    <p className="pointer">
+                    <p className="pointer" onClick={showSocialServices}>
                       <Svgs svg="view" />
                     </p>
                   }

@@ -22,6 +22,7 @@ export const getDataBenefits = () => {
   const [tableView, setTableView] = useState<boolean>(false);
   const navigate = useNavigate();
   const { document } = useParams();
+  const { setMessage } = useContext(AppContext);
 
   const getInformationBenefits = async (data) => {
     try {
@@ -75,30 +76,22 @@ export const getDataBenefits = () => {
 
   const [found, modality] = watch(["founds", "modality"]);
 
-  // const getInformationSocialSerices = async () => {
-  //   try {
-  //     const endpoint =
-  //       "/api/v1/sapiencia/beneficiary/getSocialServicesByBeneficiary";
-  //     const resp: ApiResponse<[]> = await post(endpoint, data);
-  //     setInformationSocialServices(resp.data["array"]);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getInformationSocialSerices();
-  // }, []);
-
-  // const showSocialServices = () => {
-  //   setMessage({
-  //     title: "Servicio Social",
-  //     show: true,
-  //     description: <SocialServicesModal />,
-  //     size: "medium",
-  //     background: true,
-  //   });
-  // };
+  const showSocialServices = (rowData) => {
+    console.log(rowData);
+    setMessage({
+      title: "Servicio Social",
+      show: true,
+      description: (
+        <SocialServicesModal
+          period={rowData}
+          found={found}
+          modality={modality}
+        />
+      ),
+      size: "medium",
+      background: true,
+    });
+  };
 
   useEffect(() => {
     if (found || modality) {
@@ -129,5 +122,6 @@ export const getDataBenefits = () => {
     submitDisabled,
     onSubmit,
     tableView,
+    showSocialServices,
   };
 };

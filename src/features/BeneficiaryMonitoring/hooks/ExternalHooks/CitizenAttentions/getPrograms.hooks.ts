@@ -3,10 +3,6 @@ import useCrudService from "../../../../../common/hooks/crud-service.hook";
 import { urlApiCitizenAttentions } from "../../../../../common/utils/base-url";
 import { ApiResponse } from "../../../../../common/utils/api-response";
 
-export interface IPrograms {
-    value: number;
-    name: string;
-}
 export const getProgramsCitizenAttentions = () => {
     const { get } = useCrudService(urlApiCitizenAttentions);
     const [programs, setProgrmas] = useState<any>([]);
@@ -22,8 +18,6 @@ export const getProgramsCitizenAttentions = () => {
                 name: PRG_DESCRIPCION,
             }
         })
-
-
         setProgrmas(dataRes);
     }
 

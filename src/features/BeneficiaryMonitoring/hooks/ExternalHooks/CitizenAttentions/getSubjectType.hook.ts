@@ -14,8 +14,16 @@ export const getSubjectTypeCitizenAttentions = () => {
     const getAllSubjectType = async () => {
         try {
             const endpoint = "/get-type-solicituds"
-            const resp: ApiResponse<ISubjectType[]> = await get(endpoint)
-            setSubjectType(resp.data);
+            const resp: ApiResponse<[]> = await get(endpoint)
+
+            const dataRes = resp.data.map((program) => {
+                const { TSO_CODIGO, TSO_DESCRIPTION } = program
+                return {
+                    value: TSO_CODIGO,
+                    name: TSO_DESCRIPTION,
+                }
+            })
+            setSubjectType(dataRes);
         } catch (err) {
             console.error(err);
             console.log("Error response:", err.response);

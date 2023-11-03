@@ -15,8 +15,16 @@ export const getProgramsCitizenAttentions = () => {
         const endpoint = "/get-Programs"
         const resp: ApiResponse<[]> = await get(endpoint)
 
-        const dataRes = resp.data
-        setProgrmas(resp.data);
+        const dataRes = resp.data.map((program) => {
+            const { PRG_CODIGO, PRG_DESCRIPCION } = program
+            return {
+                value: PRG_CODIGO,
+                name: PRG_DESCRIPCION,
+            }
+        })
+
+
+        setProgrmas(dataRes);
     }
 
     useEffect(() => {

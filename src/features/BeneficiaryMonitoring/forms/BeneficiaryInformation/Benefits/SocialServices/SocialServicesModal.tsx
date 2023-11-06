@@ -27,75 +27,79 @@ const SocialServicesModal = ({ period, found, modality }) => {
   }, []);
   return (
     <>
-      <div>
-        <DataTable
-          dataKey="id"
-          value={InformationSocialServices}
-          showGridlines
-          tableStyle={{ minWidth: "50rem" }}
-        >
-          <Column
-            field=""
-            header="Periodo de selección"
-            style={{ fontSize: "0.8em" }}
-          ></Column>
-          <Column
-            field=""
-            header="No.giro"
-            style={{ fontSize: "0.8em" }}
-          ></Column>
-          <Column
-            field=""
-            header="Periodo giro"
-            style={{ fontSize: "0.8em" }}
-          ></Column>
-        </DataTable>
-      </div>
-      <div>
-        <DataTable
-          value={InformationSocialServices}
-          showGridlines
-          tableStyle={{ minWidth: "50rem" }}
-        >
-          <Column
-            field=""
-            header="Realizo Servicio"
-            style={{ fontSize: "0.8em" }}
-          ></Column>
-          <Column
-            field=""
-            header="Horas presentadas"
-            style={{ fontSize: "0.8em" }}
-          ></Column>
-          <Column
-            field=""
-            header=" Horas acumuladas"
-            style={{ fontSize: "0.8em" }}
-          ></Column>
-        </DataTable>
-      </div>
-      <div>
-        <DataTable
-          value={InformationSocialServices}
-          showGridlines
-          tableStyle={{ minWidth: "50rem" }}
-        >
-          <Column
-            field=""
-            header="Horas adeuda"
-            style={{ fontSize: "0.8em" }}
-          ></Column>
-          <Column
-            field=""
-            header="Estado crédito"
-            style={{ fontSize: "0.8em" }}
-          ></Column>
-          <Column
-            field=""
-            header="Formato"
-            style={{ fontSize: "0.8em" }}
-          ></Column>
-        </DataTable>
+      <div className="container-sections-forms mt-24px ml-16px mr-16px p-0">
+        <div className="card-user">
+          <div className="spc-common-table">
+            <DataTable
+              dataKey="id"
+              value={InformationSocialServices}
+              showGridlines
+              tableStyle={{ minWidth: "50rem" }}
+            >
+              <Column
+                field=""
+                header="Periodo de selección"
+                style={{ fontSize: "0.8em" }}
+              ></Column>
+              <Column
+                field=""
+                header="No.giro"
+                style={{ fontSize: "0.8em" }}
+              ></Column>
+              <Column
+                field=""
+                header="Periodo giro"
+                style={{ fontSize: "0.8em" }}
+              ></Column>
+            </DataTable>
+          </div>
+          <div className="container-sections-forms mt-24px ml-16px mr-16px p-0">
+            <DataTable
+              value={InformationSocialServices}
+              showGridlines
+              tableStyle={{ minWidth: "50rem" }}
+            >
+              <Column
+                field=""
+                header="Realizo Servicio"
+                style={{ fontSize: "0.8em" }}
+              ></Column>
+              <Column
+                field=""
+                header="Horas presentadas"
+                style={{ fontSize: "0.8em" }}
+              ></Column>
+              <Column
+                field=""
+                header=" Horas acumuladas"
+                style={{ fontSize: "0.8em" }}
+              ></Column>
+            </DataTable>
+          </div>
+          <div className="container-sections-forms mt-24px ml-16px mr-16px p-0">
+            <DataTable
+              value={InformationSocialServices}
+              showGridlines
+              tableStyle={{ minWidth: "50rem" }}
+            >
+              <Column
+                field=""
+                header="Horas adeuda"
+                style={{ fontSize: "0.8em" }}
+              ></Column>
+              <Column
+                field=""
+                header="Estado crédito"
+                style={{ fontSize: "0.8em" }}
+              ></Column>
+              <Column
+                field=""
+                header="Formato"
+                style={{ fontSize: "0.8em" }}
+              ></Column>
+            </DataTable>
+          </div>
+        </div>
       </div>
     </>
   );

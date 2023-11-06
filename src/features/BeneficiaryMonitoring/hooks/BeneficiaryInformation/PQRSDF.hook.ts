@@ -62,7 +62,7 @@ export const PQRSDFHook = () => {
 
   const onSubmit = handleSubmit((filters: IPQRSDFFilters) => {
     setTableView(true);
-    let identification = '45542511'
+    let identification = document
     tableComponentRef.current?.loadData({
       identification,
       ...filters,

@@ -77,7 +77,7 @@ export const getDataBenefits = () => {
   const [found, modality] = watch(["founds", "modality"]);
 
   const showSocialServices = (rowData) => {
-    console.log(rowData);
+    console.log(rowData, found, modality);
     setMessage({
       title: "Servicio Social",
       show: true,

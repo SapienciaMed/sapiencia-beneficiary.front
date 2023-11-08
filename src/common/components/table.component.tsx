@@ -29,6 +29,8 @@ import { useWidth } from "../hooks/use-width";
 import { ITableAction, ITableElement } from "../interfaces/table.interfaces";
 import { IPagingData } from "../utils/api-response";
 import Svgs from "../../public/images/icons/svgs";
+import moment from "moment";
+import { DateTime } from "luxon";
 
 interface IProps<T> {
   url: string;

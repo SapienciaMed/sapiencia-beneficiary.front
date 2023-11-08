@@ -11,7 +11,7 @@ export const tableColumns: ITableElement<IPQRSDFTable>[] = [
     header: "Fecha radicado",
   },
   {
-    fieldName: "program",
+    fieldName: "program.prg_descripcion",
     header: "Programa",
   },
   {

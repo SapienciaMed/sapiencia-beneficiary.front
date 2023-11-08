@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { urlApiBeneficiary } from "../../../../common/utils/base-url";
 import useCrudService from "../../../../common/hooks/crud-service.hook";
 import { ApiResponse } from "../../../../common/utils/api-response";
@@ -20,7 +20,6 @@ export const getDataBenefits = () => {
   const tableComponentRef = useRef(null);
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [tableView, setTableView] = useState<boolean>(false);
-  const navigate = useNavigate();
   const { document } = useParams();
   const { setMessage } = useContext(AppContext);
 
@@ -36,7 +35,6 @@ export const getDataBenefits = () => {
         foundId,
         modalityId,
       };
-      console.log(dataBenefits);
       const endpoint = "/api/v1/sapiencia/beneficiary/getBenefits";
       const resp: ApiResponse<[]> = await post(endpoint, dataBenefits);
 
@@ -48,7 +46,16 @@ export const getDataBenefits = () => {
         element.OrderSustenance = formaterNumberToCurrency(
           element.OrderSustenance
         );
-        element.TotalOrder = formaterNumberToCurrency(element.TotalOrder);
+        element.OrderTotal = formaterNumberToCurrency(element.OrderTotal);
+        element.ProjectionEnrollment = formaterNumberToCurrency(
+          element.ProjectionEnrollment
+        );
+        element.ProjectionSustenance = formaterNumberToCurrency(
+          element.ProjectionSustenance
+        );
+        element.TotalProjection = formaterNumberToCurrency(
+          element.TotalProjection
+        );
       });
       setInformationBenefits(dataRes);
       setTotalBenefits(resp.data["array"].length);
@@ -58,12 +65,6 @@ export const getDataBenefits = () => {
   };
 
   useEffect(() => {}, []);
-
-  //Social Services
-  // const [InformationSocialServices, setInformationSocialServices] =
-  //   useState(null);
-  // const { setMessage } = useContext(AppContext);
-  // const data = { document, foundId };
 
   const {
     control,
@@ -76,16 +77,17 @@ export const getDataBenefits = () => {
 
   const [found, modality] = watch(["founds", "modality"]);
 
-  const showSocialServices = (rowData) => {
-    console.log(rowData, found, modality);
+  const showSocialServices = (periodId, period_name, statusCredit) => {
     setMessage({
       title: "Servicio Social",
       show: true,
       description: (
         <SocialServicesModal
-          period={rowData}
+          document={document}
+          period={periodId}
           found={found}
-          modality={modality}
+          period_name={period_name}
+          statusCredit={statusCredit}
         />
       ),
       size: "medium",

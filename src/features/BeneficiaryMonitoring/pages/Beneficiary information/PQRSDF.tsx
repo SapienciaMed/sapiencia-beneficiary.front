@@ -43,7 +43,7 @@ const PQRSDF = () => {
           <div className="container-sections-forms ml-20px mr-20px">
             <div className="grid-form-5-container gap-25 mt-24px ml-16px mr-16px p-0">
               <InputComponent
-                idInput="PQRSDF"
+                idInput="filingNumber"
                 label={
                   <>
                     No.PQRSDF <span>*</span>
@@ -57,7 +57,7 @@ const PQRSDF = () => {
                 onChange={handleChange}
               />
               <SelectComponent
-                idInput="SubjectType"
+                idInput="requestType"
                 control={control}
                 errors={errors}
                 data={subjectType}
@@ -68,7 +68,7 @@ const PQRSDF = () => {
                 filter
               />
               <SelectComponent
-                idInput="SubjectType"
+                idInput="programId"
                 control={control}
                 errors={errors}
                 data={programs}
@@ -92,6 +92,7 @@ const PQRSDF = () => {
                   !isValid || submitDisabled ? "disabled-black" : ""
                 } big`}
                 type="submit"
+                disabled={!isValid || submitDisabled}
               />
             </div>
           </div>

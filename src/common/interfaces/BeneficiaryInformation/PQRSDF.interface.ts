@@ -8,9 +8,9 @@ export interface IPQRSDF {
 }
 
 export interface IPQRSDFFilters {
-    PQRSDF: string,
-    Subject: number,
-    Program: number,
+    filingNumber: string,
+    requestType: number,
+    programId: number,
 }
 
 export interface IPQRSDFTable {

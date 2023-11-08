@@ -24,8 +24,6 @@ export const PQRSDFHook = () => {
   const { programs } = getProgramsCitizenAttentions()
   const { subjectType } = getSubjectTypeCitizenAttentions()
 
-
-  console.log(programs, subjectType)
   const {
     control,
     handleSubmit,
@@ -34,13 +32,13 @@ export const PQRSDFHook = () => {
     watch,
     formState: { errors, isValid },
   } = useForm({ resolver, mode: "all" });
-  const { document, foundId } = useParams();
+  const { document } = useParams();
 
   const [formWatch, setFormWatch] = useState({
-    PQRSDF: "",
+    filingNumber: "",
   });
 
-  const [SubjectType, Program] = watch(["SubjectType", "Program"]);
+  const [requestType, programId] = watch(["requestType", "programId"]);
 
   const tableActions: ITableAction<IPQRSDF>[] = [
     {
@@ -79,15 +77,15 @@ export const PQRSDFHook = () => {
 
   const downloadCollection = useCallback(() => {
     const { page, perPage } = paginateData;
-  }, [paginateData, formWatch]);
+  }, [paginateData, formWatch, programId]);
 
   useEffect(() => {
-    const { PQRSDF } = formWatch;
-    if (PQRSDF) {
-      return setSubmitDisabled(true);
+    const { filingNumber } = formWatch;
+    if (filingNumber || requestType || programId) {
+      return setSubmitDisabled(false);
     }
-    setSubmitDisabled(false);
-  }, [formWatch]);
+    setSubmitDisabled(true);
+  }, [formWatch, requestType, programId]);
 
   return {
     downloadCollection,

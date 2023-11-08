@@ -28,99 +28,6 @@ const BenefitsForm = () => {
     showSocialServices,
   } = getDataBenefits();
 
-  //   function getIconElement(icon: string, element: "name" | "src") {
-  //     switch (icon) {
-  //       case "Detail":
-  //         return element == "name" ? (
-  //           "Detalle"
-  //         ) : (
-  //           <Icons.FaEye className="button grid-button button-detail" />
-  //         );
-  //       case "Edit":
-  //         return element == "name" ? (
-  //           "Editar"
-  //         ) : (
-  //           <Icons.FaPencilAlt className="button grid-button button-edit" />
-  //         );
-  //       case "Delete":
-  //         return element == "name" ? (
-  //           "Eliminar"
-  //         ) : (
-  //           <Icons.FaTrashAlt className="button grid-button button-delete" />
-  //         );
-  //       case "Link":
-  //         return element == "name" ? (
-  //           "Vincular"
-  //         ) : (
-  //           <Icons.FaLink className="button grid-button button-link" />
-  //         );
-  //       case "Profile":
-  //         return element == "name" ? (
-  //           "Vincular"
-  //         ) : (
-  //           <ImProfile className="button grid-button button-link" />
-  //         );
-  //       case "Activate":
-  //         return element == "name" ? (
-  //           "Activar"
-  //         ) : (
-  //           <Icons.FaCheck className="button grid-button button-edit" />
-  //         );
-  //       case "Deactivate":
-  //         return element == "name" ? (
-  //           "Desactivar"
-  //         ) : (
-  //           <Icons.FaTimes className="button grid-button button-delete" />
-  //         );
-  //       case "Pdf":
-  //         return element == "name" ? (
-  //           "Pdf"
-  //         ) : (
-  //           <Icons.FaRegFilePdf className="button grid-button button-pdf color-icon-pdf" />
-  //         );
-  //       case "view":
-  //         return element == "name" ? (
-  //           "Pdf"
-  //         ) : (
-  //           <div className="pointer">
-  //             <Svgs svg="view" />
-  //           </div>
-  //         );
-  //       default:
-  //         return "";
-  //     }
-  //   }
-
-  //   const ActionComponent = (props: {
-  //   row: any;
-  //   actions: ITableAction<any>[];
-  // }): React.JSX.Element => {
-  //   return (
-  //     <div className="spc-table-action-button">
-  //       {props.actions.map((action, index) => (
-  //         <div
-  //           style={{ display: action.hide ? "none" : "block" }}
-  //           key={index}
-  //           onClick={() => action.onClick(props.row)}
-  //         >
-  //           {action.customIcon ? (
-  //             <div className="button grid-button button-link">
-  //               {action.customIcon()}
-  //             </div>
-  //           ) : typeof action.icon === "function" ? (
-  //             (() => {
-  //               const iconResult = action.icon(props.row);
-  //               return getIconElement(iconResult, "src");
-  //             })()
-  //           ) : (
-  //             getIconElement(action.icon, "src")
-  //           )}
-  //         </div>
-  //       ))}
-  //     </div>
-  //   );
-  // };
-
   const { foundId } = useParams();
   return (
     <div className="container-sections-forms mt-24px ml-16px mr-16px p-0">
@@ -193,12 +100,12 @@ const BenefitsForm = () => {
                   tableStyle={{ minWidth: "50rem" }}
                 >
                   <Column
-                    field="StatusOrder"
+                    field="calculatePeriodName"
                     header="Periodo"
                     style={{ fontSize: "0.8em" }}
                   ></Column>
                   <Column
-                    field="status"
+                    field="statusCredit"
                     header="Estado"
                     style={{ fontSize: "0.8em" }}
                   ></Column>
@@ -209,7 +116,11 @@ const BenefitsForm = () => {
                       body={(row) => (
                         <div
                           onClick={() =>
-                            showSocialServices(row.calculatePeriod)
+                            showSocialServices(
+                              row.calculatePeriod,
+                              row.calculatePeriodName,
+                              row.statusCredit
+                            )
                           }
                           className="pointer"
                         >
@@ -230,12 +141,12 @@ const BenefitsForm = () => {
                     style={{ fontSize: "0.8em" }}
                   ></Column>
                   <Column
-                    field="TotalOrder"
+                    field="OrderTotal"
                     header="Total girado"
                     style={{ fontSize: "0.8em" }}
                   ></Column>
                   <Column
-                    field="StatusOrder"
+                    field="statusCredit"
                     header="Estado del giro"
                     style={{ fontSize: "0.8em" }}
                   ></Column>
@@ -263,32 +174,27 @@ const BenefitsForm = () => {
                       tableStyle={{ minWidth: "50rem" }}
                     >
                       <Column
-                        field="StatusOrder"
-                        header="No.Giro"
-                        style={{ fontSize: "0.8em" }}
-                      ></Column>
-                      <Column
-                        field="StatusOrder"
+                        field="PeriodCalculateProjection"
                         header="Periodo"
                         style={{ fontSize: "0.8em" }}
                       ></Column>
                       <Column
-                        field="StatusOrder"
+                        field="statusCredit"
                         header="Estado"
                         style={{ fontSize: "0.8em" }}
                       ></Column>
                       <Column
-                        field="StatusOrder"
+                        field="ProjectionEnrollment"
                         header="Giro matrícula"
                         style={{ fontSize: "0.8em" }}
                       ></Column>
                       <Column
-                        field="StatusOrder"
+                        field="ProjectionSustenance"
                         header="Giro sostenimiento"
                         style={{ fontSize: "0.8em" }}
                       ></Column>
                       <Column
-                        field="StatusOrder"
+                        field="TotalProjection"
                         header="Total girado"
                         style={{ fontSize: "0.8em" }}
                       ></Column>

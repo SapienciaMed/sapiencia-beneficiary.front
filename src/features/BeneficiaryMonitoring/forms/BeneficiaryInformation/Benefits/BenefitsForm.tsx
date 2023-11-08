@@ -145,16 +145,6 @@ const BenefitsForm = () => {
                     header="Total girado"
                     style={{ fontSize: "0.8em" }}
                   ></Column>
-                  <Column
-                    field="statusCredit"
-                    header="Estado del giro"
-                    style={{ fontSize: "0.8em" }}
-                  ></Column>
-                  <Column
-                    field="DateOrder"
-                    header="Fecha de giro"
-                    style={{ fontSize: "0.8em" }}
-                  ></Column>
                 </DataTable>
               </div>
               <div className="container-sections-forms mt-24px ml-16px mr-16px p-0">

@@ -6,6 +6,7 @@ import useCrudService from "../../../../../../common/hooks/crud-service.hook";
 import { urlApiBeneficiary } from "../../../../../../common/utils/base-url";
 import { InputComponent } from "../../../../../../common/components/Form";
 import { useForm } from "react-hook-form";
+import Svgs from "../../../../../../public/images/icons/svgs";
 const SocialServicesModal = ({
   document,
   period,
@@ -30,55 +31,53 @@ const SocialServicesModal = ({
   getInformationSocialServices(period, found);
   return (
     <>
-      <DataTable
-        value={InformationSocialServices}
-        showGridlines
-        tableStyle={{ minWidth: "50rem" }}
-      >
-        <Column
-          field="Nombre_convocatoria_seleccionado"
-          header="Periodo de selección"
-          style={{ fontSize: "0.8em" }}
-        ></Column>
-        <Column
-          header="Periodo giro"
-          style={{ fontSize: "0.8em" }}
-          body={period_name}
-        ></Column>
-      </DataTable>
-      <DataTable
-        value={InformationSocialServices}
-        showGridlines
-        tableStyle={{ minWidth: "50rem" }}
-      >
-        <Column
-          field="Realizo_servicio"
-          header="Realizo Servicio"
-          style={{ fontSize: "0.8em" }}
-        ></Column>
-        <Column
-          field="Horas_servicio_realizo"
-          header="Horas presentadas"
-          style={{ fontSize: "0.8em" }}
-        ></Column>
-        <Column
-          field="horasAcumuladas"
-          header=" Horas acumuladas"
-          style={{ fontSize: "0.8em" }}
-        ></Column>
-      </DataTable>
-      <DataTable
-        value={InformationSocialServices}
-        showGridlines
-        tableStyle={{ minWidth: "50rem" }}
-      >
-        <Column
-          header="Estado crédito"
-          style={{ fontSize: "0.8em" }}
-          body={statusCredit}
-        ></Column>
-        <Column header="Formato" style={{ fontSize: "0.8em" }}></Column>
-      </DataTable>
+      <div className="card-user">
+        <DataTable value={InformationSocialServices} showGridlines>
+          <Column
+            field="Nombre_convocatoria_seleccionado"
+            header="Periodo de selección"
+            style={{ fontSize: "0.8em" }}
+          ></Column>
+          <Column
+            header="Periodo giro"
+            style={{ fontSize: "0.8em" }}
+            body={period_name}
+          ></Column>
+        </DataTable>
+        <DataTable value={InformationSocialServices} showGridlines>
+          <Column
+            field="Realizo_servicio"
+            header="Realizo Servicio"
+            style={{ fontSize: "0.8em" }}
+          ></Column>
+          <Column
+            field="Horas_servicio_realizo"
+            header="Horas presentadas"
+            style={{ fontSize: "0.8em" }}
+          ></Column>
+          <Column
+            field="horasAcumuladas"
+            header=" Horas acumuladas"
+            style={{ fontSize: "0.8em" }}
+          ></Column>
+        </DataTable>
+        <DataTable value={InformationSocialServices} showGridlines>
+          <Column
+            header="Estado crédito"
+            style={{ fontSize: "0.8em" }}
+            body={statusCredit}
+          ></Column>
+          <Column
+            header="Formato"
+            style={{ fontSize: "0.8em" }}
+            body={
+              <div className="pointer">
+                <Svgs svg="view" />
+              </div>
+            }
+          ></Column>
+        </DataTable>
+      </div>
     </>
   );
 };

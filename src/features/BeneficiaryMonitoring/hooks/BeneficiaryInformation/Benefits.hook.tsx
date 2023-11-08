@@ -90,7 +90,6 @@ export const getDataBenefits = () => {
           statusCredit={statusCredit}
         />
       ),
-      size: "medium",
       background: true,
     });
   };

@@ -244,7 +244,7 @@ const TableComponent = forwardRef<IRef, IProps<any>>((props, ref) => {
                     className="spc-table-actions"
                     header={
                       <div>
-                        <div className="spc-header-title">Acciones</div>
+                        <div className="spc-header-title">Accion</div>
                       </div>
                     }
                     body={(row) => (

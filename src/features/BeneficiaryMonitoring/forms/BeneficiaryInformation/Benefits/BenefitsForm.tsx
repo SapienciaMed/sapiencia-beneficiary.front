@@ -37,7 +37,7 @@ const BenefitsForm = () => {
         action={onSubmit}
       >
         <div className=" container-sections-forms ml-20px mr-20px">
-          <div className="grid-form-4-container gap-25 mt-14px">
+          <div className="grid-form-4-container gap-25">
             <SelectComponent
               idInput="founds"
               control={control}
@@ -55,7 +55,7 @@ const BenefitsForm = () => {
               errors={errors}
               data={modalitys}
               label={<>Modalidad</>}
-              className="select-basic small"
+              className="select-basic medium"
               classNameLabel="text-black big bold"
               placeholder="Seleccionar"
               filter
@@ -94,7 +94,6 @@ const BenefitsForm = () => {
             <div className="card-user">
               <div className="spc-common-table">
                 <DataTable
-                  className="spc-table full-height"
                   value={InformationBenefits}
                   showGridlines
                   tableStyle={{ minWidth: "50rem" }}
@@ -158,7 +157,6 @@ const BenefitsForm = () => {
                 <div className="card-user">
                   <div className="spc-common-table">
                     <DataTable
-                      className="spc-table full-height"
                       value={InformationBenefits}
                       showGridlines
                       tableStyle={{ minWidth: "50rem" }}

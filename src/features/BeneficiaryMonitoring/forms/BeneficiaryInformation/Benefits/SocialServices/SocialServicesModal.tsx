@@ -32,7 +32,11 @@ const SocialServicesModal = ({
   return (
     <>
       <div className="card-user">
-        <DataTable value={InformationSocialServices} showGridlines>
+        <DataTable
+          value={InformationSocialServices}
+          showGridlines
+          emptyMessage={"No se generó resultado en la búsqueda"}
+        >
           <Column
             field="Nombre_convocatoria_seleccionado"
             header="Periodo de selección"
@@ -44,7 +48,11 @@ const SocialServicesModal = ({
             body={period_name}
           ></Column>
         </DataTable>
-        <DataTable value={InformationSocialServices} showGridlines>
+        <DataTable
+          value={InformationSocialServices}
+          showGridlines
+          emptyMessage={"No se generó resultado en la búsqueda"}
+        >
           <Column
             field="Realizo_servicio"
             header="Realizo Servicio"
@@ -61,7 +69,11 @@ const SocialServicesModal = ({
             style={{ fontSize: "0.8em" }}
           ></Column>
         </DataTable>
-        <DataTable value={InformationSocialServices} showGridlines>
+        <DataTable
+          value={InformationSocialServices}
+          showGridlines
+          emptyMessage={"No se generó resultado en la búsqueda"}
+        >
           <Column
             header="Estado crédito"
             style={{ fontSize: "0.8em" }}

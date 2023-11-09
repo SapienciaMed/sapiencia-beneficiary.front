@@ -3,6 +3,10 @@ import { ITableElement } from "../../../../../common/interfaces/table.interfaces
 
 export const tableColumns: ITableElement<IPQRSDFTable>[] = [
   {
+    fieldName: "id",
+    header: "ID",
+  },
+  {
     fieldName: "filingNumber",
     header: "No.PQRSDF",
   },

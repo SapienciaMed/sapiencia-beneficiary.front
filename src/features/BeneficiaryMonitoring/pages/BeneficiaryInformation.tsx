@@ -26,12 +26,15 @@ const BeneficiaryInformation = () => {
   return (
     <>
       <div className="mt-24px ml-24px">
-        <div className="text-black large bold grid-span-4-columns  pb-14px">
+        <div
+          style={{ fontWeight: 500, fontSize: "29px" }}
+          className="text-black large bold grid-span-4-columns  pb-14px"
+        >
           Información beneficiario
         </div>
         <div className="card">
           <div>
-            <TabView>
+            <TabView style={{ fontWeight: 500 }}>
               {tabs.map((tab, i) => {
                 return (
                   <TabPanel

@@ -32,7 +32,7 @@ const BenefitsForm = () => {
 
   const { foundId } = useParams();
   return (
-    <div className="container-sections-forms mt-24px ml-16px mr-16px p-0">
+    <div className="container-sections-forms mt-24px p-0">
       <FormComponent
         id="BenefitsForm"
         className="form-signIn"
@@ -65,7 +65,10 @@ const BenefitsForm = () => {
           </div>
         </div>
 
-        <div className="button-save-container-display mr-24px">
+        <div
+          style={{ fontWeight: 500, fontSize: "16px" }}
+          className="button-save-container-display mr-24px"
+        >
           <ButtonComponent
             value="Limpiar"
             className="button-clean bold"
@@ -86,114 +89,139 @@ const BenefitsForm = () => {
       {tableView && (
         <>
           <div className="container-sections-forms mt-24px ml-16px mr-16px p-0">
-            <div className="bold mt-24px ml-16px mr-16px p-0">
+            <div
+              className="bold mt-24px ml-16px mr-16px p-0"
+              style={{ fontWeight: 500, fontSize: "29px", color: "#000000" }}
+            >
               Giros realizados al beneficiario
             </div>
             <p className="button-save-container-display mr-24px text-black bold medium">
               Total de resultados &nbsp;
               <div className="text-three bold big">{totalBenefits}</div>
             </p>
-            <div className="card-user">
-              <div className="spc-common-table">
-                <DataTable
-                  value={InformationBenefits}
-                  showGridlines
-                  tableStyle={{ minWidth: "50rem" }}
-                  emptyMessage={"No se generó resultado en la búsqueda"}
-                >
+            <div className="spc-common-table">
+              <DataTable
+                value={InformationBenefits}
+                showGridlines
+                tableStyle={{
+                  fontSize: "14px",
+                  minWidth: "50rem",
+                  fontWeight: "500",
+                  marginTop: "24px",
+                  marginLeft: "16px",
+                  marginRight: "16px",
+                }}
+                emptyMessage={"No se generó resultado en la búsqueda"}
+              >
+                <Column
+                  field="calculatePeriodName"
+                  header="Periodo"
+                  style={{ fontSize: "14px", fontWeight: "400" }}
+                ></Column>
+                <Column
+                  field="statusCredit"
+                  header="Estado"
+                  style={{ fontSize: "14px", fontWeight: "400" }}
+                ></Column>
+                {foundId == "1" || foundId == "2" ? (
                   <Column
-                    field="calculatePeriodName"
-                    header="Periodo"
-                    style={{ fontSize: "0.8em" }}
+                    field=""
+                    header="Servicio social"
+                    body={(row) => (
+                      <div
+                        onClick={() =>
+                          showSocialServices(
+                            row.calculatePeriod,
+                            row.calculatePeriodName,
+                            row.statusCredit
+                          )
+                        }
+                        className="pointer"
+                      >
+                        <Svgs svg="view" />
+                      </div>
+                    )}
+                    style={{ fontSize: "14px", fontWeight: "400" }}
                   ></Column>
-                  <Column
-                    field="statusCredit"
-                    header="Estado"
-                    style={{ fontSize: "0.8em" }}
-                  ></Column>
-                  {foundId == "1" || foundId == "2" ? (
-                    <Column
-                      field=""
-                      header="Servicio social"
-                      body={(row) => (
-                        <div
-                          onClick={() =>
-                            showSocialServices(
-                              row.calculatePeriod,
-                              row.calculatePeriodName,
-                              row.statusCredit
-                            )
-                          }
-                          className="pointer"
-                        >
-                          <Svgs svg="view" />
-                        </div>
-                      )}
-                      style={{ fontSize: "0.8em" }}
-                    ></Column>
-                  ) : null}
-                  <Column
-                    field="OrderEnrollment"
-                    header="Giro matrícula"
-                    style={{ fontSize: "0.8em" }}
-                  ></Column>
-                  <Column
-                    field="OrderSustenance"
-                    header="Giro sostenimiento"
-                    style={{ fontSize: "0.8em" }}
-                  ></Column>
-                  <Column
-                    field="OrderTotal"
-                    header="Total girado"
-                    style={{ fontSize: "0.8em" }}
-                  ></Column>
-                </DataTable>
-              </div>
-              <div className="container-sections-forms mt-24px ml-16px mr-16px p-0">
-                <div className="bold mt-24px ml-16px mr-16px p-0">
-                  Giros proyectados al beneficiario
-                </div>
-                <p className="button-save-container-display mr-24px text-black bold medium">
-                  Total de resultados &nbsp;
-                  <div className="text-three bold big">{totalBenefits}</div>
-                </p>
-                <div className="card-user">
-                  <div className="spc-common-table">
-                    <DataTable
-                      value={InformationBenefits}
-                      showGridlines
-                      tableStyle={{ minWidth: "50rem" }}
-                      emptyMessage={"No se generó resultado en la búsqueda"}
-                    >
-                      <Column
-                        field="PeriodCalculateProjection"
-                        header="Periodo"
-                        style={{ fontSize: "0.8em" }}
-                      ></Column>
-                      <Column
-                        field="statusCredit"
-                        header="Estado"
-                        style={{ fontSize: "0.8em" }}
-                      ></Column>
-                      <Column
-                        field="ProjectionEnrollment"
-                        header="Giro matrícula"
-                        style={{ fontSize: "0.8em" }}
-                      ></Column>
-                      <Column
-                        field="ProjectionSustenance"
-                        header="Giro sostenimiento"
-                        style={{ fontSize: "0.8em" }}
-                      ></Column>
-                      <Column
-                        field="TotalProjection"
-                        header="Total girado"
-                        style={{ fontSize: "0.8em" }}
-                      ></Column>
-                    </DataTable>
-                  </div>
-                </div>
-              </div>
+                ) : null}
+                <Column
+                  field="OrderEnrollment"
+                  header="Giro matrícula"
+                  style={{ fontSize: "14px", fontWeight: "400" }}
+                ></Column>
+                <Column
+                  field="OrderSustenance"
+                  header="Giro sostenimiento"
+                  style={{ fontSize: "14px", fontWeight: "400" }}
+                ></Column>
+                <Column
+                  field="OrderTotal"
+                  header="Total girado"
+                  style={{ fontSize: "14px", fontWeight: "400" }}
+                ></Column>
+              </DataTable>
+            </div>
+          </div>
+          <div className="container-sections-forms mt-24px ml-16px mr-16px p-0">
+            <div
+              className="bold mt-24px ml-16px mr-16px p-0"
+              style={{
+                fontWeight: 500,
+                fontSize: "29px",
+                color: "#000000",
+              }}
+            >
+              Giros proyectados al beneficiario
+            </div>
+            <p className="button-save-container-display mr-24px text-black bold medium">
+              Total de resultados &nbsp;
+              <div className="text-three bold big">{totalBenefits}</div>
+            </p>
+            <div className="spc-common-table">
+              <DataTable
+                value={InformationBenefits}
+                showGridlines
+                tableStyle={{
+                  fontSize: "14px",
+                  minWidth: "50rem",
+                  fontWeight: "500",
+                  marginTop: "24px",
+                  marginLeft: "16px",
+                  marginRight: "16px",
+                }}
+                emptyMessage={"No se generó resultado en la búsqueda"}
+              >
+                <Column
+                  field="NumberPeriodCalculateProjection"
+                  header="Nro.Giro"
+                  style={{ fontSize: "14px", fontWeight: "400" }}
+                ></Column>
+                <Column
+                  field="PeriodCalculateProjection"
+                  header="Periodo"
+                  style={{ fontSize: "14px", fontWeight: "400" }}
+                ></Column>
+                <Column
+                  field="statusCredit"
+                  header="Estado"
+                  style={{ fontSize: "14px", fontWeight: "400" }}
+                ></Column>
+                <Column
+                  field="ProjectionEnrollment"
+                  header="Giro matrícula"
+                  style={{ fontSize: "14px", fontWeight: "400" }}
+                ></Column>
+                <Column
+                  field="ProjectionSustenance"
+                  header="Giro sostenimiento"
+                  style={{ fontSize: "14px", fontWeight: "400" }}
+                ></Column>
+                <Column
+                  field="TotalProjection"
+                  header="Total girado"
+                  style={{ fontSize: "14px", fontWeight: "400" }}
+                ></Column>
+              </DataTable>
             </div>
           </div>
         </>

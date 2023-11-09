@@ -26,11 +26,13 @@ interface ISelectProps<T> {
 function LabelElement({ label, idInput, classNameLabel }): React.JSX.Element {
   if (!label) return <></>;
   return (
-    <LabelComponent
-      htmlFor={idInput}
-      className={classNameLabel}
-      value={label}
-    />
+    <div style={{ fontWeight: 500 }}>
+      <LabelComponent
+        htmlFor={idInput}
+        className={classNameLabel}
+        value={label}
+      />
+    </div>
   );
 }
 
@@ -80,12 +82,14 @@ export function SelectComponent({
         messageError() ? `${direction} container-icon_error` : direction
       }
     >
-      <LabelElement
-        label={label}
-        idInput={idInput}
-        classNameLabel={classNameLabel}
-      />
-      <div>
+      <div style={{ fontWeight: 500 }}>
+        <LabelElement
+          label={label}
+          idInput={idInput}
+          classNameLabel={classNameLabel}
+        />
+      </div>
+      <div style={{ fontWeight: 400, fontSize: "14px" }}>
         <Controller
           name={idInput}
           control={control}

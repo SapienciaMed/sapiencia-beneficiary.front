@@ -31,7 +31,7 @@ const SocialServicesModal = ({
   getInformationSocialServices(period, found);
   return (
     <>
-      <div className="card-user">
+      <div className="container-sections-forms p-0">
         <DataTable
           value={InformationSocialServices}
           showGridlines

@@ -28,6 +28,8 @@ const BenefitsForm = () => {
     showSocialServices,
   } = getDataBenefits();
 
+  let noOrder = 0;
+
   const { foundId } = useParams();
   return (
     <div className="container-sections-forms mt-24px ml-16px mr-16px p-0">
@@ -97,6 +99,7 @@ const BenefitsForm = () => {
                   value={InformationBenefits}
                   showGridlines
                   tableStyle={{ minWidth: "50rem" }}
+                  emptyMessage={"No se generó resultado en la búsqueda"}
                 >
                   <Column
                     field="calculatePeriodName"
@@ -160,6 +163,7 @@ const BenefitsForm = () => {
                       value={InformationBenefits}
                       showGridlines
                       tableStyle={{ minWidth: "50rem" }}
+                      emptyMessage={"No se generó resultado en la búsqueda"}
                     >
                       <Column
                         field="PeriodCalculateProjection"

@@ -76,8 +76,30 @@ export const PQRSDFHook = () => {
   };
 
   const downloadCollection = useCallback(() => {
-    const { page, perPage } = paginateData;
-  }, [paginateData, formWatch, programId]);
+    const { filingNumber } = formWatch;
+    const url = new URL(`${urlApiBeneficiary}/api/v1/sapiencia/external/citizenAttentions/pqrsdfXLSX`);
+    const params = new URLSearchParams();
+    let identification = document
+    params.append("page", "1")
+    params.append("perPage", "1000")
+    params.append("identification", identification)
+
+    if (filingNumber) {
+      params.append("filingNumber", filingNumber)
+    }
+    if (requestType) {
+
+      params.append("requestType", requestType)
+    }
+    if (programId) {
+
+      params.append("programId", programId)
+    }
+
+
+    url.search = params.toString();
+    window.open(url.toString(), "_blank");
+  }, [paginateData, formWatch, requestType, programId]);
 
   useEffect(() => {
     const { filingNumber } = formWatch;

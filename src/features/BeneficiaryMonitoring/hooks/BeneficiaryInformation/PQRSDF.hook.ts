@@ -12,7 +12,9 @@ import { AppContext } from "../../../../common/contexts/app.context";
 import { urlApiBeneficiary } from "../../../../common/utils/base-url";
 import { getProgramsCitizenAttentions } from "../ExternalHooks/CitizenAttentions/getPrograms.hooks";
 import { getSubjectTypeCitizenAttentions } from "../ExternalHooks/CitizenAttentions/getSubjectType.hook";
-
+import { ApiResponse } from "../../../../common/utils/api-response";
+import useCrudService from "../../../../common/hooks/crud-service.hook";
+import * as XLSX from "xlsx"
 export const PQRSDFHook = () => {
   const navigate = useNavigate();
   const tableComponentRef = useRef(null);
@@ -23,6 +25,7 @@ export const PQRSDFHook = () => {
   const resolver = useYupValidationResolver(consultPQRSFSchema);
   const { programs } = getProgramsCitizenAttentions()
   const { subjectType } = getSubjectTypeCitizenAttentions()
+  const { post } = useCrudService(urlApiBeneficiary);
 
   const {
     control,
@@ -75,31 +78,62 @@ export const PQRSDFHook = () => {
     });
   };
 
-  const downloadCollection = useCallback(() => {
+  const downloadCollection = async () => {
     const { filingNumber } = formWatch;
-    const url = new URL(`${urlApiBeneficiary}/api/v1/sapiencia/external/citizenAttentions/pqrsdfXLSX`);
-    const params = new URLSearchParams();
     let identification = document
-    params.append("page", "1")
-    params.append("perPage", "1000")
-    params.append("identification", identification)
-
-    if (filingNumber) {
-      params.append("filingNumber", filingNumber)
+    const data = {
+      page: 1,
+      perPage: 1000,
+      identification,
+      filingNumber,
+      requestType,
+      programId
     }
-    if (requestType) {
+    const endpoint = "/api/v1/sapiencia/external/citizenAttentions/pqrsdf/get-paginated";
+    const resp: ApiResponse<[]> = await post(endpoint, data);
+    const dataRes = resp.data["array"];
+    let dataPqrsdf = dataRes.map((data) => {
+      return {
+        ID: data.id,
+        NoPQRSDF: data.filingNumber,
+        Fecha_Radicado: data.createdAt,
+        Programa: data.program?.prg_descripcion,
+        Asunto: data.requestSubject.aso_asunto,
+        Estado: data.status.lep_estado
+      }
+    })
+    const book = XLSX.utils.book_new()
+    const sheet = XLSX.utils.json_to_sheet(dataPqrsdf)
 
-      params.append("requestType", requestType)
-    }
-    if (programId) {
+    XLSX.utils.book_append_sheet(book, sheet, "PQRSDF")
 
-      params.append("programId", programId)
-    }
+    setTimeout(() => {
+      XLSX.writeFile(book, "PQRSDF.xlsx")
+    }, 1000)
+
+    // const url = new URL(`${urlApiBeneficiary}/api/v1/sapiencia/external/citizenAttentions/pqrsdfXLSX`);
+    // const params = new URLSearchParams();
+    // params.append("page", "1")
+    // params.append("perPage", "1000")
+    // params.append("identification", identification)
+
+    // if (filingNumber) {
+    //   params.append("filingNumber", filingNumber)
+    // }
+    // if (requestType) {
+
+    //   params.append("requestType", requestType)
+    // }
+    // if (programId) {
+
+    //   params.append("programId", programId)
+    // }
 
 
-    url.search = params.toString();
-    window.open(url.toString(), "_blank");
-  }, [paginateData, formWatch, requestType, programId]);
+    // url.search = params.toString();
+    // window.open(url.toString(), "_blank");
+  };
+
 
   useEffect(() => {
     const { filingNumber } = formWatch;

@@ -133,7 +133,8 @@ const BenefitsForm = () => {
                           showSocialServices(
                             row.calculatePeriod,
                             row.calculatePeriodName,
-                            row.statusCredit
+                            row.statusCredit,
+                            row.NumberPeriodCalculateProjection
                           )
                         }
                         className="pointer"

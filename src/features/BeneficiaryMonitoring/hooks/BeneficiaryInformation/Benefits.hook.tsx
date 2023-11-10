@@ -77,7 +77,12 @@ export const getDataBenefits = () => {
 
   const [found, modality] = watch(["founds", "modality"]);
 
-  const showSocialServices = (periodId, period_name, statusCredit) => {
+  const showSocialServices = (
+    periodId,
+    period_name,
+    statusCredit,
+    nroOrder
+  ) => {
     setMessage({
       title: "Servicio Social",
       show: true,
@@ -88,9 +93,14 @@ export const getDataBenefits = () => {
           found={found}
           period_name={period_name}
           statusCredit={statusCredit}
+          nroOrder={nroOrder}
         />
       ),
       background: true,
+      okTitle: "Cerrar",
+      onOk: () => {
+        setMessage({ show: false });
+      },
     });
   };
 

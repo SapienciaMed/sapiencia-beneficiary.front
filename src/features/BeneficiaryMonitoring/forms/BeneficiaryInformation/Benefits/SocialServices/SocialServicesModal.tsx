@@ -13,6 +13,7 @@ const SocialServicesModal = ({
   found,
   period_name,
   statusCredit,
+  nroOrder,
 }) => {
   const [InformationSocialServices, setInformationSocialServices] =
     useState(null);
@@ -41,6 +42,11 @@ const SocialServicesModal = ({
             field="Nombre_convocatoria_seleccionado"
             header="Periodo de selección"
             style={{ fontSize: "0.8em" }}
+          ></Column>
+          <Column
+            header="Nro.Giro"
+            style={{ fontSize: "0.8em" }}
+            body={nroOrder}
           ></Column>
           <Column
             header="Periodo giro"
@@ -74,6 +80,11 @@ const SocialServicesModal = ({
           showGridlines
           emptyMessage={"No se generó resultado en la búsqueda"}
         >
+          <Column
+            header="Horas adeuda"
+            style={{ fontSize: "0.8em" }}
+            body={""}
+          ></Column>
           <Column
             header="Estado crédito"
             style={{ fontSize: "0.8em" }}

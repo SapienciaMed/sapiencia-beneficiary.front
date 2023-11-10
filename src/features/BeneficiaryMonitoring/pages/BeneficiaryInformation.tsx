@@ -25,41 +25,37 @@ const BeneficiaryInformation = () => {
   };
   return (
     <>
-      <div className="mt-24px ml-24px">
-        <div
-          style={{ fontWeight: 500, fontSize: "29px" }}
-          className="text-black large bold grid-span-4-columns  pb-14px"
-        >
-          Información beneficiario
-        </div>
-        <div className="card">
-          <div>
-            <TabView style={{ fontWeight: 500 }}>
-              {tabs.map((tab, i) => {
-                return (
-                  <TabPanel
-                    pt={{
-                      headerAction: ({ parent }) => ({
-                        className: panelClassName(parent, i),
-                      }),
-                    }}
-                    key={i}
-                    header={tab.title}
-                  >
-                    <p className="m-0">{tab.content}</p>
-                  </TabPanel>
-                );
-              })}
-            </TabView>
-            <div className="button-save-container-display mr-24px">
-              <ButtonComponent
-                value="Regresar"
-                className={`button-save big`}
-                type="submit"
-                action={handleClose}
-              />
-            </div>
-          </div>
+      <div
+        style={{ fontWeight: 500, fontSize: "29px" }}
+        className="text-black large bold grid-span-4-columns mt-24px pb-14px"
+      >
+        Información beneficiario
+      </div>
+      <div>
+        <TabView style={{ fontWeight: 500 }}>
+          {tabs.map((tab, i) => {
+            return (
+              <TabPanel
+                pt={{
+                  headerAction: ({ parent }) => ({
+                    className: panelClassName(parent, i),
+                  }),
+                }}
+                key={i}
+                header={tab.title}
+              >
+                <p>{tab.content}</p>
+              </TabPanel>
+            );
+          })}
+        </TabView>
+        <div className="button-save-container-display mr-24px">
+          <ButtonComponent
+            value="Regresar"
+            className={`button-save big`}
+            type="submit"
+            action={handleClose}
+          />
         </div>
       </div>
     </>

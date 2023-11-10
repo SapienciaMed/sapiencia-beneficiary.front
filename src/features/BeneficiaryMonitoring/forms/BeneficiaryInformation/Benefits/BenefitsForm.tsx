@@ -32,14 +32,31 @@ const BenefitsForm = () => {
 
   const { foundId } = useParams();
   return (
-    <div className="container-sections-forms mt-24px p-0">
+    <div
+      style={{
+        border: "1px solid #e0e0e0",
+        borderRadius: "15px",
+        opacity: 1,
+        padding: "1em",
+        margin: "1.5em 0em",
+      }}
+      className="mt-24px"
+    >
       <FormComponent
         id="BenefitsForm"
         className="form-signIn"
         action={onSubmit}
       >
-        <div className=" container-sections-forms ml-20px mr-20px">
-          <div className="grid-form-4-container gap-25">
+        <div
+          style={{
+            border: "1px solid #e0e0e0",
+            borderRadius: "15px",
+            opacity: 1,
+            padding: "1em",
+            margin: "1.5em 0em",
+          }}
+        >
+          <div className="grid-form-4-container">
             <SelectComponent
               idInput="founds"
               control={control}
@@ -47,7 +64,7 @@ const BenefitsForm = () => {
               data={founds}
               label={<>Fondo / Programa</>}
               className="select-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big"
               placeholder="Seleccionar"
               filter
             />
@@ -58,23 +75,21 @@ const BenefitsForm = () => {
               data={modalitys}
               label={<>Modalidad</>}
               className="select-basic medium"
-              classNameLabel="text-black big bold"
+              classNameLabel="text-black big"
               placeholder="Seleccionar"
               filter
             />
           </div>
         </div>
 
-        <div
-          style={{ fontWeight: 500, fontSize: "16px" }}
-          className="button-save-container-display mr-24px"
-        >
+        <div className="button-save-container-display mr-24px">
           <ButtonComponent
             value="Limpiar"
-            className="button-clean bold"
+            className="button-clean"
             type="button"
             action={handleClean}
           />
+
           <ButtonComponent
             value="Buscar"
             className={`button-save ${

@@ -29,7 +29,11 @@ const SocialServicesModal = ({
       console.error(error);
     }
   };
-  getInformationSocialServices(period, found);
+
+  useEffect(() => {
+    getInformationSocialServices(period, found);
+  }, []);
+
   return (
     <>
       <div

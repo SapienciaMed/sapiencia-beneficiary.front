@@ -101,6 +101,7 @@ export const getDataBenefits = () => {
       onOk: () => {
         setMessage({ show: false });
       },
+      style: "align-items: flex-start",
     });
   };
 

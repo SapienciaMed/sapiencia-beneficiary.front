@@ -32,25 +32,57 @@ const SocialServicesModal = ({
   getInformationSocialServices(period, found);
   return (
     <>
-      <div className="container-sections-forms p-0">
+      <div
+        style={{
+          width: "100%",
+          wordWrap: "break-word",
+          overflow: "hidden",
+          whiteSpace: "nowrap",
+          alignItems: "flex-start",
+          border: "1px solid #e0e0e0",
+          borderRadius: "15px",
+        }}
+      >
         <DataTable
           value={InformationSocialServices}
           showGridlines
           emptyMessage={"No se generó resultado en la búsqueda"}
+          tableStyle={{
+            fontSize: "14px",
+            fontWeight: "500",
+          }}
         >
           <Column
             field="Nombre_convocatoria_seleccionado"
             header="Periodo de selección"
-            style={{ fontSize: "0.8em" }}
+            style={{
+              fontSize: "14px",
+              fontWeight: "400",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           ></Column>
           <Column
             header="Nro.Giro"
-            style={{ fontSize: "0.8em" }}
+            style={{
+              fontSize: "14px",
+              fontWeight: "400",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
             body={nroOrder}
           ></Column>
           <Column
             header="Periodo giro"
-            style={{ fontSize: "0.8em" }}
+            style={{
+              fontSize: "14px",
+              fontWeight: "400",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
             body={period_name}
           ></Column>
         </DataTable>
@@ -58,41 +90,85 @@ const SocialServicesModal = ({
           value={InformationSocialServices}
           showGridlines
           emptyMessage={"No se generó resultado en la búsqueda"}
+          tableStyle={{
+            fontSize: "14px",
+            fontWeight: "500",
+          }}
         >
           <Column
             field="Realizo_servicio"
             header="Realizo Servicio"
-            style={{ fontSize: "0.8em" }}
+            style={{
+              fontSize: "14px",
+              fontWeight: "400",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           ></Column>
           <Column
             field="Horas_servicio_realizo"
             header="Horas presentadas"
-            style={{ fontSize: "0.8em" }}
+            style={{
+              fontSize: "14px",
+              fontWeight: "400",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           ></Column>
           <Column
             field="horasAcumuladas"
             header=" Horas acumuladas"
-            style={{ fontSize: "0.8em" }}
+            style={{
+              fontSize: "14px",
+              fontWeight: "400",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           ></Column>
         </DataTable>
         <DataTable
           value={InformationSocialServices}
           showGridlines
           emptyMessage={"No se generó resultado en la búsqueda"}
+          tableStyle={{
+            fontSize: "14px",
+            fontWeight: "500",
+          }}
         >
           <Column
             header="Horas adeuda"
-            style={{ fontSize: "0.8em" }}
+            style={{
+              fontSize: "14px",
+              fontWeight: "400",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
             body={""}
           ></Column>
           <Column
             header="Estado crédito"
-            style={{ fontSize: "0.8em" }}
+            style={{
+              fontSize: "14px",
+              fontWeight: "400",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
             body={statusCredit}
           ></Column>
           <Column
             header="Formato"
-            style={{ fontSize: "0.8em" }}
+            style={{
+              fontSize: "14px",
+              fontWeight: "400",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
             body={
               <div className="pointer">
                 <Svgs svg="view" />

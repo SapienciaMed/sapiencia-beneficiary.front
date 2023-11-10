@@ -2762,6 +2762,7 @@
 }
 .p-datatable .p-datatable-tbody > tr > td > .p-column-title {
   font-weight: bold;
+  justify-content: center;
 }
 .p-datatable .p-datatable-tbody > tr > td.p-highlight {
   background: #533893;
@@ -2799,6 +2800,7 @@
 }
 .p-datatable .p-column-resizer-helper {
   background: #533893;
+  justify-content: center;
 }
 .p-datatable .p-datatable-scrollable-header,
 .p-datatable .p-datatable-scrollable-footer {

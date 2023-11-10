@@ -139,6 +139,7 @@ const SocialServicesModal = ({
           }}
         >
           <Column
+            field="TotalHoras"
             header="Horas adeuda"
             style={{
               fontSize: "14px",

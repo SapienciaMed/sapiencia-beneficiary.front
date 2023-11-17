@@ -9,16 +9,10 @@ export const getSubjectTypeCitizenAttentions = () => {
 
     const getAllSubjectType = async () => {
         try {
-            const endpoint = "/get-type-solicituds"
+            const endpoint = "/api/v1/utility/requestSubject"
             const resp: ApiResponse<[]> = await get(endpoint)
 
-            const dataRes = resp.data.map((program) => {
-                const { TSO_CODIGO, TSO_DESCRIPTION } = program
-                return {
-                    value: TSO_CODIGO,
-                    name: TSO_DESCRIPTION,
-                }
-            })
+            const dataRes = resp.data
             setSubjectType(dataRes);
         } catch (err) {
             console.error(err);

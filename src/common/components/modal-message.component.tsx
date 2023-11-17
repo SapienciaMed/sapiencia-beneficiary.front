@@ -72,7 +72,6 @@ function ModalMessageComponent(): React.JSX.Element {
               }
             >
               {message.okTitle}
-              <img className="icons" src={okIcon} />
             </button>
           ) : (
             <></>

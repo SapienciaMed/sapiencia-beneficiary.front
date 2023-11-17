@@ -3464,7 +3464,7 @@
   border-width: 0 0 0 0;
   font-weight: bold;
   color: #000;
-  background: #ffffff;
+  background: #f8f9fa;
   transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 .p-datatable .p-datatable-tfoot > tr > td {

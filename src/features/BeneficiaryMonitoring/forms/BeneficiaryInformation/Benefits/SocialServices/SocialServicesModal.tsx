@@ -45,6 +45,7 @@ const SocialServicesModal = ({
           alignItems: "flex-start",
           border: "1px solid #e0e0e0",
           borderRadius: "15px",
+          background: "#F8F9FA",
         }}
       >
         <DataTable

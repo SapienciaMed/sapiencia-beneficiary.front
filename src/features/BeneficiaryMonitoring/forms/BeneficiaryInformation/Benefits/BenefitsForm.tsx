@@ -80,24 +80,23 @@ const BenefitsForm = () => {
               filter
             />
           </div>
-        </div>
+          <div className="button-save-container-display mr-24px">
+            <ButtonComponent
+              value="Limpiar"
+              className="button-clean"
+              type="button"
+              action={handleClean}
+            />
 
-        <div className="button-save-container-display mr-24px">
-          <ButtonComponent
-            value="Limpiar"
-            className="button-clean"
-            type="button"
-            action={handleClean}
-          />
-
-          <ButtonComponent
-            value="Buscar"
-            className={`button-save ${
-              !isValid || submitDisabled ? "disabled-black" : ""
-            } big`}
-            type="submit"
-            disabled={!isValid || submitDisabled}
-          />
+            <ButtonComponent
+              value="Buscar"
+              className={`button-save ${
+                !isValid || submitDisabled ? "disabled-black" : ""
+              } big`}
+              type="submit"
+              disabled={!isValid || submitDisabled}
+            />
+          </div>
         </div>
       </FormComponent>
 

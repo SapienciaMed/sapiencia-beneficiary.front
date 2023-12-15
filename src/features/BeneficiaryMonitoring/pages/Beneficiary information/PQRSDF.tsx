@@ -98,44 +98,43 @@ const PQRSDF = () => {
             </div>
           </div>
         </FormComponent>
-        {tableView && (
-          <>
-            <div className="container-sections-forms ml-20px mr-20px">
-              <TableComponent
-                setPaginateData={setPaginateData}
-                ref={tableComponentRef}
-                url={urlGetPQRSDF}
-                columns={tableColumns}
-                actions={tableActions}
-                isShowModal={true}
-                emptyMessage="Resultado en la búsqueda"
-                descriptionModalNoResult="No se generó resultado en la búsqueda"
-                titleMessageModalNoResult="Resultado de búsqueda"
-              />
-            </div>
-            <div
-              style={{
-                height: "1px",
-                margin: "0 20px",
-                backgroundColor: "#e0e0e0",
-              }}
-            ></div>
-            <div className="button-save-container-display mr-24px">
-              <ButtonComponent
-                value={
-                  <>
-                    <div className="container-buttonText">
-                      <span>Descargar</span>
-                      <Svgs svg="excel" width={23.593} height={28.505} />
-                    </div>
-                  </>
-                }
-                className="button-download large "
-                action={downloadCollection}
-              />
-            </div>
-          </>
-        )}
+
+        <>
+          <div className="container-sections-forms ml-20px mr-20px">
+            <TableComponent
+              setPaginateData={setPaginateData}
+              ref={tableComponentRef}
+              url={urlGetPQRSDF}
+              columns={tableColumns}
+              actions={tableActions}
+              isShowModal={true}
+              emptyMessage="Resultado en la búsqueda"
+              descriptionModalNoResult="No se generó resultado en la búsqueda"
+              titleMessageModalNoResult="Resultado de búsqueda"
+            />
+          </div>
+          <div
+            style={{
+              height: "1px",
+              margin: "0 20px",
+              backgroundColor: "#e0e0e0",
+            }}
+          ></div>
+          <div className="button-save-container-display mr-24px">
+            <ButtonComponent
+              value={
+                <>
+                  <div className="container-buttonText">
+                    <span>Descargar</span>
+                    <Svgs svg="excel" width={23.593} height={28.505} />
+                  </div>
+                </>
+              }
+              className="button-download large "
+              action={downloadCollection}
+            />
+          </div>
+        </>
       </div>
     </>
   );

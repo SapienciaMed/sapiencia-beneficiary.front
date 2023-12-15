@@ -20,7 +20,7 @@ export const getDataBenefits = () => {
   const tableComponentRef = useRef(null);
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [tableView, setTableView] = useState<boolean>(false);
-  const { document } = useParams();
+  const { document, foundId } = useParams();
   const { setMessage } = useContext(AppContext);
 
   const getInformationBenefits = async (data) => {
@@ -64,7 +64,13 @@ export const getDataBenefits = () => {
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    let data = {
+      founds: foundId,
+    };
+    getInformationBenefits(data);
+    setTableView(true);
+  }, []);
 
   const {
     control,
@@ -83,14 +89,26 @@ export const getDataBenefits = () => {
     statusCredit,
     nroOrder
   ) => {
+    console.log(foundId);
+    console.log(found);
+
+    let Ffound;
+
+    if (found === undefined) {
+      Ffound = foundId;
+    } else {
+      Ffound = found;
+    }
+
     setMessage({
       title: "Servicio Social",
       show: true,
+
       description: (
         <SocialServicesModal
           document={document}
           period={periodId}
-          found={found}
+          found={Ffound}
           period_name={period_name}
           statusCredit={statusCredit}
           nroOrder={nroOrder}
@@ -99,6 +117,9 @@ export const getDataBenefits = () => {
       background: true,
       okTitle: "Cerrar",
       onOk: () => {
+        setMessage({ show: false });
+      },
+      onClose: () => {
         setMessage({ show: false });
       },
       style: "align-items: flex-start",

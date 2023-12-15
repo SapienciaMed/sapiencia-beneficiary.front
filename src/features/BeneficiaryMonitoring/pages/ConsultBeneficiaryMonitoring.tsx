@@ -21,6 +21,7 @@ const ConsultBeneficiaryMonitoring = () => {
     modalitys,
     creditsStatus,
     urlGetConsultBeneficiary,
+    loading,
   } = useConsultBeneficiaryMonitoring();
   return (
     <BeneficiaryMonitoringForm
@@ -42,6 +43,7 @@ const ConsultBeneficiaryMonitoring = () => {
       modalitys={modalitys}
       creditsStatus={creditsStatus}
       urlGetConsultBeneficiary={urlGetConsultBeneficiary}
+      loading={loading}
     />
   );
 };

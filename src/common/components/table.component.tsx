@@ -43,6 +43,7 @@ interface IProps<T> {
   titleMessageModalNoResult?: string;
   descriptionModalNoResult?: string;
   setPaginateData?: any;
+  onResult?: (rows: T[]) => void;
 }
 
 interface IRef {

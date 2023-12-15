@@ -8,6 +8,7 @@ import {
 import TableComponent from "../../../../common/components/table.component";
 import Svgs from "../../../../public/images/icons/svgs";
 import { tableColumns } from "./columns";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 const BeneficiaryMonitoringForm = ({
   tableComponentRef,
@@ -28,6 +29,7 @@ const BeneficiaryMonitoringForm = ({
   modalitys,
   creditsStatus,
   urlGetConsultBeneficiary,
+  loading,
 }) => {
   return (
     <div className="container-sections-forms mt-24px ml-16px mr-16px p-0">
@@ -129,29 +131,43 @@ const BeneficiaryMonitoringForm = ({
               emptyMessage="Resultado en la búsqueda"
               descriptionModalNoResult="No se generó resultado en la búsqueda"
               titleMessageModalNoResult="Resultado de búsqueda"
+              onResult={(rows) => {
+                console.log(rows);
+              }}
             />
           </div>
-          <div
-            style={{
-              height: "1px",
-              margin: "0 20px",
-              backgroundColor: "#e0e0e0",
-            }}
-          ></div>
-          <div className="button-save-container-display mr-24px">
-            <ButtonComponent
-              value={
-                <>
-                  <div className="container-buttonText">
-                    <span>Descargar</span>
-                    <Svgs svg="excel" width={23.593} height={28.505} />
-                  </div>
-                </>
-              }
-              className="button-download large "
-              action={downloadCollection}
+          {loading ? (
+            <ProgressSpinner
+              style={{
+                display: "flex",
+                justifyContent: "center",
+              }}
             />
-          </div>
+          ) : (
+            <>
+              <div
+                style={{
+                  height: "1px",
+                  margin: "0 20px",
+                  backgroundColor: "#e0e0e0",
+                }}
+              ></div>
+              <div className="button-save-container-display mr-24px">
+                <ButtonComponent
+                  value={
+                    <>
+                      <div className="container-buttonText">
+                        <span>Descargar</span>
+                        <Svgs svg="excel" width={23.593} height={28.505} />
+                      </div>
+                    </>
+                  }
+                  className="button-download large "
+                  action={downloadCollection}
+                />
+              </div>
+            </>
+          )}
         </>
       )}
     </div>

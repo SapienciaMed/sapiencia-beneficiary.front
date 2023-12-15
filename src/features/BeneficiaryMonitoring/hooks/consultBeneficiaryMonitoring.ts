@@ -14,6 +14,8 @@ import { useGetAllPeriod } from "./listsSapiencia/getPeriods.hook";
 import { getAllModalitys } from "./listsSapiencia/getModality.hook";
 import { useGetAllCreditStatus } from "./listsSapiencia/getCreditStatus.hook";
 import { urlApiBeneficiary } from "../../../common/utils/base-url";
+import { ApiResponse } from "../../../common/utils/api-response";
+import useCrudService from "../../../common/hooks/crud-service.hook";
 
 export const useConsultBeneficiaryMonitoring = () => {
   const navigate = useNavigate();
@@ -27,6 +29,8 @@ export const useConsultBeneficiaryMonitoring = () => {
   const { validateActionAccess } = useContext(AppContext);
   const [paginateData, setPaginateData] = useState({ page: "", perPage: "" });
   const resolver = useYupValidationResolver(consultBeneficiaryMonitoringSchema);
+  const { post } = useCrudService(urlApiBeneficiary);
+  const [loading, setLoading] = useState(null);
 
   const {
     control,
@@ -55,10 +59,33 @@ export const useConsultBeneficiaryMonitoring = () => {
     },
   ];
 
+  const getInfo = async (data) => {
+    try {
+
+      const endpoint = "/api/v1/sapiencia/beneficiary/get-all-paginated"
+      let newData = {
+        perPage: 10,
+        page: 1,
+        ...data
+      }
+      const res: ApiResponse<[]> = await post(endpoint, newData)
+
+      if (res.data['array'].length > 0) {
+        setLoading(false)
+      } else {
+        setLoading(false)
+        setTableView(false);
+      }
+    } catch (error) {
+      // Handle error
+    }
+  }
+
   const handleClean = () => {
     reset();
     setSubmitDisabled(true);
     tableComponentRef.current?.emptyData();
+
     setTableView(false);
   };
 
@@ -67,6 +94,8 @@ export const useConsultBeneficiaryMonitoring = () => {
     tableComponentRef.current?.loadData({
       ...filters,
     });
+    setLoading(true);
+    getInfo(filters)
   });
 
   const handleChange = ({ target }) => {
@@ -136,5 +165,6 @@ export const useConsultBeneficiaryMonitoring = () => {
     modalitys,
     creditsStatus,
     urlGetConsultBeneficiary,
+    loading
   };
 };

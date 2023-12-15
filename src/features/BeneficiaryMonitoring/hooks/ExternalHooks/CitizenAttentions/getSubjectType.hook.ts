@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
 import useCrudService from "../../../../../common/hooks/crud-service.hook";
-import { urlApiCitizenAttentions } from "../../../../../common/utils/base-url";
+import { urlApiBeneficiary } from "../../../../../common/utils/base-url";
 import { ApiResponse } from "../../../../../common/utils/api-response";
+import { useParams } from "react-router-dom";
 
 export const getSubjectTypeCitizenAttentions = () => {
-    const { get } = useCrudService(urlApiCitizenAttentions);
+    const { post } = useCrudService(urlApiBeneficiary);
     const [subjectType, setSubjectType] = useState<any>([]);
-
+    const { document } = useParams();
     const getAllSubjectType = async () => {
+
         try {
-            const endpoint = "/api/v1/utility/requestSubject"
-            const resp: ApiResponse<[]> = await get(endpoint)
+            let data = {
+                identification: document
+            }
+            const endpoint = "/api/v1/external/getSubjectByUser"
+            const resp: ApiResponse<[]> = await post(endpoint, data)
 
             const dataRes = resp.data
             setSubjectType(dataRes);

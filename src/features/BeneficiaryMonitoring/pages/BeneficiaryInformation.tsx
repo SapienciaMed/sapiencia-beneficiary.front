@@ -95,13 +95,13 @@ const BeneficiaryInformation = () => {
     };
     const result = [
       InformacionGeneral,
-      Historial,
-      Documentos,
+      // Historial,
+      // Documentos,
       Beneficios,
       Pqrsdf,
-      Atenciones,
-      Consolidación,
-      EstadoCredito,
+      // Atenciones,
+      // Consolidación,
+      // EstadoCredito,
     ].filter((item) => item?.hide);
     return result;
   };

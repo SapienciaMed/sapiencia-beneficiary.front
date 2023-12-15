@@ -83,6 +83,8 @@ export const PQRSDFHook = () => {
     tableComponentRef.current?.loadData({
       identification,
     });
+
+    setTableView(true);
   }, [])
 
   const downloadCollection = async () => {

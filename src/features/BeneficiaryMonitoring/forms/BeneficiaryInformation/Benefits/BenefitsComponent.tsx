@@ -1,149 +1,21 @@
-import { memo } from "react";
-import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { useParams } from "react-router-dom";
+import { DataTable } from "primereact/datatable";
+import { getDataComponentsBeneftis } from "../../../hooks/BeneficiaryInformation/BenefitsComponent.hook";
 import Svgs from "../../../../../public/images/icons/svgs";
-import { getDataBenefits } from "../../../hooks/BeneficiaryInformation/Benefits.hook";
-import * as Icons from "react-icons/fa";
-import { ImProfile } from "react-icons/im";
-import {
-  ButtonComponent,
-  FormComponent,
-  SelectComponent,
-} from "../../../../../common/components/Form";
-import { ITableAction } from "../../../../../common/interfaces/table.interfaces";
-import BenefitsComponent from "./BenefitsComponent";
-const BenefitsForm = () => {
-  const {
-    founds,
-    modalitys,
-    InformationBenefits,
-    totalBenefits,
-    control,
-    errors,
-    handleClean,
-    isValid,
-    submitDisabled,
-    onSubmit,
-    tableView,
-    showSocialServices,
-    view,
-    found,
-  } = getDataBenefits();
 
+const BenefitsComponent = ({ foundId, foundName }) => {
+  const { InformationBenefits, totalBenefits, showSocialServices, view } =
+    getDataComponentsBeneftis(foundId);
   return (
-    <div
-      style={{
-        border: "1px solid #e0e0e0",
-        borderRadius: "15px",
-        opacity: 1,
-        padding: "1em",
-        margin: "1.5em 0em",
-      }}
-      className="mt-24px"
-    >
-      <FormComponent
-        id="BenefitsForm"
-        className="form-signIn"
-        action={onSubmit}
-      >
-        <div
-          style={{
-            border: "1px solid #e0e0e0",
-            borderRadius: "15px",
-            opacity: 1,
-            padding: "1em",
-            margin: "1.5em 0em",
-          }}
-        >
-          <div className="grid-form-4-container">
-            <SelectComponent
-              idInput="founds"
-              control={control}
-              errors={errors}
-              data={founds}
-              label={<>Fondo / Programa</>}
-              className="select-basic medium"
-              classNameLabel="text-black big"
-              placeholder="Seleccionar"
-              filter
-            />
-            <SelectComponent
-              idInput="modality"
-              control={control}
-              errors={errors}
-              data={modalitys}
-              label={<>Modalidad</>}
-              className="select-basic medium"
-              classNameLabel="text-black big"
-              placeholder="Seleccionar"
-              filter
-            />
-          </div>
-          <div className="button-save-container-display mr-24px">
-            <ButtonComponent
-              value="Limpiar"
-              className="button-clean"
-              type="button"
-              action={handleClean}
-            />
-
-            <ButtonComponent
-              value="Buscar"
-              className={`button-save ${
-                !isValid || submitDisabled ? "disabled-black" : ""
-              } big`}
-              type="submit"
-              disabled={!isValid || submitDisabled}
-            />
-          </div>
-        </div>
-      </FormComponent>
-
+    <>
       {view && (
-        <>
-          <BenefitsComponent
-            foundId={1}
-            foundName={"FONDO PRESUPUESTO PARTICIPATIVO"}
-          />
-          <BenefitsComponent
-            foundId={2}
-            foundName={
-              "PUAP Línea de Crédito Condonable Pregrado con Recurso Ordinario y Fondo EPM."
-            }
-          />
-          <BenefitsComponent
-            foundId={3}
-            foundName={"FONDO FORMACIÓN AVANZADA"}
-          />
-          <BenefitsComponent
-            foundId={4}
-            foundName={"EXTENDIENDO FRONTERAS EDUCATIVAS RO"}
-          />
-          <BenefitsComponent foundId={5} foundName={"ENLAZA MUNDOS"} />
-          <BenefitsComponent foundId={6} foundName={"MEJORES BACHILLERES"} />
-          <BenefitsComponent foundId={7} foundName={"BECAS TECNOLOGÍCAS"} />
-          <BenefitsComponent
-            foundId={8}
-            foundName={"BECAS MEJORES DEPORTISTAS"}
-          />
-          <BenefitsComponent foundId={9} foundName={"TALENTO ESPECIALIZADO"} />
-          <BenefitsComponent foundId={10} foundName={"MATRICULA CERO"} />
-          <BenefitsComponent
-            foundId={11}
-            foundName={"EXTENDIENDO FRONTERAS EDUCATIVAS PP"}
-          />
-        </>
-      )}
-
-      {tableView && (
         <>
           <div className="container-sections-forms mt-24px ml-16px mr-16px p-0">
             <div
               className="bold mt-24px ml-16px mr-16px p-0"
               style={{ fontWeight: 500, fontSize: "29px", color: "#000000" }}
             >
-              Giros realizados al beneficiario
+              Giros realizados al beneficiario fondo/programa {foundName}
             </div>
             <p className="button-save-container-display mr-24px text-black bold medium">
               Total de resultados &nbsp;
@@ -173,7 +45,7 @@ const BenefitsForm = () => {
                   header="Estado"
                   style={{ fontSize: "14px", fontWeight: "400" }}
                 ></Column>
-                {found == "1" || found == "2" ? (
+                {foundId == "1" || foundId == "2" ? (
                   <Column
                     field=""
                     header="Servicio social"
@@ -222,7 +94,7 @@ const BenefitsForm = () => {
                 color: "#000000",
               }}
             >
-              Giros proyectados al beneficiario
+              Giros proyectados al beneficiario fondo/programa {foundName}
             </div>
             <p className="button-save-container-display mr-24px text-black bold medium">
               Total de resultados &nbsp;
@@ -277,11 +149,8 @@ const BenefitsForm = () => {
           </div>
         </>
       )}
-    </div>
-    // <>
-
-    // </>
+    </>
   );
 };
 
-export default memo(BenefitsForm);
+export default BenefitsComponent;

@@ -38,9 +38,12 @@ export const useConsultBeneficiaryMonitoring = () => {
   } = useForm({ resolver, mode: "all" });
 
   const [found, period, modality, creditStatus] = watch([
-    "founds", "period", "modality", "creditStatus"
-  ])
-  const urlGetConsultBeneficiary = `${urlApiBeneficiary}/api/v1/sapiencia/beneficiary/get-all-paginated`
+    "founds",
+    "period",
+    "modality",
+    "creditStatus",
+  ]);
+  const urlGetConsultBeneficiary = `${urlApiBeneficiary}/api/v1/sapiencia/beneficiary/get-all-paginated`;
 
   const [formWatch, setFormWatch] = useState({
     ccBeneficiary: "",
@@ -51,6 +54,12 @@ export const useConsultBeneficiaryMonitoring = () => {
       icon: "view",
       onClick: (row) => {
         navigate(`/Beneficiario/info/${row.document}/${row.foundID}`);
+      },
+    },
+    {
+      icon: "Edit",
+      onClick: (row) => {
+        navigate(`/beneficiario/editar/${row.document}/${row.foundID}`);
       },
     },
   ];
@@ -80,37 +89,44 @@ export const useConsultBeneficiaryMonitoring = () => {
   const downloadCollection = useCallback(() => {
     const { page, perPage } = paginateData;
     const { ccBeneficiary } = formWatch;
-    const url = new URL(`${urlApiBeneficiary}/api/v1/sapiencia/beneficiary/generate-xlsx`);
+    const url = new URL(
+      `${urlApiBeneficiary}/api/v1/sapiencia/beneficiary/generate-xlsx`
+    );
     const params = new URLSearchParams();
-    params.append("page", page + 1)
-    params.append("perPage", perPage + 1)
+    params.append("page", page + 1);
+    params.append("perPage", perPage + 1);
 
     if (ccBeneficiary) {
-      params.append("ccBeneficiary", ccBeneficiary)
+      params.append("ccBeneficiary", ccBeneficiary);
     }
     if (found) {
-      params.append("founds", found)
+      params.append("founds", found);
     }
     if (period) {
-      params.append("period", period)
+      params.append("period", period);
     }
     if (modality) {
-      params.append("modality", modality)
+      params.append("modality", modality);
     }
     if (creditStatus) {
-      params.append("creditStatus", creditStatus)
+      params.append("creditStatus", creditStatus);
     }
 
     url.search = params.toString();
     window.open(url.toString(), "_blank");
-
   }, [paginateData, formWatch, found, period, modality, creditStatus]);
-
 
   useEffect(() => {
     const { ccBeneficiary } = formWatch;
 
-    if (found || period || modality || creditStatus != null || creditStatus != undefined || ccBeneficiary) {
+    if (
+      found ||
+      period ||
+      modality ||
+      creditStatus != null ||
+      creditStatus != undefined ||
+      ccBeneficiary
+    ) {
       return setSubmitDisabled(false);
     }
     setSubmitDisabled(true);

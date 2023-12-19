@@ -1,12 +1,15 @@
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { ApiResponse } from "../../../../../../common/utils/api-response";
 import useCrudService from "../../../../../../common/hooks/crud-service.hook";
 import { urlApiBeneficiary } from "../../../../../../common/utils/base-url";
-import { InputComponent } from "../../../../../../common/components/Form";
 import { useForm } from "react-hook-form";
 import Svgs from "../../../../../../public/images/icons/svgs";
+import { OverlayPanel } from "primereact/overlaypanel";
+import { Button } from "primereact/button";
+import { useParams } from "react-router-dom";
+
 const SocialServicesModal = ({
   document,
   period,
@@ -18,10 +21,14 @@ const SocialServicesModal = ({
   const [InformationSocialServices, setInformationSocialServices] =
     useState(null);
   const { post } = useCrudService(urlApiBeneficiary);
-  const { control, register, reset } = useForm();
+
   const getInformationSocialServices = async (periodId, foundId) => {
     try {
+      if (foundId === undefined) {
+        foundId = foundId;
+      }
       const data = { document, foundId, periodId };
+
       const endpoint = "/api/v1/sapiencia/beneficiary/get-socialServices";
       const resp: ApiResponse<any> = await post(endpoint, data);
       setInformationSocialServices(resp.data[0][0]);
@@ -34,6 +41,9 @@ const SocialServicesModal = ({
     getInformationSocialServices(period, found);
   }, []);
 
+  const getFormats = () => {};
+
+  const op = useRef(null);
   return (
     <>
       <div
@@ -177,7 +187,14 @@ const SocialServicesModal = ({
             }}
             body={
               <div className="pointer">
-                <Svgs svg="view" />
+                <Button
+                  type="button"
+                  style={{ backgroundColor: "white", borderColor: "white" }}
+                  icon={<Svgs svg="view" />}
+                  onClick={(e) => op.current.toggle(e)}
+                />
+
+                <OverlayPanel ref={op}></OverlayPanel>
               </div>
             }
           ></Column>

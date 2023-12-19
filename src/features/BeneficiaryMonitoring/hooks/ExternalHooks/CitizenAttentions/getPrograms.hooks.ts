@@ -1,24 +1,21 @@
 import { useEffect, useState } from "react";
 import useCrudService from "../../../../../common/hooks/crud-service.hook";
-import { urlApiCitizenAttentions } from "../../../../../common/utils/base-url";
+import { urlApiBeneficiary, urlApiCitizenAttentions } from "../../../../../common/utils/base-url";
 import { ApiResponse } from "../../../../../common/utils/api-response";
+import { useParams } from "react-router-dom";
 
 export const getProgramsCitizenAttentions = () => {
-    const { get } = useCrudService(urlApiCitizenAttentions);
+    const { post } = useCrudService(urlApiBeneficiary);
     const [programs, setProgrmas] = useState<any>([]);
-
+    const { document } = useParams();
     const getAllPrograms = async () => {
-        const endpoint = "/get-Programs"
-        const resp: ApiResponse<[]> = await get(endpoint)
+        let data = {
+            identification: document
+        }
+        const endpoint = "/api/v1/external/getProgramsByUser"
+        const resp: ApiResponse<[]> = await post(endpoint, data)
 
-        const dataRes = resp.data.map((program) => {
-            const { PRG_CODIGO, PRG_DESCRIPCION } = program
-            return {
-                value: PRG_CODIGO,
-                name: PRG_DESCRIPCION,
-            }
-        })
-        setProgrmas(dataRes);
+        setProgrmas(resp.data);
     }
 
     useEffect(() => {

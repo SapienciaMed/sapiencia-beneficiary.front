@@ -9,20 +9,106 @@ import Consolidation from "./Beneficiary information/Consolidation";
 import Credit_Status from "./Beneficiary information/Credit_Status";
 import { ButtonComponent } from "../../../common/components/Form";
 import { MainHook } from "../hooks/BeneficiaryInformation/Main";
+import { ITabsMenuTemplate } from "../../../common/interfaces/tabs-menu.interface";
+import { useParams } from "react-router-dom";
+import TabListComponent from "../../../common/components/tab-list.component";
+import Documents from "./Beneficiary information/Documents";
 const BeneficiaryInformation = () => {
   const { handleClose } = MainHook();
-  const tabs = [
-    { title: "Información general", content: <GeneralInformation /> },
-    // { title: "Historial", content: <Historical /> },
-    { title: "Beneficios", content: <Benefits /> },
-    { title: "PQRSDF", content: <PQRSDF /> },
-    // { title: "Atenciones", content: <Attentions /> },
-    // { title: "Consolidación", content: <Consolidation /> },
-    // { title: "Estado Crédito", content: <Credit_Status /> },
-  ];
-  const panelClassName = (parent, index) => {
-    if (parent.state.activeIndex === index) return "bg-primary";
+  const { option } = useParams();
+  // const tabs = [
+  //   { title: "Información general", content: <GeneralInformation /> },
+  //   // { title: "Historial", content: <Historical /> },
+  //   { title: "Beneficios", content: <Benefits /> },
+  //   { title: "PQRSDF", content: <PQRSDF /> },
+  //   // { title: "Atenciones", content: <Attentions /> },
+  //   // { title: "Consolidación", content: <Consolidation /> },
+  //   // { title: "Estado Crédito", content: <Credit_Status /> },
+  // ];
+  // const panelClassName = (parent, index) => {
+  //   if (parent.state.activeIndex === index) return "bg-primary";
+  // };
+
+  const tabs = (): ITabsMenuTemplate[] => {
+    const InformacionGeneral = {
+      id: "InformacionGeneral",
+      title: "Información general",
+      content: <GeneralInformation />,
+      action: () => {},
+      hide: true,
+    };
+
+    const Historial = {
+      id: "Historial",
+      title: "Historial",
+      content: <Historical />,
+      action: () => {},
+      hide: true,
+    };
+
+    const Documentos = {
+      id: "Documents",
+      title: "Documentos",
+      content: <Documents />,
+      action: () => {},
+      hide: true,
+    };
+
+    const Beneficios = {
+      id: "Beneficios",
+      title: "Beneficios",
+      content: <Benefits />,
+      action: () => {},
+      hide: true,
+    };
+
+    const Pqrsdf = {
+      id: "PQRSDF",
+      title: "PQRSDF",
+      content: <PQRSDF />,
+      action: () => {},
+      hide: true,
+    };
+
+    const Atenciones = {
+      id: "Atenciones",
+      title: "Atenciones",
+      content: <Attentions />,
+      action: () => {},
+      hide: true,
+    };
+
+    const Consolidación = {
+      id: "Consolidación",
+      title: "Consolidación",
+      content: <Consolidation />,
+      action: () => {},
+      hide: true,
+    };
+
+    const EstadoCredito = {
+      id: "Estado Crédito",
+      title: "Estado Crédito",
+      content: <Credit_Status />,
+      action: () => {},
+      hide: true,
+    };
+    const result = [
+      InformacionGeneral,
+      // Historial,
+      // Documentos,
+      Beneficios,
+      Pqrsdf,
+      // Atenciones,
+      // Consolidación,
+      // EstadoCredito,
+    ].filter((item) => item?.hide);
+    return result;
   };
+
+  const start = tabs().find(
+    (tab) => tab.id.toString().toLowerCase() == option?.toLowerCase()
+  );
   return (
     <>
       <div
@@ -32,23 +118,9 @@ const BeneficiaryInformation = () => {
         Información beneficiario
       </div>
       <div>
-        <TabView style={{ fontWeight: 500 }}>
-          {tabs.map((tab, i) => {
-            return (
-              <TabPanel
-                pt={{
-                  headerAction: ({ parent }) => ({
-                    className: panelClassName(parent, i),
-                  }),
-                }}
-                key={i}
-                header={tab.title}
-              >
-                <p>{tab.content}</p>
-              </TabPanel>
-            );
-          })}
-        </TabView>
+        <section>
+          <TabListComponent tabs={tabs()} start={start} />
+        </section>
         <div className="button-save-container-display mr-24px">
           <ButtonComponent
             value="Regresar"

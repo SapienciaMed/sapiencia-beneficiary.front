@@ -26,7 +26,7 @@ export const PQRSDFHook = () => {
   const { programs } = getProgramsCitizenAttentions()
   const { subjectType } = getSubjectTypeCitizenAttentions()
   const { post } = useCrudService(urlApiBeneficiary);
-
+  const [loading, setLoading] = useState(null);
   const {
     control,
     handleSubmit,
@@ -77,6 +77,15 @@ export const PQRSDFHook = () => {
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    let identification = document
+    tableComponentRef.current?.loadData({
+      identification,
+    });
+
+    setTableView(true);
+  }, [])
 
   const downloadCollection = async () => {
     const { filingNumber } = formWatch;
@@ -134,6 +143,17 @@ export const PQRSDFHook = () => {
     // window.open(url.toString(), "_blank");
   };
 
+  const getInfo = async () => {
+    const endpoint = "/api/v1/sapiencia/beneficiary/getBenefits";
+    let data = {
+      page: 1,
+      perPage: 100,
+      identification: document
+    }
+    const resp: ApiResponse<[]> = await post(endpoint, data);
+
+
+  }
 
   useEffect(() => {
     const { filingNumber } = formWatch;

@@ -5,14 +5,14 @@ import useCrudService from "../../../../common/hooks/crud-service.hook";
 import { ApiResponse } from "../../../../common/utils/api-response";
 import { AppContext } from "../../../../common/contexts/app.context";
 import SocialServicesModal from "../../forms/BeneficiaryInformation/Benefits/SocialServices/SocialServicesModal";
-import { useGetAllFounds } from "../listsSapiencia/getFounds.hook";
+import { useGetFoundsByUser } from "../listsSapiencia/getFounds.hook";
 import { getAllModalitys } from "../listsSapiencia/getModality.hook";
 import { useForm } from "react-hook-form";
 import { IBenefitsFilters } from "../../../../common/interfaces/BeneficiaryInformation/Benefits.interface";
 import { formaterNumberToCurrency } from "../../../../common/utils/helpers";
 
 export const getDataBenefits = () => {
-  const { founds } = useGetAllFounds();
+  const { founds } = useGetFoundsByUser();
   const { modalitys } = getAllModalitys();
   const [InformationBenefits, setInformationBenefits] = useState(null);
   const { post } = useCrudService(urlApiBeneficiary);

@@ -16,18 +16,6 @@ import Documents from "./Beneficiary information/Documents";
 const BeneficiaryInformation = () => {
   const { handleClose } = MainHook();
   const { option } = useParams();
-  // const tabs = [
-  //   { title: "Información general", content: <GeneralInformation /> },
-  //   // { title: "Historial", content: <Historical /> },
-  //   { title: "Beneficios", content: <Benefits /> },
-  //   { title: "PQRSDF", content: <PQRSDF /> },
-  //   // { title: "Atenciones", content: <Attentions /> },
-  //   // { title: "Consolidación", content: <Consolidation /> },
-  //   // { title: "Estado Crédito", content: <Credit_Status /> },
-  // ];
-  // const panelClassName = (parent, index) => {
-  //   if (parent.state.activeIndex === index) return "bg-primary";
-  // };
 
   const tabs = (): ITabsMenuTemplate[] => {
     const InformacionGeneral = {

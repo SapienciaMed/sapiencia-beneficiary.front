@@ -22,6 +22,33 @@ const SocialServicesModal = ({
     useState(null);
   const { post } = useCrudService(urlApiBeneficiary);
 
+  const viewDocuments = (tipo, documento, id_periodo_giro, pseleccion) => {
+    let url =
+      "https://fondos.sapiencia.gov.co/convocatorias/frontendrenovacionpp/uploads/index.php";
+
+    let form = $(
+      '<form action="' +
+        url +
+        '" method="post" target="_blank" style="display: none">' +
+        '<input type="text" name="documento" value="' +
+        documento +
+        '" />' +
+        '<input type="text" name="tipo" value="' +
+        tipo +
+        '" />' +
+        '<input type="text" name="periodo" value="' +
+        id_periodo_giro +
+        '" />' +
+        '<input type="text" name="npseleccion" value="' +
+        pseleccion +
+        '" />' +
+        "</form>"
+    );
+
+    $("body").append(form);
+    form.submit();
+  };
+
   const getInformationSocialServices = async (periodId, foundId) => {
     try {
       if (foundId === undefined) {
@@ -194,7 +221,9 @@ const SocialServicesModal = ({
                   onClick={(e) => op.current.toggle(e)}
                 />
 
-                <OverlayPanel ref={op}></OverlayPanel>
+                <OverlayPanel ref={op}>
+                  <div>Hola </div>
+                </OverlayPanel>
               </div>
             }
           ></Column>

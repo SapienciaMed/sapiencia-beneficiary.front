@@ -87,7 +87,7 @@ const BeneficiaryInformation = () => {
       // Documentos,
       Beneficios,
       Pqrsdf,
-      // Atenciones,
+      Atenciones,
       // Consolidación,
       // EstadoCredito,
     ].filter((item) => item?.hide);

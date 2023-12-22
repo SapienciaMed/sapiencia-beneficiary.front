@@ -13,6 +13,7 @@ export interface IMessage {
   onClose?: () => void;
   background?: boolean;
   size?: string;
+  alignDescription?: string;
   style?: string;
 }
 
@@ -21,7 +22,7 @@ export interface IGenericList {
   grouper: string;
   itemCode: string;
   itemDescription: string;
-  additionalFields?: object
+  additionalFields?: object;
 }
 
 export interface IAdditionalField {

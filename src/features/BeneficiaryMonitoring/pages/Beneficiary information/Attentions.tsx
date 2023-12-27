@@ -6,6 +6,8 @@ import {
 } from "../../../../common/components/Form";
 import { DatePickerComponent } from "../../../../common/components/Form/input-date.component";
 import { AttentionsHook } from "../../hooks/BeneficiaryInformation/Attentions.hook";
+import TableComponent from "../../../../common/components/table.component";
+import { tableColumnsAttentions } from "../../forms/BeneficiaryInformation/Attentions/Columns";
 
 const Attentions = () => {
   const {
@@ -19,6 +21,10 @@ const Attentions = () => {
     errors,
     tableActions,
     isValid,
+    programs,
+    setPaginateData,
+    tableComponentRef,
+    url,
   } = AttentionsHook();
   return (
     <>
@@ -34,7 +40,7 @@ const Attentions = () => {
           >
             <div className="grid-form-5-container">
               <DatePickerComponent
-                idInput="registrationDate"
+                idInput="createdAt"
                 errors={errors}
                 control={control}
                 label={<>Fecha registro</>}
@@ -44,10 +50,10 @@ const Attentions = () => {
                 maxDate={new Date()}
               />
               <SelectComponent
-                idInput="Program"
+                idInput="programId"
                 control={control}
                 errors={errors}
-                //data={founds}
+                data={programs}
                 label={<>Programa</>}
                 className="select-basic medium"
                 classNameLabel="text-black big bold"
@@ -65,15 +71,33 @@ const Attentions = () => {
               />
               <ButtonComponent
                 value="Buscar"
-                className={`button-save ${
-                  !isValid || submitDisabled ? "disabled-black" : ""
-                } big`}
+                className={`button-save big`}
                 type="submit"
-                disabled={!isValid || submitDisabled}
+                // disabled={!isValid || submitDisabled}
               />
             </div>
           </FormComponent>
         </div>
+        {tableView && (
+          <>
+            <div className="container-sections-forms ml-20px mr-20px">
+              <TableComponent
+                setPaginateData={setPaginateData}
+                ref={tableComponentRef}
+                url={url}
+                columns={tableColumnsAttentions}
+                actions={tableActions}
+                isShowModal={true}
+                emptyMessage="Resultado en la búsqueda"
+                descriptionModalNoResult="No se generó resultado en la búsqueda"
+                titleMessageModalNoResult="Resultado de búsqueda"
+                onResult={(rows) => {
+                  console.log(rows);
+                }}
+              />
+            </div>
+          </>
+        )}
       </div>
     </>
   );

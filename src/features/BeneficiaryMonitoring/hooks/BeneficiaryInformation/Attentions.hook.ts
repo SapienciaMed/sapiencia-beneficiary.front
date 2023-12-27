@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useYupValidationResolver from "../../../../common/hooks/form-validator.hook";
 import { consultPQRSFSchema } from "../../../../common/schemas/BeneficiaryInformation/PQRSDF.schema";
 import { useForm } from "react-hook-form";
 import { ITableAction } from "../../../../common/interfaces/table.interfaces";
 import { IAttentions, IAttentionsFilter } from "../../../../common/interfaces/BeneficiaryInformation/Attentions.interface";
 import { consultAttentioschema } from "../../../../common/schemas/BeneficiaryInformation/Attentions.schema";
+import { getProgramsCitizenAttention } from "../ExternalHooks/CitizenAttentions/getPrograms.hooks";
 
 export const AttentionsHook = () => {
   const navigate = useNavigate();
@@ -14,6 +15,8 @@ export const AttentionsHook = () => {
   const [tableView, setTableView] = useState<boolean>(false);
   const [paginateData, setPaginateData] = useState({ page: "", perPage: "" });
   const resolver = useYupValidationResolver(consultAttentioschema);
+  const { programs } = getProgramsCitizenAttention()
+  const { document } = useParams()
   const {
     control,
     handleSubmit,
@@ -25,6 +28,7 @@ export const AttentionsHook = () => {
 
   const [registrationDate, Program] = watch(["registrationDate", "Program"]);
 
+  const url = `https://sapiencia-citizen-attention-api-ukyunq2uxa-uc.a.run.app/api/v1/citizen-attention/get-by-filters`
   const handleClean = () => {
     reset();
     setSubmitDisabled(true);
@@ -34,25 +38,28 @@ export const AttentionsHook = () => {
 
   const tableActions: ITableAction<IAttentions>[] = [
     {
-      icon: "Detail",
+      icon: "view",
       onClick: (row) => {
         navigate(`#`);
       },
     },
   ];
   const onSubmit = handleSubmit((filters: IAttentionsFilter) => {
+    setTableView(false);
     setTableView(true);
+    let identification = document
     tableComponentRef.current?.loadData({
+      identification,
       ...filters,
     });
   });
 
-  const downloadCollection = useCallback(() => {}, [paginateData]);
+  const downloadCollection = useCallback(() => { }, [paginateData]);
   useEffect(() => {
-    if (registrationDate || Program ) {
-      return setSubmitDisabled(true);
-    }
-    setSubmitDisabled(false);
+    // if (registrationDate || Program) {
+    //   return setSubmitDisabled(true);
+    // }
+    // setSubmitDisabled(false);
   }, [registrationDate, Program]);
   return {
     downloadCollection,
@@ -64,6 +71,10 @@ export const AttentionsHook = () => {
     submitDisabled,
     errors,
     tableActions,
-    isValid
+    isValid,
+    programs,
+    setPaginateData,
+    tableComponentRef,
+    url
   }
 };

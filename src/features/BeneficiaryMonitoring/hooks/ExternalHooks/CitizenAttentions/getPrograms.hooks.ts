@@ -24,3 +24,29 @@ export const getProgramsCitizenAttentions = () => {
 
     return { programs }
 }
+
+export const getProgramsCitizenAttention = () => {
+    const { get } = useCrudService(urlApiCitizenAttentions);
+    const [programs, setProgrmas] = useState<any>([]);
+    const { document } = useParams();
+    const getAllPrograms = async () => {
+
+        const endpoint = "/api/v1/citizen-attention/get-programs"
+        const resp: ApiResponse<[]> = await get(endpoint)
+
+        const dataRes = resp.data.map((program) => {
+            const { prg_codigo, prg_descripcion } = program
+            return {
+                value: prg_codigo,
+                name: prg_descripcion,
+            }
+        })
+        setProgrmas(dataRes);
+    }
+
+    useEffect(() => {
+        getAllPrograms()
+    }, [])
+
+    return { programs }
+}

@@ -26,7 +26,7 @@ export const useConsultBeneficiaryMonitoring = () => {
   const tableComponentRef = useRef(null);
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [tableView, setTableView] = useState<boolean>(false);
-  const { validateActionAccess } = useContext(AppContext);
+  const { validateActionAccess, setMessage } = useContext(AppContext);
   const [paginateData, setPaginateData] = useState({ page: "", perPage: "" });
   const resolver = useYupValidationResolver(consultBeneficiaryMonitoringSchema);
   const { post } = useCrudService(urlApiBeneficiary);
@@ -42,13 +42,26 @@ export const useConsultBeneficiaryMonitoring = () => {
   } = useForm({ resolver, mode: "all" });
 
   const [found, period, modality, creditStatus] = watch([
-    "founds", "period", "modality", "creditStatus"
-  ])
-  const urlGetConsultBeneficiary = `${urlApiBeneficiary}/api/v1/sapiencia/beneficiary/get-all-paginated`
+    "founds",
+    "period",
+    "modality",
+    "creditStatus",
+  ]);
+  const urlGetConsultBeneficiary = `${urlApiBeneficiary}/api/v1/sapiencia/beneficiary/get-all-paginated`;
 
   const [formWatch, setFormWatch] = useState({
     ccBeneficiary: "",
   });
+
+  const iframeEdit = () => (
+    <>
+      <iframe
+        src="https://fondos.sapiencia.gov.co/convocatorias/frontendrenovacionpp/index.php/FormularioRenovacionPP/fc_cargarvista?test=12345"
+        width="100%"
+        height="600"
+      ></iframe>
+    </>
+  );
 
   const tableActions: ITableAction<IBeneficiary>[] = [
     {
@@ -57,29 +70,48 @@ export const useConsultBeneficiaryMonitoring = () => {
         navigate(`/Beneficiario/info/${row.document}/${row.foundID}`);
       },
     },
+    {
+      icon: "Edit",
+      onClick: (row) => {
+        setMessage({
+          // title: "Servicio Social",
+          show: true,
+          description: iframeEdit(),
+          background: true,
+          okTitle: "Cerrar",
+          onOk: () => {
+            setMessage({ show: false });
+          },
+          onClose: () => {
+            setMessage({ show: false });
+          },
+          style: "align-items: flex-start",
+          size: "90%",
+        });
+      },
+    },
   ];
 
   const getInfo = async (data) => {
     try {
-
-      const endpoint = "/api/v1/sapiencia/beneficiary/get-all-paginated"
+      const endpoint = "/api/v1/sapiencia/beneficiary/get-all-paginated";
       let newData = {
         perPage: 10,
         page: 1,
-        ...data
-      }
-      const res: ApiResponse<[]> = await post(endpoint, newData)
+        ...data,
+      };
+      const res: ApiResponse<[]> = await post(endpoint, newData);
 
-      if (res.data['array'].length > 0) {
-        setLoading(false)
+      if (res.data["array"].length > 0) {
+        setLoading(false);
       } else {
-        setLoading(false)
+        setLoading(false);
         setTableView(false);
       }
     } catch (error) {
       // Handle error
     }
-  }
+  };
 
   const handleClean = () => {
     reset();
@@ -95,7 +127,7 @@ export const useConsultBeneficiaryMonitoring = () => {
       ...filters,
     });
     setLoading(true);
-    getInfo(filters)
+    getInfo(filters);
   });
 
   const handleChange = ({ target }) => {
@@ -109,37 +141,44 @@ export const useConsultBeneficiaryMonitoring = () => {
   const downloadCollection = useCallback(() => {
     const { page, perPage } = paginateData;
     const { ccBeneficiary } = formWatch;
-    const url = new URL(`${urlApiBeneficiary}/api/v1/sapiencia/beneficiary/generate-xlsx`);
+    const url = new URL(
+      `${urlApiBeneficiary}/api/v1/sapiencia/beneficiary/generate-xlsx`
+    );
     const params = new URLSearchParams();
-    params.append("page", page + 1)
-    params.append("perPage", perPage + 1)
+    params.append("page", page + 1);
+    params.append("perPage", perPage + 1);
 
     if (ccBeneficiary) {
-      params.append("ccBeneficiary", ccBeneficiary)
+      params.append("ccBeneficiary", ccBeneficiary);
     }
     if (found) {
-      params.append("founds", found)
+      params.append("founds", found);
     }
     if (period) {
-      params.append("period", period)
+      params.append("period", period);
     }
     if (modality) {
-      params.append("modality", modality)
+      params.append("modality", modality);
     }
     if (creditStatus) {
-      params.append("creditStatus", creditStatus)
+      params.append("creditStatus", creditStatus);
     }
 
     url.search = params.toString();
     window.open(url.toString(), "_blank");
-
   }, [paginateData, formWatch, found, period, modality, creditStatus]);
-
 
   useEffect(() => {
     const { ccBeneficiary } = formWatch;
 
-    if (found || period || modality || creditStatus != null || creditStatus != undefined || ccBeneficiary) {
+    if (
+      found ||
+      period ||
+      modality ||
+      creditStatus != null ||
+      creditStatus != undefined ||
+      ccBeneficiary
+    ) {
       return setSubmitDisabled(false);
     }
     setSubmitDisabled(true);
@@ -165,6 +204,6 @@ export const useConsultBeneficiaryMonitoring = () => {
     modalitys,
     creditsStatus,
     urlGetConsultBeneficiary,
-    loading
+    loading,
   };
 };

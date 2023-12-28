@@ -22,7 +22,11 @@ function ModalMessageComponent(): React.JSX.Element {
         message.show ? "is-open" : "modal-close"
       }`}
     >
-      <div ref={modal} className="modal-container">
+      <div
+        ref={modal}
+        className="modal-container"
+        style={{ minWidth: message.size && message.size }}
+      >
         <div className="modal-header">
           <button
             className="close button-close tiny hover-three"

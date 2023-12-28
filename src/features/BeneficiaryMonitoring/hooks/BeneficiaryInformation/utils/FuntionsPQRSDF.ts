@@ -1,7 +1,11 @@
 import { IDetailsPQRSDF } from "../../../../../common/interfaces/BeneficiaryInformation/PQRSDF.interface";
 
 export const createObjectDetailPQRSDF = (item: any) => {
+  console.log({ item });
+
   let resultObject: IDetailsPQRSDF = {
+    idPQRSDF: "",
+    PQRSDF: "",
     typeOfRequest: "", // Preguntar por esta
     identityDocument: "",
     typeOfEntity: "", // Preguntar por esta
@@ -25,8 +29,13 @@ export const createObjectDetailPQRSDF = (item: any) => {
       description: "", // Preguntar por esta
       filesOrDocumentsSupportingTheRequest: "", // Preguntar por esta
     },
+    internalSupportDocuments: [],
+    responsesPQRSDF: [],
   };
 
+  //ID PQRSDF
+  resultObject.idPQRSDF = item.id;
+  resultObject.PQRSDF = item.filingNumber;
   //Documento de identficacion
   resultObject.identityDocument = `${item.person.documentType.itemCode} ${item.person.identification}`;
   //Nombre Completo
@@ -70,6 +79,10 @@ export const createObjectDetailPQRSDF = (item: any) => {
   //Medio por el cual quiere recibir la respuesta
   resultObject.citizenInformation.MeansByWhichYouWantToReceiveTheAnswer =
     item.person.municipality.itemDescription;
+  //Docuemntos internos
+  resultObject.internalSupportDocuments = item.supportFiles;
+  //Respuestas PQRSDF
+  resultObject.responsesPQRSDF = item.pqrsdfResponses;
 
   console.log({ resultObject });
 

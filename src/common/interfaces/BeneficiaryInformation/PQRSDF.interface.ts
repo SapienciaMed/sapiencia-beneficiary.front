@@ -35,9 +35,13 @@ interface ICitizenInformation {
 }
 
 export interface IDetailsPQRSDF {
+  idPQRSDF: string;
+  PQRSDF: string;
   typeOfRequest: string;
   identityDocument: string;
   typeOfEntity: string;
   citizenInformation: ICitizenInformation;
   informationOnTheRequest: any;
+  internalSupportDocuments: any[];
+  responsesPQRSDF: any[];
 }

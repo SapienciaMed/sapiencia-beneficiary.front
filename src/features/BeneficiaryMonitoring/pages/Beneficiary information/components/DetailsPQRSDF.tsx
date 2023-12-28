@@ -1,8 +1,10 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useRef } from "react";
 import { InputComponent } from "../../../../../common/components/Form";
 import { Accordion, AccordionTab } from "primereact/accordion";
 import { TextAreaComponent } from "../../../../../common/components/Form/input-text-area.component";
-
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import Svgs from "../../../../../public/images/icons/svgs";
 const DetailsPQRSDF = ({ data }) => {
   console.log({ data });
 
@@ -47,7 +49,10 @@ const DetailsPQRSDF = ({ data }) => {
                 </span>
               }
             >
-              <div className="grid-form-4-container gap-25 mb-16px ml-14px mr-14px p-0">
+              <div
+                className="grid-form-4-container gap-25 mb-16px ml-14px mr-14px p-0"
+                style={{ width: "100%" }}
+              >
                 <InputComponent
                   idInput="fullName"
                   label={"Nombres y Apellidos"}
@@ -239,7 +244,10 @@ const DetailsPQRSDF = ({ data }) => {
                   }}
                   onClick={() => console.log("click buttonText")}
                 >
-                  <div className="small bold" style={{ color: "#FF0000", cursor: "pointer" }}>
+                  <div
+                    className="small bold"
+                    style={{ color: "#FF0000", cursor: "pointer" }}
+                  >
                     Documento.PDF
                   </div>
                 </div>
@@ -252,16 +260,182 @@ const DetailsPQRSDF = ({ data }) => {
                 </span>
               }
             >
-              asdas
+              <div className="spc-common-table">
+                <DataTable
+                  value={data.internalSupportDocuments}
+                  showGridlines
+                  tableStyle={{
+                    fontSize: "14px",
+                    width: "full",
+                    fontWeight: "500",
+                    marginTop: "24px",
+                    marginLeft: "16px",
+                    marginRight: "16px",
+                    marginBottom: "24px",
+                  }}
+                  emptyMessage={"No se generó resultado en la búsqueda"}
+                  paginator
+                  rows={5}
+                  // rowsPerPageOptions={[5, 10, 25, 50]}
+                >
+                  <Column
+                    field="user"
+                    header="Usuario"
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "400",
+                    }}
+                  ></Column>
+                  <Column
+                    field="visibleToPetitioner"
+                    header="Visible para peticionario"
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "400",
+                    }}
+                  />
+                  <Column
+                    field="file"
+                    header="Acciones"
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "400",
+                    }}
+                    body={(row) => (
+                      <div
+                        onClick={() => console.log({ row })}
+                        className="pointer"
+                      >
+                        <Svgs svg="view" />
+                      </div>
+                    )}
+                  />
+                </DataTable>
+              </div>
             </AccordionTab>
             <AccordionTab
               header={
                 <span style={{ color: "#6C757D" }}>
-                  Respuestas a la solicitud
+                  {`Respuesta PQRSDF ${data.idPQRSDF}`}
                 </span>
               }
             >
-              asdas
+              <div className="spc-common-table" style={{ width: "40rem" }}>
+                <DataTable
+                  value={data.internalSupportDocuments}
+                  showGridlines
+                  tableStyle={{
+                    fontSize: "14px",
+                    width: "full",
+                    fontWeight: "500",
+                    marginTop: "24px",
+                    marginLeft: "16px",
+                    marginRight: "16px",
+                    marginBottom: "24px",
+                  }}
+                  emptyMessage={"No se generó resultado en la búsqueda"}
+                  paginator
+                  rows={5}
+                  // rowsPerPageOptions={[5, 10, 25, 50]}
+                >
+                  <Column
+                    field="date"
+                    header="Fecha"
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "400",
+                    }}
+                  />
+                  <Column
+                    field="dependecyResponse"
+                    header="Dependencia que responde"
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "400",
+                    }}
+                  />
+                  <Column
+                    field="userResponse"
+                    header="Usuario que responde"
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "400",
+                    }}
+                  />
+                  <Column
+                    field="assignedDependecy"
+                    header="Dependencia asignada"
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "400",
+                    }}
+                  />
+                  <Column
+                    field="assignedUser"
+                    header="Usuario asignado"
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "400",
+                    }}
+                  />
+                  <Column
+                    field="typeResponse"
+                    header="Tipo de respuesta"
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "400",
+                    }}
+                  />
+                  <Column
+                    field="response"
+                    header="Respuesta"
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "400",
+                    }}
+                  />
+                  <Column
+                    field="Factor"
+                    header="Factor"
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "400",
+                    }}
+                  />
+                  <Column
+                    field="Status"
+                    header="Estado"
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "400",
+                    }}
+                  />
+                  <Column
+                    field="DaysOnPlatter"
+                    header="Días en bandeja"
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "400",
+                    }}
+                  />
+                  <Column
+                    field="file"
+                    header="Acciones"
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "400",
+                    }}
+                    body={(row) => (
+                      <div
+                        onClick={() => console.log({ row })}
+                        className="pointer"
+                      >
+                        <Svgs svg="view" />
+                      </div>
+                    )}
+                  />
+                </DataTable>
+              </div>
             </AccordionTab>
           </Accordion>
         </div>

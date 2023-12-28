@@ -55,7 +55,7 @@ export const PQRSDFHook = () => {
     }
 
     setMessage({
-      title: "Detalle PQRSDF XXXXXXXXXXXX",
+      title: `Detalle PQRSDF ${item.filingNumber}`,
       show: true,
       description: <DetailsPQRSDF data={detailObject} />,
       background: true,
@@ -67,7 +67,7 @@ export const PQRSDFHook = () => {
         setMessage({ show: false });
       },
       style: "align-items: flex-start",
-      size: "60%",
+      size: "80%",
       alignDescription: "center",
     });
   };

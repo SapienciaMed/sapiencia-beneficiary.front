@@ -7,7 +7,7 @@ export interface IAttentions {
   ApplicationTopic: string;
 }
 export interface IAttentionsTable {
-  registrationDate: Date;
+  createdAt: string;
   Typeofrequest: string;
   dependence: string;
   program: string;

@@ -9,6 +9,7 @@ import Svgs from "../../../../../../public/images/icons/svgs";
 import { OverlayPanel } from "primereact/overlaypanel";
 import { Button } from "primereact/button";
 import { useParams } from "react-router-dom";
+import $ from "jquery";
 
 const SocialServicesModal = ({
   document,
@@ -21,11 +22,15 @@ const SocialServicesModal = ({
   const [InformationSocialServices, setInformationSocialServices] =
     useState(null);
   const { post } = useCrudService(urlApiBeneficiary);
+  const [conditionalFormats, setconditionalFormats] = useState(null);
 
   const viewDocuments = (tipo, documento, id_periodo_giro, pseleccion) => {
+    // const url = new URL(
+    //   "https://fondos.sapiencia.gov.co/convocatorias/frontendrenovacionpp/uploads/index.php"
+    // );
+
     let url =
       "https://fondos.sapiencia.gov.co/convocatorias/frontendrenovacionpp/uploads/index.php";
-
     let form = $(
       '<form action="' +
         url +
@@ -44,7 +49,6 @@ const SocialServicesModal = ({
         '" />' +
         "</form>"
     );
-
     $("body").append(form);
     form.submit();
   };
@@ -59,6 +63,8 @@ const SocialServicesModal = ({
       const endpoint = "/api/v1/sapiencia/beneficiary/get-socialServices";
       const resp: ApiResponse<any> = await post(endpoint, data);
       setInformationSocialServices(resp.data[0][0]);
+
+      return resp.data[0][0];
     } catch (error) {
       console.error(error);
     }
@@ -66,9 +72,85 @@ const SocialServicesModal = ({
 
   useEffect(() => {
     getInformationSocialServices(period, found);
+    getFormats();
   }, []);
 
-  const getFormats = () => {};
+  const getFormats = async () => {
+    const Acta_Servicio = "Acta_Servicio";
+    const Ficha_Servicio = "Ficha_Servicio";
+    const Certificado_Servicio = "Certificado_Servicio";
+    const Formato_Unico = "Formato_Unificado";
+    const AcumulacionServicio = "AcumulacionServicio";
+
+    const data = await getInformationSocialServices(period, found);
+
+    const pseleccion = data[0]["Nombre_convocatoria_seleccionado"];
+    if (period <= 10) {
+      setconditionalFormats(
+        <>
+          <li
+            style={{ listStyle: "none", cursor: "pointer" }}
+            onClick={() =>
+              viewDocuments(Acta_Servicio, document, period, pseleccion)
+            }
+          >
+            Acta
+          </li>
+          <li
+            style={{ listStyle: "none", cursor: "pointer" }}
+            onClick={() =>
+              viewDocuments(Ficha_Servicio, document, period, pseleccion)
+            }
+          >
+            Ficha
+          </li>
+          <li
+            style={{ listStyle: "none", cursor: "pointer" }}
+            onClick={() =>
+              viewDocuments(Certificado_Servicio, document, period, pseleccion)
+            }
+          >
+            Certificado
+          </li>
+        </>
+      );
+    } else {
+      if (data[0]["Realizo_servicio"] === "SI") {
+        setconditionalFormats(
+          <>
+            <li
+              style={{ listStyle: "none", cursor: "pointer" }}
+              onClick={() =>
+                viewDocuments(Formato_Unico, document, period, pseleccion)
+              }
+            >
+              Certificado
+            </li>
+          </>
+        );
+      } else {
+        if (data[0]["horasAcumuladas"] >= 80) {
+          setconditionalFormats(
+            <>
+              <li
+                style={{ listStyle: "none", cursor: "pointer" }}
+                onClick={() =>
+                  viewDocuments(
+                    AcumulacionServicio,
+                    document,
+                    period,
+                    pseleccion
+                  )
+                }
+              >
+                Acumulación/fuerza mayor
+              </li>
+            </>
+          );
+        }
+      }
+    }
+  };
 
   const op = useRef(null);
   return (
@@ -190,7 +272,6 @@ const SocialServicesModal = ({
               flexDirection: "column",
               alignItems: "center",
             }}
-            body={""}
           ></Column>
           <Column
             header="Estado crédito"
@@ -221,9 +302,7 @@ const SocialServicesModal = ({
                   onClick={(e) => op.current.toggle(e)}
                 />
 
-                <OverlayPanel ref={op}>
-                  <div>Hola </div>
-                </OverlayPanel>
+                <OverlayPanel ref={op}>{conditionalFormats}</OverlayPanel>
               </div>
             }
           ></Column>

@@ -1,9 +1,9 @@
 import * as yup from "yup";
 
 export const consultAttentioschema = yup.object({
-  registrationDate: yup
+  createdAt: yup
     .date()
-    .required("Completar información")
+    .optional()
     .typeError("Fecha inválida"),
-    Program: yup.number().required("Completar información")
+  programId: yup.number().optional()
 });

@@ -2,7 +2,6 @@ import React, { useContext, useRef } from "react";
 import { AppContext } from "../contexts/app.context";
 import useOnClickOutside from "../hooks/click-outside.hook";
 import cancelIcon from "../../public/images/icons/cancel.png";
-import okIcon from "../../public/images/icons/ok.png";
 
 function ModalMessageComponent(): React.JSX.Element {
   // Services
@@ -22,7 +21,11 @@ function ModalMessageComponent(): React.JSX.Element {
         message.show ? "is-open" : "modal-close"
       }`}
     >
-      <div ref={modal} className="modal-container">
+      <div
+        ref={modal}
+        className="modal-container"
+        style={{ minWidth: message.size && message.size }}
+      >
         <div className="modal-header">
           <button
             className="close button-close tiny hover-three"
@@ -37,7 +40,12 @@ function ModalMessageComponent(): React.JSX.Element {
           <p className="text-black huge">{message?.title}</p>
         </div>
         <div
-          style={{ alignItems: "flex-start", width: "100%" }}
+          style={{
+            alignItems: message.alignDescription
+              ? message.alignDescription
+              : "flex-start",
+            width: "100%",
+          }}
           className="modal-content"
         >
           {typeof message.description != "string" ? (

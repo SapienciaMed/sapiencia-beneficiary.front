@@ -5,6 +5,7 @@ import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { ITableAction } from "../../../../common/interfaces/table.interfaces";
 import { consultPQRSFSchema } from "../../../../common/schemas/BeneficiaryInformation/PQRSDF.schema";
 import {
+  IDetailsPQRSDF,
   IPQRSDF,
   IPQRSDFFilters,
 } from "../../../../common/interfaces/BeneficiaryInformation/PQRSDF.interface";
@@ -14,7 +15,9 @@ import { getProgramsCitizenAttentions } from "../ExternalHooks/CitizenAttentions
 import { getSubjectTypeCitizenAttentions } from "../ExternalHooks/CitizenAttentions/getSubjectType.hook";
 import { ApiResponse } from "../../../../common/utils/api-response";
 import useCrudService from "../../../../common/hooks/crud-service.hook";
-import * as XLSX from "xlsx"
+import * as XLSX from "xlsx";
+import DetailsPQRSDF from "../../pages/Beneficiary information/components/DetailsPQRSDF";
+import { createObjectDetailPQRSDF } from "./utils/FuntionsPQRSDF";
 export const PQRSDFHook = () => {
   const navigate = useNavigate();
   const tableComponentRef = useRef(null);
@@ -23,8 +26,8 @@ export const PQRSDFHook = () => {
   const { validateActionAccess } = useContext(AppContext);
   const [paginateData, setPaginateData] = useState({ page: "", perPage: "" });
   const resolver = useYupValidationResolver(consultPQRSFSchema);
-  const { programs } = getProgramsCitizenAttentions()
-  const { subjectType } = getSubjectTypeCitizenAttentions()
+  const { programs } = getProgramsCitizenAttentions();
+  const { subjectType } = getSubjectTypeCitizenAttentions();
   const { post } = useCrudService(urlApiBeneficiary);
   const [loading, setLoading] = useState(null);
   const {
@@ -36,6 +39,7 @@ export const PQRSDFHook = () => {
     formState: { errors, isValid },
   } = useForm({ resolver, mode: "all" });
   const { document } = useParams();
+  const { setMessage } = useContext(AppContext);
 
   const [formWatch, setFormWatch] = useState({
     filingNumber: "",
@@ -43,16 +47,49 @@ export const PQRSDFHook = () => {
 
   const [requestType, programId] = watch(["requestType", "programId"]);
 
+  const viewDetailsPQRSDF = async (item: any) => {
+    let detailObject: IDetailsPQRSDF;
+    if (item && Object.keys(item).length > 0) {
+      const data = {
+        page: 1,
+        perPage: 10,
+        pqrsdfId: 210,
+      };
+      const endpoint =
+        "/api/v1/sapiencia/external/citizenAttentions/pqrsdf/get-responses";
+      const resp: ApiResponse<[]> = await post(endpoint, data);
+      const dataResponse = resp.data["array"];
+      detailObject = await createObjectDetailPQRSDF(item, dataResponse);
+    }
+
+    setMessage({
+      title: `Detalle PQRSDF ${item.filingNumber}`,
+      show: true,
+      description: <DetailsPQRSDF data={detailObject} />,
+      background: true,
+      okTitle: "Cerrar",
+      onOk: () => {
+        setMessage({ show: false });
+      },
+      onClose: () => {
+        setMessage({ show: false });
+      },
+      style: "align-items: flex-start",
+      size: "80%",
+      alignDescription: "center",
+    });
+  };
+
   const tableActions: ITableAction<IPQRSDF>[] = [
     {
       icon: "view",
       onClick: (row) => {
-        navigate(`#`);
+        viewDetailsPQRSDF(row);
       },
     },
   ];
 
-  const urlGetPQRSDF = `${urlApiBeneficiary}/api/v1/sapiencia/external/citizenAttentions/pqrsdf/get-paginated`
+  const urlGetPQRSDF = `${urlApiBeneficiary}/api/v1/sapiencia/external/citizenAttentions/pqrsdf/get-paginated`;
 
   const handleClean = () => {
     reset();
@@ -63,7 +100,7 @@ export const PQRSDFHook = () => {
 
   const onSubmit = handleSubmit((filters: IPQRSDFFilters) => {
     setTableView(true);
-    let identification = document
+    let identification = document;
     tableComponentRef.current?.loadData({
       identification,
       ...filters,
@@ -79,26 +116,27 @@ export const PQRSDFHook = () => {
   };
 
   useEffect(() => {
-    let identification = document
+    let identification = document;
     tableComponentRef.current?.loadData({
       identification,
     });
 
     setTableView(true);
-  }, [])
+  }, []);
 
   const downloadCollection = async () => {
     const { filingNumber } = formWatch;
-    let identification = document
+    let identification = document;
     const data = {
       page: 1,
       perPage: 1000,
       identification,
       filingNumber,
       requestType,
-      programId
-    }
-    const endpoint = "/api/v1/sapiencia/external/citizenAttentions/pqrsdf/get-paginated";
+      programId,
+    };
+    const endpoint =
+      "/api/v1/sapiencia/external/citizenAttentions/pqrsdf/get-paginated";
     const resp: ApiResponse<[]> = await post(endpoint, data);
     const dataRes = resp.data["array"];
     let dataPqrsdf = dataRes.map((data) => {
@@ -108,17 +146,17 @@ export const PQRSDFHook = () => {
         Fecha_Radicado: data.createdAt,
         Programa: data.program?.prg_descripcion,
         Asunto: data.requestSubject.aso_asunto,
-        Estado: data.status.lep_estado
-      }
-    })
-    const book = XLSX.utils.book_new()
-    const sheet = XLSX.utils.json_to_sheet(dataPqrsdf)
+        Estado: data.status.lep_estado,
+      };
+    });
+    const book = XLSX.utils.book_new();
+    const sheet = XLSX.utils.json_to_sheet(dataPqrsdf);
 
-    XLSX.utils.book_append_sheet(book, sheet, "PQRSDF")
+    XLSX.utils.book_append_sheet(book, sheet, "PQRSDF");
 
     setTimeout(() => {
-      XLSX.writeFile(book, "PQRSDF.xlsx")
-    }, 1000)
+      XLSX.writeFile(book, "PQRSDF.xlsx");
+    }, 1000);
 
     // const url = new URL(`${urlApiBeneficiary}/api/v1/sapiencia/external/citizenAttentions/pqrsdfXLSX`);
     // const params = new URLSearchParams();
@@ -138,7 +176,6 @@ export const PQRSDFHook = () => {
     //   params.append("programId", programId)
     // }
 
-
     // url.search = params.toString();
     // window.open(url.toString(), "_blank");
   };
@@ -148,12 +185,10 @@ export const PQRSDFHook = () => {
     let data = {
       page: 1,
       perPage: 100,
-      identification: document
-    }
+      identification: document,
+    };
     const resp: ApiResponse<[]> = await post(endpoint, data);
-
-
-  }
+  };
 
   useEffect(() => {
     const { filingNumber } = formWatch;
@@ -179,6 +214,6 @@ export const PQRSDFHook = () => {
     tableComponentRef,
     urlGetPQRSDF,
     programs,
-    subjectType
+    subjectType,
   };
 };

@@ -7595,6 +7595,10 @@
 .p-progress-spinner-circle {
   stroke: #533893 !important;
 }
+
+.p-column-title{
+  color: #000 !important
+}
 /* Customizations to the designer theme should be defined here */
 
 /*# sourceMappingURL=theme.css.map */

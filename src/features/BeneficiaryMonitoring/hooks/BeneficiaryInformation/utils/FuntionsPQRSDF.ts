@@ -42,7 +42,7 @@ export const createObjectDetailPQRSDF = async (
   //Tipo de Solicitud
   resultObject.typeOfRequest = item.requestType.tso_description;
   //Tipo de entidad
-  resultObject.typeOfEntity = item.person.entityType
+  resultObject.typeOfEntity = item.person.entityType;
   //Documento de identficacion
   resultObject.identityDocument = `${item.person.documentType.itemCode} ${item.person.identification}`;
   //Nombre Completo
@@ -85,7 +85,7 @@ export const createObjectDetailPQRSDF = async (
     item.person.municipality.itemDescription;
   //Medio por el cual quiere recibir la respuesta
   resultObject.citizenInformation.MeansByWhichYouWantToReceiveTheAnswer =
-    item.person.municipality.itemDescription;
+    item.responseMedium.mre_descripcion;
   //Informacion de la solicitud
   //Programa al que aplica la solicitud
   resultObject.informationOnTheRequest.programToWhichTheApplicationApplies =

@@ -47,11 +47,19 @@ export const PQRSDFHook = () => {
 
   const [requestType, programId] = watch(["requestType", "programId"]);
 
-  const viewDetailsPQRSDF = (item: any) => {
+  const viewDetailsPQRSDF = async (item: any) => {
     let detailObject: IDetailsPQRSDF;
     if (item && Object.keys(item).length > 0) {
-      console.log({ item });
-      detailObject = createObjectDetailPQRSDF(item);
+      const data = {
+        page: 1,
+        perPage: 10,
+        pqrsdfId: 210,
+      };
+      const endpoint =
+        "/api/v1/sapiencia/external/citizenAttentions/pqrsdf/get-responses";
+      const resp: ApiResponse<[]> = await post(endpoint, data);
+      const dataResponse = resp.data["array"];
+      detailObject = await createObjectDetailPQRSDF(item, dataResponse);
     }
 
     setMessage({

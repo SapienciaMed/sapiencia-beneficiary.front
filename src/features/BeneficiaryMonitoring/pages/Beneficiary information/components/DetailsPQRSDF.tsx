@@ -6,7 +6,30 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import Svgs from "../../../../../public/images/icons/svgs";
 const DetailsPQRSDF = ({ data }) => {
-  console.log({ data });
+  // console.log({ data });
+
+  const viewFile = (file: any) => {
+    let base64Pdf = file.split(";base64,").pop();
+
+    const byteCharacters = atob(base64Pdf);
+    const byteNumbers = new Array(byteCharacters.length);
+
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], { type: "application/octet-stream" });
+
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "documento.pdf";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="container-sections-forms mt-24px ml-16px mr-14px p-0">
@@ -51,7 +74,7 @@ const DetailsPQRSDF = ({ data }) => {
             >
               <div
                 className="grid-form-4-container gap-25 mb-16px ml-14px mr-14px p-0"
-                style={{ width: "100%" }}
+                // style={{ width: "100%" }}
               >
                 <InputComponent
                   idInput="fullName"
@@ -242,7 +265,12 @@ const DetailsPQRSDF = ({ data }) => {
                     justifyContent: "flex-start",
                     marginTop: "5px",
                   }}
-                  onClick={() => console.log("click buttonText")}
+                  onClick={() =>
+                    viewFile(
+                      data.informationOnTheRequest
+                        .filesOrDocumentsSupportingTheRequest
+                    )
+                  }
                 >
                   <div
                     className="small bold"
@@ -303,7 +331,7 @@ const DetailsPQRSDF = ({ data }) => {
                     }}
                     body={(row) => (
                       <div
-                        onClick={() => console.log({ row })}
+                        onClick={() => viewFile(row.file)}
                         className="pointer"
                       >
                         <Svgs svg="view" />
@@ -322,7 +350,7 @@ const DetailsPQRSDF = ({ data }) => {
             >
               <div className="spc-common-table" style={{ width: "40rem" }}>
                 <DataTable
-                  value={data.internalSupportDocuments}
+                  value={data.responsesPQRSDF}
                   showGridlines
                   tableStyle={{
                     fontSize: "14px",
@@ -395,7 +423,7 @@ const DetailsPQRSDF = ({ data }) => {
                     }}
                   />
                   <Column
-                    field="Factor"
+                    field="factor"
                     header="Factor"
                     style={{
                       fontSize: "14px",
@@ -403,7 +431,7 @@ const DetailsPQRSDF = ({ data }) => {
                     }}
                   />
                   <Column
-                    field="Status"
+                    field="status"
                     header="Estado"
                     style={{
                       fontSize: "14px",
@@ -411,7 +439,7 @@ const DetailsPQRSDF = ({ data }) => {
                     }}
                   />
                   <Column
-                    field="DaysOnPlatter"
+                    field="daysOnPlatter"
                     header="Días en bandeja"
                     style={{
                       fontSize: "14px",
@@ -427,7 +455,7 @@ const DetailsPQRSDF = ({ data }) => {
                     }}
                     body={(row) => (
                       <div
-                        onClick={() => console.log({ row })}
+                        onClick={() => viewFile(row.file)}
                         className="pointer"
                       >
                         <Svgs svg="view" />

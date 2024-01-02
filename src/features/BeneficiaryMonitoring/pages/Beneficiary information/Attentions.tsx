@@ -25,6 +25,7 @@ const Attentions = () => {
     setPaginateData,
     tableComponentRef,
     url,
+    requestTypes,
   } = AttentionsHook();
   return (
     <>
@@ -55,6 +56,17 @@ const Attentions = () => {
                 errors={errors}
                 data={programs}
                 label={<>Programa</>}
+                className="select-basic medium"
+                classNameLabel="text-black big bold"
+                placeholder="Seleccionar"
+                filter
+              />
+              <SelectComponent
+                idInput="requestSubjectTypeId"
+                control={control}
+                errors={errors}
+                data={requestTypes}
+                label={<>Tema de solicitud</>}
                 className="select-basic medium"
                 classNameLabel="text-black big bold"
                 placeholder="Seleccionar"

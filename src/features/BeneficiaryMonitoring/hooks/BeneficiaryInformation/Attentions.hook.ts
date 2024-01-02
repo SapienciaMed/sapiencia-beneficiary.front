@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useYupValidationResolver from "../../../../common/hooks/form-validator.hook";
-import { consultPQRSFSchema } from "../../../../common/schemas/BeneficiaryInformation/PQRSDF.schema";
 import { useForm } from "react-hook-form";
 import { ITableAction } from "../../../../common/interfaces/table.interfaces";
 import { IAttentions, IAttentionsFilter } from "../../../../common/interfaces/BeneficiaryInformation/Attentions.interface";
 import { consultAttentioschema } from "../../../../common/schemas/BeneficiaryInformation/Attentions.schema";
 import { getProgramsCitizenAttention } from "../ExternalHooks/CitizenAttentions/getPrograms.hooks";
+import { getRequestType } from "../ExternalHooks/CitizenAttentions/getRequestType.hook";
 
 export const AttentionsHook = () => {
   const navigate = useNavigate();
@@ -17,6 +17,7 @@ export const AttentionsHook = () => {
   const resolver = useYupValidationResolver(consultAttentioschema);
   const { programs } = getProgramsCitizenAttention()
   const { document } = useParams()
+  const { requestTypes } = getRequestType()
   const {
     control,
     handleSubmit,
@@ -49,7 +50,7 @@ export const AttentionsHook = () => {
     setTableView(true);
     let identification = document
     tableComponentRef.current?.loadData({
-      identification,
+      // identification,
       ...filters,
     });
   });
@@ -75,6 +76,6 @@ export const AttentionsHook = () => {
     programs,
     setPaginateData,
     tableComponentRef,
-    url
+    url, requestTypes
   }
 };

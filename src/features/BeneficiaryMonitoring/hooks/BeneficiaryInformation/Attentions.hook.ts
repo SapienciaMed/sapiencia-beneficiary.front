@@ -50,7 +50,7 @@ export const AttentionsHook = () => {
     setTableView(true);
     let identification = document
     tableComponentRef.current?.loadData({
-      // identification,
+      identification,
       ...filters,
     });
   });

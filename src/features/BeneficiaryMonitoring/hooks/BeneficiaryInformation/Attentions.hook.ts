@@ -27,7 +27,7 @@ export const AttentionsHook = () => {
     formState: { errors, isValid },
   } = useForm({ resolver, mode: "all" });
 
-  const [registrationDate, Program] = watch(["registrationDate", "Program"]);
+  const [registrationDate, Program, requestSubjectType] = watch(["createdAt", "programId", "requestSubjectTypeId"]);
 
   const url = `https://sapiencia-citizen-attention-api-ukyunq2uxa-uc.a.run.app/api/v1/citizen-attention/get-by-filters`
   const handleClean = () => {
@@ -57,11 +57,11 @@ export const AttentionsHook = () => {
 
   const downloadCollection = useCallback(() => { }, [paginateData]);
   useEffect(() => {
-    // if (registrationDate || Program) {
-    //   return setSubmitDisabled(true);
-    // }
-    // setSubmitDisabled(false);
-  }, [registrationDate, Program]);
+    if (registrationDate || Program || requestSubjectType) {
+      return setSubmitDisabled(false);
+    }
+    setSubmitDisabled(true);
+  }, [registrationDate, Program, requestSubjectType]);
   return {
     downloadCollection,
     onSubmit,

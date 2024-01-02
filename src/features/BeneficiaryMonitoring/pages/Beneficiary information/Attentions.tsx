@@ -83,9 +83,11 @@ const Attentions = () => {
               />
               <ButtonComponent
                 value="Buscar"
-                className={`button-save big`}
+                className={`button-save ${
+                  !isValid || submitDisabled ? "disabled-black" : ""
+                } big`}
                 type="submit"
-                // disabled={!isValid || submitDisabled}
+                disabled={!isValid || submitDisabled}
               />
             </div>
           </FormComponent>

@@ -43,7 +43,7 @@ function ModalMessageComponent(): React.JSX.Element {
           style={{
             alignItems: message.alignDescription
               ? message.alignDescription
-              : "flex-start",
+              : "center",
             width: "100%",
           }}
           className="modal-content"

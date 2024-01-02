@@ -5,5 +5,5 @@ export const consultAttentioschema = yup.object({
     .date()
     .optional()
     .typeError("Fecha inválida"),
-  programId: yup.number().optional()
+  programId: yup.number().optional().typeError("Seleccione un programa")
 });

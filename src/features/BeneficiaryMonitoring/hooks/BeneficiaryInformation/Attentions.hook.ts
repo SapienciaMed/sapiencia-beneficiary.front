@@ -25,7 +25,7 @@ export const AttentionsHook = () => {
     reset,
     watch,
     formState: { errors, isValid },
-  } = useForm({ resolver, mode: "all" });
+  } = useForm();
 
   const [registrationDate, Program, requestSubjectType] = watch(["createdAt", "programId", "requestSubjectTypeId"]);
 

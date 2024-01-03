@@ -12,7 +12,8 @@ export interface IMessage {
   onClickOutClose?: boolean;
   onClose?: () => void;
   background?: boolean;
-  size?: string;
+  sizeWidth?: string;
+  marginTopAndBotton?: string;
   alignDescription?: string;
   style?: string;
 }

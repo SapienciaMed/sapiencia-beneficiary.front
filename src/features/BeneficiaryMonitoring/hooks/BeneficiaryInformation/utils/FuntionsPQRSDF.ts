@@ -8,10 +8,10 @@ export const createObjectDetailPQRSDF = async (
 
   let resultObject: IDetailsPQRSDF = {
     idPQRSDF: "",
-    PQRSDF: "",
-    typeOfRequest: "", // Preguntar por esta
+    filingNumber: "",
+    typeOfRequest: "",
     identityDocument: "",
-    typeOfEntity: "", // Preguntar por esta
+    typeOfEntity: "",
     citizenInformation: {
       fullName: "",
       dateOfBirth: "",
@@ -22,15 +22,16 @@ export const createObjectDetailPQRSDF = async (
       country: "",
       department: "",
       municipality: "",
-      MeansByWhichYouWantToReceiveTheAnswer: "", // Preguntar por esta
+      MeansByWhichYouWantToReceiveTheAnswer: "",
     },
     informationOnTheRequest: {
-      programToWhichTheApplicationApplies: "", // Preguntar por esta
-      subjectOfTheApplication: "", // Preguntar por esta
-      classification: "", // Preguntar por esta
-      dependency: "", // Preguntar por esta
-      description: "", // Preguntar por esta
-      filesOrDocumentsSupportingTheRequest: "", // Preguntar por esta
+      programToWhichTheApplicationApplies: "",
+      subjectOfTheApplication: "",
+      classification: "",
+      dependency: "",
+      description: "",
+      filesOrDocumentsSupportingTheRequest: "",
+      nameFile: "",
     },
     internalSupportDocuments: [],
     responsesPQRSDF: [],
@@ -38,7 +39,7 @@ export const createObjectDetailPQRSDF = async (
 
   //ID PQRSDF
   resultObject.idPQRSDF = item.id;
-  resultObject.PQRSDF = item.filingNumber;
+  resultObject.filingNumber = item.filingNumber;
   //Tipo de Solicitud
   resultObject.typeOfRequest = item.requestType.tso_description;
   //Tipo de entidad
@@ -102,6 +103,11 @@ export const createObjectDetailPQRSDF = async (
   //Archivos o documentos que soportan la solicitud
   resultObject.informationOnTheRequest.filesOrDocumentsSupportingTheRequest =
     item.file.filePath;
+  //Nombere del archivo
+  let nameFile = item.file.name;
+  const nameFileSplit = nameFile.split("/");
+  nameFile = nameFileSplit[nameFileSplit.length - 2];
+  resultObject.informationOnTheRequest.nameFile = nameFile;
   //Docuemntos internos
   const filterDataInternalSupport = [];
   for (const i of item.supportFiles) {
@@ -127,6 +133,14 @@ export const createObjectDetailPQRSDF = async (
       .toString()
       .padStart(2, "0")}/${year}`;
 
+    //Dias trascurridos
+    const dateCurrent: Date = new Date();
+    const differenceInMilliseconds: number =
+      dateCurrent.getTime() - dateObj.getTime();
+    const daysElapsed: number = Math.floor(
+      differenceInMilliseconds / (1000 * 60 * 60 * 24)
+    );
+
     filterDataResponsesPQRSDF.push({
       date: dateFormated,
       dependecyResponse: i.respondingDependence?.dep_descripcion,
@@ -139,9 +153,9 @@ export const createObjectDetailPQRSDF = async (
       }`,
       typeResponse: i.responseType?.description,
       response: i.observation,
-      factor: i.factorId,
+      factor: i.factorId ? i.factorId : "N/A",
       status: i.pqrsdf?.status?.lep_estado,
-      daysOnPlatter: "XX",
+      daysOnPlatter: daysElapsed,
       file: i.file?.filePath,
     });
   }

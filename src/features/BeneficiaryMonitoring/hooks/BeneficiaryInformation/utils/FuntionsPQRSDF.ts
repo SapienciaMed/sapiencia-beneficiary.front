@@ -38,22 +38,22 @@ export const createObjectDetailPQRSDF = async (
   };
 
   //ID PQRSDF
-  resultObject.idPQRSDF = item.id;
-  resultObject.filingNumber = item.filingNumber;
+  resultObject.idPQRSDF = item?.id;
+  resultObject.filingNumber = item?.filingNumber;
   //Tipo de Solicitud
-  resultObject.typeOfRequest = item.requestType.tso_description;
+  resultObject.typeOfRequest = item?.requestType?.tso_description;
   //Tipo de entidad
-  resultObject.typeOfEntity = item.person.entityType;
+  resultObject.typeOfEntity = item?.person?.entityType;
   //Documento de identficacion
-  resultObject.identityDocument = `${item.person.documentType.itemCode} ${item.person.identification}`;
+  resultObject.identityDocument = `${item?.person?.documentType?.itemCode} ${item?.person?.identification}`;
   //Nombre Completo
   resultObject.citizenInformation.fullName = `${
-    item.person.firstName ? item.person.firstName : ""
-  } ${item.person.secondName ? item.person.secondName : ""} ${
-    item.person.firstSurname ? item.person.firstSurname : ""
-  } ${item.person.secondSurname ? item.person.secondSurname : ""}`;
+    item?.person?.firstName ? item?.person?.firstName : ""
+  } ${item?.person?.secondName ? item?.person?.secondName : ""} ${
+    item?.person?.firstSurname ? item?.person?.firstSurname : ""
+  } ${item?.person?.secondSurname ? item?.person?.secondSurname : ""}`;
   //Fecha de nacimiento
-  const fechaObjeto = new Date(item.person.birthdate);
+  const fechaObjeto = new Date(item?.person?.birthdate);
   const dia = fechaObjeto.getUTCDate();
   const mes = fechaObjeto.getUTCMonth() + 1;
   const anio = fechaObjeto.getUTCFullYear();
@@ -68,60 +68,61 @@ export const createObjectDetailPQRSDF = async (
   resultObject.citizenInformation.dateOfBirth = dateOfBirth;
   //Numero de contacto 1
   resultObject.citizenInformation.numberContactOne =
-    item.person.firstContactNumber;
+    item?.person?.firstContactNumber;
   //Numero de contacto 2
   resultObject.citizenInformation.numberContactTwo =
-    item.person.secondContactNumber;
+    item?.person?.secondContactNumber;
   //Email
-  resultObject.citizenInformation.email = item.person.email;
+  resultObject.citizenInformation.email = item?.person?.email;
   //Direccion
-  resultObject.citizenInformation.address = item.person.address;
+  resultObject.citizenInformation.address = item?.person?.address;
   //Pais
-  resultObject.citizenInformation.country = item.person.country.itemDescription;
+  resultObject.citizenInformation.country =
+    item?.person?.country?.itemDescription;
   //Departamento
   resultObject.citizenInformation.department =
-    item.person.department.itemDescription;
+    item.person?.department?.itemDescription;
   //Municipio
   resultObject.citizenInformation.municipality =
-    item.person.municipality.itemDescription;
+    item.person?.municipality?.itemDescription;
   //Medio por el cual quiere recibir la respuesta
   resultObject.citizenInformation.MeansByWhichYouWantToReceiveTheAnswer =
-    item.responseMedium.mre_descripcion;
+    item.responseMedium?.mre_descripcion;
   //Informacion de la solicitud
   //Programa al que aplica la solicitud
   resultObject.informationOnTheRequest.programToWhichTheApplicationApplies =
-    item.program.prg_descripcion;
+    item.program?.prg_descripcion;
   //Asunto de la solicitud
   resultObject.informationOnTheRequest.subjectOfTheApplication =
-    item.requestSubject.aso_asunto;
+    item.requestSubject?.aso_asunto;
   //Clasificación
-  resultObject.informationOnTheRequest.classification = item.clasification;
+  resultObject.informationOnTheRequest.classification = item?.clasification;
   //Dependencia
-  resultObject.informationOnTheRequest.dependency = item.dependency;
+  resultObject.informationOnTheRequest.dependency = item?.dependency;
   //Descripción
-  resultObject.informationOnTheRequest.description = item.description;
+  resultObject.informationOnTheRequest.description = item?.description;
   //Archivos o documentos que soportan la solicitud
   resultObject.informationOnTheRequest.filesOrDocumentsSupportingTheRequest =
-    item.file.filePath;
+    item?.file?.filePath;
   //Nombere del archivo
-  let nameFile = item.file.name;
+  let nameFile = item?.file?.name;
   const nameFileSplit = nameFile.split("/");
   nameFile = nameFileSplit[nameFileSplit.length - 2];
   resultObject.informationOnTheRequest.nameFile = nameFile;
   //Docuemntos internos
   const filterDataInternalSupport = [];
-  for (const i of item.supportFiles) {
+  for (const i of item?.supportFiles) {
     filterDataInternalSupport.push({
-      user: `${i.file.user.names} ${i.file.user.lastNames}`,
-      visibleToPetitioner: i.visiblePetitioner === 1 ? "SI" : "NO",
-      file: i.file.filePath,
+      user: `${i?.file?.user?.names} ${i?.file?.user?.lastNames}`,
+      visibleToPetitioner: i?.visiblePetitioner === 1 ? "SI" : "NO",
+      file: i?.file?.filePath,
     });
   }
   resultObject.internalSupportDocuments = filterDataInternalSupport;
   //Respuestas PQRSDF
   const filterDataResponsesPQRSDF = [];
   for (const i of dataResponse) {
-    const dateObj = new Date(i.createdAt);
+    const dateObj = new Date(i?.createdAt);
 
     // Obtener los componentes de la fecha
     const day = dateObj.getDate();
@@ -143,20 +144,20 @@ export const createObjectDetailPQRSDF = async (
 
     filterDataResponsesPQRSDF.push({
       date: dateFormated,
-      dependecyResponse: i.respondingDependence?.dep_descripcion,
-      userResponse: `${i.respondingUser?.names ?? ""} ${
-        i.respondingUser?.lastNames ?? ""
+      dependecyResponse: i?.respondingDependence?.dep_descripcion,
+      userResponse: `${i?.respondingUser?.names ?? ""} ${
+        i?.respondingUser?.lastNames ?? ""
       }`,
-      assignedDependecy: i.assignedDependence?.dep_descripcion,
-      assignedUser: `${i.assignedUser?.names ?? ""} ${
-        i.assignedUser?.lastNames ?? ""
+      assignedDependecy: i?.assignedDependence?.dep_descripcion,
+      assignedUser: `${i?.assignedUser?.names ?? ""} ${
+        i?.assignedUser?.lastNames ?? ""
       }`,
-      typeResponse: i.responseType?.description,
-      response: i.observation,
-      factor: i.factorId ? i.factorId : "N/A",
-      status: i.pqrsdf?.status?.lep_estado,
+      typeResponse: i?.responseType?.description,
+      response: i?.observation,
+      factor: i?.factorId ? i?.factorId : "N/A",
+      status: i?.pqrsdf?.status?.lep_estado,
       daysOnPlatter: daysElapsed,
-      file: i.file?.filePath,
+      file: i?.file?.filePath,
     });
   }
   resultObject.responsesPQRSDF = filterDataResponsesPQRSDF;

@@ -12,12 +12,11 @@ export const getProgramsCitizenAttentions = () => {
         let data = {
             identification: document
         }
-        const endpoint = "/api/v1/citizen-attention/get-programs-by-user"
+        const endpoint = "/api/v1/pqrsdf/get-programs-by-user"
         const resp: ApiResponse<[]> = await post(endpoint, data)
 
         setProgrmas(resp.data);
     }
-
     useEffect(() => {
         getAllPrograms()
     }, [])
@@ -26,22 +25,18 @@ export const getProgramsCitizenAttentions = () => {
 }
 
 export const getProgramsCitizenAttention = () => {
-    const { get } = useCrudService(urlApiCitizenAttentions);
+    const { post } = useCrudService(urlApiCitizenAttentions);
     const [programs, setProgrmas] = useState<any>([]);
     const { document } = useParams();
     const getAllPrograms = async () => {
+        let data = {
+            identification: document
+        }
+        const endpoint = "/api/v1/citizen-attention/get-programs-by-user"
+        const resp: ApiResponse<[]> = await post(endpoint, data)
 
-        const endpoint = "/api/v1/citizen-attention/get-programs"
-        const resp: ApiResponse<[]> = await get(endpoint)
 
-        const dataRes = resp.data.map((program) => {
-            const { prg_codigo, prg_descripcion } = program
-            return {
-                value: prg_codigo,
-                name: prg_descripcion,
-            }
-        })
-        setProgrmas(dataRes);
+        setProgrmas(resp.data);
     }
 
     useEffect(() => {

@@ -92,26 +92,25 @@ const Attentions = () => {
             </div>
           </FormComponent>
         </div>
-        {tableView && (
-          <>
-            <div className="container-sections-forms ml-20px mr-20px">
-              <TableComponent
-                setPaginateData={setPaginateData}
-                ref={tableComponentRef}
-                url={url}
-                columns={tableColumnsAttentions}
-                actions={tableActions}
-                isShowModal={true}
-                emptyMessage="Resultado en la búsqueda"
-                descriptionModalNoResult="No se generó resultado en la búsqueda"
-                titleMessageModalNoResult="Resultado de búsqueda"
-                onResult={(rows) => {
-                  console.log(rows);
-                }}
-              />
-            </div>
-          </>
-        )}
+
+        <>
+          <div className="container-sections-forms ml-20px mr-20px">
+            <TableComponent
+              setPaginateData={setPaginateData}
+              ref={tableComponentRef}
+              url={url}
+              columns={tableColumnsAttentions}
+              actions={tableActions}
+              isShowModal={true}
+              emptyMessage="Resultado en la búsqueda"
+              descriptionModalNoResult="No se generó resultado en la búsqueda"
+              titleMessageModalNoResult="Resultado de búsqueda"
+              onResult={(rows) => {
+                console.log(rows);
+              }}
+            />
+          </div>
+        </>
       </div>
     </>
   );

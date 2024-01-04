@@ -14,10 +14,11 @@ export const getSubjectTypeCitizenAttentions = () => {
             let data = {
                 identification: document
             }
-            const endpoint = "/api/v1/citizen-attention/get-subject-by-user"
+            const endpoint = "/api/v1/pqrsdf/get-subject-by-user"
             const resp: ApiResponse<[]> = await post(endpoint, data)
 
             const dataRes = resp.data
+            console.log(dataRes)
             setSubjectType(dataRes);
         } catch (err) {
             console.error(err);

@@ -1,7 +1,7 @@
 {
   "name": "@sapiencia/beneficiary",
   "scripts": {
-    "start": "webpack serve --host 0.0.0.0 --port 9024",
+    "start": "webpack serve --host 0.0.0.0 --port 9012",
     "start:standalone": "webpack serve --env standalone",
     "build": "concurrently npm:build:*",
     "build:webpack": "webpack --mode=production",

@@ -135,39 +135,39 @@ const BeneficiaryMonitoringForm = ({
                 console.log(rows);
               }}
             />
-          </div>
-          {loading ? (
-            <ProgressSpinner
-              style={{
-                display: "flex",
-                justifyContent: "center",
-              }}
-            />
-          ) : (
-            <>
-              <div
+            {loading ? (
+              <ProgressSpinner
                 style={{
-                  height: "1px",
-                  margin: "0 20px",
-                  backgroundColor: "#e0e0e0",
+                  display: "flex",
+                  justifyContent: "center",
                 }}
-              ></div>
-              <div className="button-save-container-display mr-24px">
-                <ButtonComponent
-                  value={
-                    <>
-                      <div className="container-buttonText">
-                        <span>Descargar</span>
-                        <Svgs svg="excel" width={23.593} height={28.505} />
-                      </div>
-                    </>
-                  }
-                  className="button-download large "
-                  action={downloadCollection}
-                />
-              </div>
-            </>
-          )}
+              />
+            ) : (
+              <>
+                <div
+                  style={{
+                    height: "1px",
+                    margin: "0 20px",
+                    backgroundColor: "#e0e0e0",
+                  }}
+                ></div>
+                <div className="button-save-container-display mr-24px">
+                  <ButtonComponent
+                    value={
+                      <>
+                        <div className="container-buttonText">
+                          <span>Descargar</span>
+                          <Svgs svg="excel" width={23.593} height={28.505} />
+                        </div>
+                      </>
+                    }
+                    className="button-download large "
+                    action={downloadCollection}
+                  />
+                </div>
+              </>
+            )}
+          </div>
         </>
       )}
     </div>

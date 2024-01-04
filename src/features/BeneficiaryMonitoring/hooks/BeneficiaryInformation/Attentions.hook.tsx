@@ -1,12 +1,17 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useYupValidationResolver from "../../../../common/hooks/form-validator.hook";
 import { useForm } from "react-hook-form";
 import { ITableAction } from "../../../../common/interfaces/table.interfaces";
-import { IAttentions, IAttentionsFilter } from "../../../../common/interfaces/BeneficiaryInformation/Attentions.interface";
+import {
+  IAttentions,
+  IAttentionsFilter,
+} from "../../../../common/interfaces/BeneficiaryInformation/Attentions.interface";
 import { consultAttentioschema } from "../../../../common/schemas/BeneficiaryInformation/Attentions.schema";
 import { getProgramsCitizenAttention } from "../ExternalHooks/CitizenAttentions/getPrograms.hooks";
 import { getRequestType } from "../ExternalHooks/CitizenAttentions/getRequestType.hook";
+import { AppContext } from "../../../../common/contexts/app.context";
+import DetailsAttentions from "../../forms/BeneficiaryInformation/Attentions/DetailsAttentions";
 
 export const AttentionsHook = () => {
   const navigate = useNavigate();
@@ -15,9 +20,10 @@ export const AttentionsHook = () => {
   const [tableView, setTableView] = useState<boolean>(false);
   const [paginateData, setPaginateData] = useState({ page: "", perPage: "" });
   const resolver = useYupValidationResolver(consultAttentioschema);
-  const { programs } = getProgramsCitizenAttention()
-  const { document } = useParams()
-  const { requestTypes } = getRequestType()
+  const { programs } = getProgramsCitizenAttention();
+  const { document } = useParams();
+  const { requestTypes } = getRequestType();
+  const { setMessage } = useContext(AppContext);
   const {
     control,
     handleSubmit,
@@ -27,9 +33,13 @@ export const AttentionsHook = () => {
     formState: { errors, isValid },
   } = useForm();
 
-  const [registrationDate, Program, requestSubjectType] = watch(["createdAt", "programId", "requestSubjectTypeId"]);
+  const [registrationDate, Program, requestSubjectType] = watch([
+    "createdAt",
+    "programId",
+    "requestSubjectTypeId",
+  ]);
 
-  const url = `https://sapiencia-citizen-attention-api-ukyunq2uxa-uc.a.run.app/api/v1/citizen-attention/get-by-filters`
+  const url = `https://sapiencia-citizen-attention-api-ukyunq2uxa-uc.a.run.app/api/v1/citizen-attention/get-by-filters`;
   const handleClean = () => {
     reset();
     setSubmitDisabled(true);
@@ -37,25 +47,43 @@ export const AttentionsHook = () => {
     setTableView(false);
   };
 
+  useEffect(() => {
+    let identification = document;
+    let data = {
+      page: 1,
+      perPage: 10,
+      // identification
+    };
+    tableComponentRef.current?.loadData({
+      ...data,
+    });
+  }, []);
+
   const tableActions: ITableAction<IAttentions>[] = [
     {
       icon: "view",
       onClick: (row) => {
-        navigate(`#`);
+        setMessage({
+          show: true,
+          background: true,
+          description: <DetailsAttentions />,
+          title: "Informacion de la atencion",
+          size: "items",
+        });
       },
     },
   ];
   const onSubmit = handleSubmit((filters: IAttentionsFilter) => {
     setTableView(false);
     setTableView(true);
-    let identification = document
+    let identification = document;
     tableComponentRef.current?.loadData({
       identification,
       ...filters,
     });
   });
 
-  const downloadCollection = useCallback(() => { }, [paginateData]);
+  const downloadCollection = useCallback(() => {}, [paginateData]);
   useEffect(() => {
     if (registrationDate || Program || requestSubjectType) {
       return setSubmitDisabled(false);
@@ -76,6 +104,7 @@ export const AttentionsHook = () => {
     programs,
     setPaginateData,
     tableComponentRef,
-    url, requestTypes
-  }
+    url,
+    requestTypes,
+  };
 };

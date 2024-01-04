@@ -89,9 +89,6 @@ export const getDataBenefits = () => {
     statusCredit,
     nroOrder
   ) => {
-    console.log(foundId);
-    console.log(found);
-
     let Ffound;
 
     if (found === undefined) {

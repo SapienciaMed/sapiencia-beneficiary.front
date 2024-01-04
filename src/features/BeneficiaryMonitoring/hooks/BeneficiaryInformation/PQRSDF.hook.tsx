@@ -29,7 +29,7 @@ export const PQRSDFHook = () => {
   const { programs } = getProgramsCitizenAttentions();
   const { subjectType } = getSubjectTypeCitizenAttentions();
   const { post } = useCrudService(urlApiBeneficiary);
-  const [loading, setLoading] = useState(null);
+  const [loading, setLoading] = useState(false);
   const {
     control,
     handleSubmit,
@@ -48,42 +48,54 @@ export const PQRSDFHook = () => {
   const [requestType, programId] = watch(["requestType", "programId"]);
 
   const viewDetailsPQRSDF = async (item: any) => {
-    let detailObject: IDetailsPQRSDF;
-    if (item && Object.keys(item).length > 0) {
-      const data = {
-        page: 1,
-        perPage: 10,
-        pqrsdfId: 210,
-      };
-      const endpoint =
-        "/api/v1/sapiencia/external/citizenAttentions/pqrsdf/get-responses";
-      const resp: ApiResponse<[]> = await post(endpoint, data);
-      const dataResponse = resp.data["array"];
-      detailObject = await createObjectDetailPQRSDF(item, dataResponse);
-    }
+    // console.log({ item });
+    const data = {
+      page: 1,
+      perPage: 10,
+      pqrsdfId: item.id,
+    };
+    const endpoint =
+      "/api/v1/sapiencia/external/citizenAttentions/pqrsdf/get-responses";
+    const resp: ApiResponse<[]> = await post(endpoint, data);
+    const dataResponse = resp.data["array"];
 
-    setMessage({
-      title: `Detalle PQRSDF ${item.filingNumber}`,
-      show: true,
-      description: <DetailsPQRSDF data={detailObject} />,
-      background: true,
-      okTitle: "Cerrar",
-      onOk: () => {
-        setMessage({ show: false });
-      },
-      onClose: () => {
-        setMessage({ show: false });
-      },
-      style: "align-items: flex-start",
-      size: "80%",
-      alignDescription: "center",
-    });
+    if (resp.data["array"].length > 0) {
+      if (item && Object.keys(item).length > 0) {
+        let detailObject: IDetailsPQRSDF = await createObjectDetailPQRSDF(
+          item,
+          dataResponse
+        );
+        // console.log({ detailObject });
+
+        if (detailObject && Object.keys(detailObject).length > 0) {
+          setLoading(false);
+          setMessage({
+            title: `Detalle PQRSDF ${item.filingNumber}`,
+            show: true,
+            description: <DetailsPQRSDF data={detailObject} />,
+            background: true,
+            okTitle: "Cerrar",
+            onOk: () => {
+              setMessage({ show: false });
+            },
+            onClose: () => {
+              setMessage({ show: false });
+            },
+            style: "align-items: flex-start",
+            sizeWidth: "50%",
+            marginTopAndBotton: "40px",
+            alignDescription: "center",
+          });
+        }
+      }
+    }
   };
 
   const tableActions: ITableAction<IPQRSDF>[] = [
     {
       icon: "view",
       onClick: (row) => {
+        setLoading(true);
         viewDetailsPQRSDF(row);
       },
     },
@@ -215,5 +227,6 @@ export const PQRSDFHook = () => {
     urlGetPQRSDF,
     programs,
     subjectType,
+    loading,
   };
 };

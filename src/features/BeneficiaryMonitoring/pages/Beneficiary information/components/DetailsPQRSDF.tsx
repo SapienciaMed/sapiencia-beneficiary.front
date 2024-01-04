@@ -31,6 +31,8 @@ const DetailsPQRSDF = ({ data }) => {
     window.URL.revokeObjectURL(url);
   };
 
+  if (!data || Object.keys(data).length === 0) return;
+
   return (
     <div className="container-sections-forms mt-24px ml-16px mr-14px p-0">
       <div className="text-black large bold grid-span-6-columns pb-14px mt-24px">
@@ -72,10 +74,7 @@ const DetailsPQRSDF = ({ data }) => {
                 </span>
               }
             >
-              <div
-                className="grid-form-4-container gap-25 mb-16px ml-14px mr-14px p-0"
-                // style={{ width: "100%" }}
-              >
+              <div className="grid-form-2-container gap-25 mb-16px ml-14px mr-14px p-0">
                 <InputComponent
                   idInput="fullName"
                   label={"Nombres y Apellidos"}
@@ -133,7 +132,7 @@ const DetailsPQRSDF = ({ data }) => {
                   classNameLabel="text-black small bold"
                 />
               </div>
-              <div className="grid-form-4-container gap-25 mb-16px ml-14px mr-14px p-0">
+              <div className="grid-form-2-container gap-25 mb-16px ml-14px mr-14px p-0">
                 <InputComponent
                   idInput="country"
                   label={"País"}
@@ -152,6 +151,8 @@ const DetailsPQRSDF = ({ data }) => {
                   className="input-basic medium"
                   classNameLabel="text-black small bold"
                 />
+              </div>
+              <div className="grid-form-2-container gap-25 mb-16px ml-14px mr-14px p-0">
                 <InputComponent
                   idInput="municipality"
                   label={"Municipio"}
@@ -161,8 +162,6 @@ const DetailsPQRSDF = ({ data }) => {
                   className="input-basic medium"
                   classNameLabel="text-black small bold"
                 />
-              </div>
-              <div className="grid-form-2-container gap-25 mb-16px ml-14px mr-14px p-0">
                 <InputComponent
                   idInput="MeansByWhichYouWantToReceiveTheAnswer"
                   label={"Medio por el cual quiere recibir la respuesta "}
@@ -276,7 +275,7 @@ const DetailsPQRSDF = ({ data }) => {
                     className="small bold"
                     style={{ color: "#FF0000", cursor: "pointer" }}
                   >
-                    Documento.PDF
+                    {data.informationOnTheRequest.nameFile}
                   </div>
                 </div>
               </div>
@@ -290,7 +289,7 @@ const DetailsPQRSDF = ({ data }) => {
             >
               <div className="spc-common-table">
                 <DataTable
-                  value={data.internalSupportDocuments}
+                  value={data?.internalSupportDocuments}
                   showGridlines
                   tableStyle={{
                     fontSize: "14px",
@@ -344,13 +343,13 @@ const DetailsPQRSDF = ({ data }) => {
             <AccordionTab
               header={
                 <span style={{ color: "#6C757D" }}>
-                  {`Respuesta PQRSDF ${data.idPQRSDF}`}
+                  {`Respuesta PQRSDF ${data.filingNumber}`}
                 </span>
               }
             >
-              <div className="spc-common-table" style={{ width: "40rem" }}>
+              <div className="spc-common-table" style={{ maxWidth: "40rem" }}>
                 <DataTable
-                  value={data.responsesPQRSDF}
+                  value={data?.responsesPQRSDF}
                   showGridlines
                   tableStyle={{
                     fontSize: "14px",

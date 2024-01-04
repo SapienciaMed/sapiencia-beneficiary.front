@@ -24,7 +24,12 @@ function ModalMessageComponent(): React.JSX.Element {
       <div
         ref={modal}
         className="modal-container"
-        style={{ minWidth: message.size && message.size }}
+        style={{
+          minWidth: message.sizeWidth && message.sizeWidth,
+          marginTop: message.marginTopAndBotton && message.marginTopAndBotton,
+          marginBottom:
+            message.marginTopAndBotton && message.marginTopAndBotton,
+        }}
       >
         <div className="modal-header">
           <button

@@ -36,7 +36,7 @@ interface ICitizenInformation {
 
 export interface IDetailsPQRSDF {
   idPQRSDF: string;
-  PQRSDF: string;
+  filingNumber: string;
   typeOfRequest: string;
   identityDocument: string;
   typeOfEntity: string;

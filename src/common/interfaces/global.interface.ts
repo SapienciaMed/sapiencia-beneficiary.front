@@ -6,6 +6,7 @@ export interface IMessage {
   description?: string | React.JSX.Element;
   show?: boolean;
   okTitle?: string;
+  size?: string;
   cancelTitle?: string;
   onOk?: () => void;
   onCancel?: () => void;

@@ -84,49 +84,36 @@ const SocialServicesModal = ({
 
     const data = await getInformationSocialServices(period, found);
     if (data[0]) {
-      const pseleccion = data[0]["Nombre_convocatoria_seleccionado"];
-      if (period <= 10) {
-        setconditionalFormats(
-          <>
-            <li
-              style={{ listStyle: "none", cursor: "pointer" }}
-              onClick={() =>
-                viewDocuments(Acta_Servicio, document, period, pseleccion)
-              }
-            >
-              Acta
-            </li>
-            <li
-              style={{ listStyle: "none", cursor: "pointer" }}
-              onClick={() =>
-                viewDocuments(Ficha_Servicio, document, period, pseleccion)
-              }
-            >
-              Ficha
-            </li>
-            <li
-              style={{ listStyle: "none", cursor: "pointer" }}
-              onClick={() =>
-                viewDocuments(
-                  Certificado_Servicio,
-                  document,
-                  period,
-                  pseleccion
-                )
-              }
-            >
-              Certificado
-            </li>
-          </>
-        );
-      } else {
-        if (data[0]["Realizo_servicio"] === "SI") {
+      if (data[0]["Realizo_servicio"] == "SI") {
+        const pseleccion = data[0]["Nombre_convocatoria_seleccionado"];
+        if (period <= 10) {
           setconditionalFormats(
             <>
               <li
                 style={{ listStyle: "none", cursor: "pointer" }}
                 onClick={() =>
-                  viewDocuments(Formato_Unico, document, period, pseleccion)
+                  viewDocuments(Acta_Servicio, document, period, pseleccion)
+                }
+              >
+                Acta
+              </li>
+              <li
+                style={{ listStyle: "none", cursor: "pointer" }}
+                onClick={() =>
+                  viewDocuments(Ficha_Servicio, document, period, pseleccion)
+                }
+              >
+                Ficha
+              </li>
+              <li
+                style={{ listStyle: "none", cursor: "pointer" }}
+                onClick={() =>
+                  viewDocuments(
+                    Certificado_Servicio,
+                    document,
+                    period,
+                    pseleccion
+                  )
                 }
               >
                 Certificado
@@ -134,26 +121,45 @@ const SocialServicesModal = ({
             </>
           );
         } else {
-          if (data[0]["horasAcumuladas"] >= 80) {
+          if (data[0]["Realizo_servicio"] === "SI") {
             setconditionalFormats(
               <>
                 <li
                   style={{ listStyle: "none", cursor: "pointer" }}
                   onClick={() =>
-                    viewDocuments(
-                      AcumulacionServicio,
-                      document,
-                      period,
-                      pseleccion
-                    )
+                    viewDocuments(Formato_Unico, document, period, pseleccion)
                   }
                 >
-                  Acumulación/fuerza mayor
+                  Certificado
                 </li>
               </>
             );
+          } else {
+            if (data[0]["horasAcumuladas"] >= 80) {
+              setconditionalFormats(
+                <>
+                  <li
+                    style={{ listStyle: "none", cursor: "pointer" }}
+                    onClick={() =>
+                      viewDocuments(
+                        AcumulacionServicio,
+                        document,
+                        period,
+                        pseleccion
+                      )
+                    }
+                  >
+                    Acumulación/fuerza mayor
+                  </li>
+                </>
+              );
+            }
           }
         }
+      } else {
+        setconditionalFormats(
+          <li style={{ listStyle: "none", cursor: "pointer" }}>N/A</li>
+        );
       }
     }
   };

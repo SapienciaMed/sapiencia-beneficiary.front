@@ -9,7 +9,11 @@ const DetailsPQRSDF = ({ data }) => {
   // console.log({ data });
 
   const viewFile = (file: any) => {
-    let base64Pdf = file.split(";base64,").pop();
+    // console.log({ file });
+
+    let base64Pdf = file.filesOrDocumentsSupportingTheRequest
+      ? file.filesOrDocumentsSupportingTheRequest.split(";base64,").pop()
+      : file.file.split(";base64,").pop();
 
     const byteCharacters = atob(base64Pdf);
     const byteNumbers = new Array(byteCharacters.length);
@@ -24,7 +28,7 @@ const DetailsPQRSDF = ({ data }) => {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "documento.pdf";
+    a.download = file.nameFile;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -264,12 +268,7 @@ const DetailsPQRSDF = ({ data }) => {
                     justifyContent: "flex-start",
                     marginTop: "5px",
                   }}
-                  onClick={() =>
-                    viewFile(
-                      data.informationOnTheRequest
-                        .filesOrDocumentsSupportingTheRequest
-                    )
-                  }
+                  onClick={() => viewFile(data.informationOnTheRequest)}
                 >
                   <div
                     className="small bold"
@@ -329,10 +328,7 @@ const DetailsPQRSDF = ({ data }) => {
                       fontWeight: "400",
                     }}
                     body={(row) => (
-                      <div
-                        onClick={() => viewFile(row.file)}
-                        className="pointer"
-                      >
+                      <div onClick={() => viewFile(row)} className="pointer">
                         <Svgs svg="view" />
                       </div>
                     )}
@@ -453,10 +449,7 @@ const DetailsPQRSDF = ({ data }) => {
                       fontWeight: "400",
                     }}
                     body={(row) => (
-                      <div
-                        onClick={() => viewFile(row.file)}
-                        className="pointer"
-                      >
+                      <div onClick={() => viewFile(row)} className="pointer">
                         <Svgs svg="view" />
                       </div>
                     )}

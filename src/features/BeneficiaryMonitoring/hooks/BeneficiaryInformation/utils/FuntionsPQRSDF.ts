@@ -112,16 +112,28 @@ export const createObjectDetailPQRSDF = async (
   //Docuemntos internos
   const filterDataInternalSupport = [];
   for (const i of item?.supportFiles) {
+    // console.log({ i });
+    let nameFileInternalSupport = i.file?.name;
+    const nameFileSplitInternalSupport = nameFileInternalSupport.split("/");
+    nameFileInternalSupport =
+      nameFileSplitInternalSupport[nameFileSplitInternalSupport.length - 2];
+
     filterDataInternalSupport.push({
       user: `${i?.file?.user?.names} ${i?.file?.user?.lastNames}`,
       visibleToPetitioner: i?.visiblePetitioner === 1 ? "SI" : "NO",
       file: i?.file?.filePath,
+      nameFile: nameFileInternalSupport,
     });
   }
   resultObject.internalSupportDocuments = filterDataInternalSupport;
   //Respuestas PQRSDF
   const filterDataResponsesPQRSDF = [];
   for (const i of dataResponse) {
+    // console.log({ i });
+    let nameFileResponse = i.file?.name;
+    const nameFileSplitResponse = nameFileResponse.split("/");
+    nameFileResponse = nameFileSplitResponse[nameFileSplitResponse.length - 2];
+
     const dateObj = new Date(i?.createdAt);
 
     // Obtener los componentes de la fecha
@@ -158,6 +170,7 @@ export const createObjectDetailPQRSDF = async (
       status: i?.pqrsdf?.status?.lep_estado,
       daysOnPlatter: daysElapsed,
       file: i?.file?.filePath,
+      nameFile: nameFileResponse,
     });
   }
   resultObject.responsesPQRSDF = filterDataResponsesPQRSDF;

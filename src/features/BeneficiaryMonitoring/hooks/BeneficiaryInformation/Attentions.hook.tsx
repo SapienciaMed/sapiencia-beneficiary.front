@@ -52,7 +52,7 @@ export const AttentionsHook = () => {
     let data = {
       page: 1,
       perPage: 10,
-      // identification
+      identification,
     };
     tableComponentRef.current?.loadData({
       ...data,
@@ -66,9 +66,12 @@ export const AttentionsHook = () => {
         setMessage({
           show: true,
           background: true,
-          description: <DetailsAttentions />,
+          description: <DetailsAttentions data={row} />,
           title: "Informacion de la atencion",
           size: "items",
+          onOk: () => {
+            setMessage({ show: false });
+          },
         });
       },
     },
